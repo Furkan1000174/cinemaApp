@@ -62,10 +62,10 @@ namespace cinemaApp
         {
             Console.Clear();
             Console.WriteLine("Welcome to the cinema..\n");
-            Console.Write("Please select what you would like to do\n");
-            Console.Write("1. View movies\n");
-            Console.Write("2. View reviews\n");
-            Console.Write("3. View catering");
+            Console.WriteLine("Please select what you would like to do\n");
+            Console.WriteLine("1. View movies");
+            Console.WriteLine("2. View reviews");
+            Console.WriteLine("3. View catering");
 
         }
         private static void adminScreen()
@@ -73,8 +73,8 @@ namespace cinemaApp
             Console.Clear();
             Console.WriteLine("Welcome administrator\n");
             Console.WriteLine("Please select what you would like to do\n");
-            Console.WriteLine("1. Manage movies\n");
-            Console.WriteLine("2. Manage reservations\n");
+            Console.WriteLine("1. Manage movies");
+            Console.WriteLine("2. Manage reservations");
             Console.WriteLine("3. Manage catering");
         }
 
