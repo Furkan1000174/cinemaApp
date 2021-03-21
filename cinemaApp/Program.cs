@@ -6,6 +6,7 @@ namespace cinemaApp
     {
         public static void Main()
         {
+            //Welcome screen
             Console.WriteLine("Welcome to the cinema!");
             Console.WriteLine("Please enter what you would like to do: ");
             Console.WriteLine("1. Login");
