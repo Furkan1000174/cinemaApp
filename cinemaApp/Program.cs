@@ -37,6 +37,13 @@ namespace cinemaApp
                     string enterPassword = Console.ReadLine();
                     if (accountchecker(enterPassword) == true)
                     {
+                        if(enterUsername == "admin"){
+                            if(enterPassword == "123")
+                            {
+                                adminScreen();
+                                break;
+                            }
+                        }
                         mainScreen();
                         logginIn = false;
                     }
@@ -73,7 +80,11 @@ namespace cinemaApp
 
         private static bool accountchecker(string usernameORpassword)
         {
-            if (usernameORpassword == "admin" | usernameORpassword == "123")
+            if (usernameORpassword == "customer" | usernameORpassword == "123")
+            {
+                return true;
+            }
+            else if(usernameORpassword == "admin" | usernameORpassword == "123")
             {
                 return true;
             }
