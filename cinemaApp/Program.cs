@@ -66,6 +66,7 @@ namespace cinemaApp
             Console.WriteLine("1. View movies");
             Console.WriteLine("2. View reviews");
             Console.WriteLine("3. View catering");
+            exit();
 
         }
         private static void adminScreen()
@@ -76,6 +77,7 @@ namespace cinemaApp
             Console.WriteLine("1. Manage movies");
             Console.WriteLine("2. Manage reservations");
             Console.WriteLine("3. Manage catering");
+            exit();
         }
 
         private static bool accountchecker(string usernameORpassword)
@@ -89,6 +91,12 @@ namespace cinemaApp
                 return true;
             }
             return false;
+        }
+
+        private static void exit()
+        {
+            Console.WriteLine("Press enter to continue");
+            string test = Console.ReadLine();
         }
     }
 }
