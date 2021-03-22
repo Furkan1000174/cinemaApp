@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace cinemaApp
 {
@@ -14,7 +15,7 @@ namespace cinemaApp
             var options = Console.ReadLine();
             if (options == "1")
             {
-                loginscherm();
+                loginScreen();
             }
             else if (options == "2")
             {
@@ -23,38 +24,30 @@ namespace cinemaApp
                 mainScreen();
             }
         }
-        private static void loginscherm()
-        {
+       
+        private static void loginScreen() {
             Console.WriteLine("Please enter your login info...");
             var logginIn = true;
-            while (logginIn)
-            {
-                Console.WriteLine("Please enter your username: ");
-                string enterUsername = Console.ReadLine();
-                if (accountchecker(enterUsername) == true)
-                {
-                    Console.WriteLine("Please enter your password: ");
-                    string enterPassword = Console.ReadLine();
-                    if (accountchecker(enterPassword) == true)
-                    {
-                        if(enterUsername == "admin"){
-                            if(enterPassword == "123")
-                            {
-                                adminScreen();
-                                break;
-                            }
+            while (logginIn) {
+            Console.WriteLine("Please enter your username: ");
+            string enteredUsername = Console.ReadLine();
+            Console.WriteLine("Please enter your password: ");
+            string enteredPassword = Console.ReadLine();
+                if (accountchecker(enteredUsername, enteredPassword) == true) {
+                    if(enteredUsername == "admin"){
+                        if(enteredPassword == "adminPass") {
+                            adminScreen();
+                            break;
                         }
+                    }
+                    else if (enteredUsername != "admin") {
                         mainScreen();
                         logginIn = false;
                     }
-                    else if (accountchecker(enterPassword) != true)
-                    {
-                        Console.WriteLine("Password is incorrect...");
-                    }
+                        
                 }
-                else if (accountchecker(enterUsername) != true)
-                {
-                    Console.WriteLine("Username is incorrect...");
+                else if (accountchecker(enteredUsername, enteredPassword) == false) {
+                    Console.WriteLine("pass or username is incorrect...");
                 }
             }
         }
@@ -78,16 +71,17 @@ namespace cinemaApp
             Console.WriteLine("3. Manage catering");
         }
 
-        private static bool accountchecker(string usernameORpassword)
-        {
-            if (usernameORpassword == "customer" | usernameORpassword == "123")
-            {
-                return true;
+        
+        
+        private static bool accountchecker(string enteredUsername, string enteredPassword) {
+            IDictionary<string, string> accountDict = new Dictionary<string, string> { { "account1", "password1" }, { "account2", "password2" } };
+            accountDict.Add("admin", "adminPass"); //just testing if adding accounts works
+
+            if (accountDict.ContainsKey(enteredUsername)) {
+                if (accountDict[enteredUsername] == enteredPassword)
+                    return true;
             }
-            else if(usernameORpassword == "admin" | usernameORpassword == "123")
-            {
-                return true;
-            }
+            
             return false;
         }
     }
