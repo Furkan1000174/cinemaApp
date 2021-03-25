@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace cinemaApp
 {
@@ -11,6 +13,7 @@ namespace cinemaApp
             Console.WriteLine("Please enter what you would like to do: ");
             Console.WriteLine("1. Login");
             Console.WriteLine("2. Continue as guest");
+            Console.WriteLine("3. Create an account");
             var options = Console.ReadLine();
             if (options == "1")
             {
@@ -22,6 +25,20 @@ namespace cinemaApp
                 var guestMail = Console.ReadLine();
                 mainScreen();
             }
+            else if (options == "3")
+            {
+                createAccount();
+            }
+        }
+        private static void createAccount()
+        {
+            Console.WriteLine("Please enter your account information below..");
+            Console.WriteLine("Please enter your username:");
+            string username = Console.ReadLine();
+            Console.WriteLine("Please enter your password:");
+            string password = Console.ReadLine();
+            Console.WriteLine("Please enter your email:");
+            string email = Console.ReadLine();
         }
         private static void loginscherm()
         {
@@ -66,6 +83,11 @@ namespace cinemaApp
             Console.WriteLine("1. View movies");
             Console.WriteLine("2. View reviews");
             Console.WriteLine("3. View catering");
+            var options = Console.ReadLine();
+            if (options == "1")
+            {
+                movieScreen();
+            }
 
         }
         private static void adminScreen()
@@ -89,6 +111,19 @@ namespace cinemaApp
                 return true;
             }
             return false;
+        }
+        private static void movieScreen()
+        {
+            Console.Clear();
+            Console.WriteLine("Welcome to our movie selections!");
+            Console.WriteLine("We are proud to present the following movies!");
+            Console.WriteLine("");
+            Console.WriteLine("1. Baba1\n");
+            Console.WriteLine("2. Baba2\n");
+            Console.WriteLine("3. BabaThePreSquel\n");
+            Console.WriteLine("4. The adventures of Baba\n");
+            Console.WriteLine("5. Baba\'s bizarre adventures\n");
+
         }
     }
 }
