@@ -6,7 +6,7 @@ namespace cinemaApp
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             //Welcome screen
             Console.WriteLine("Welcome to the cinema!");
@@ -88,6 +88,8 @@ namespace cinemaApp
             Console.WriteLine("2. View reviews");
             Console.WriteLine("3. View catering");
             Console.WriteLine("4. View Schedule");
+            Console.WriteLine("5. Check Schedule");
+            Console.WriteLine("6. Log Out");
             var options = Console.ReadLine();
             if (options == "1")
             {
@@ -107,27 +109,14 @@ namespace cinemaApp
             {
                 Schedule();
             }
-            Console.WriteLine("4. Check Schedule");
-            Console.WriteLine("5. Log Out");
-
-            var option = Console.ReadLine();
-            switch(option)
+            else if (options == "5")
             {
-                case "1":
-                   // viewMovies();
-                    break;
-                case "2":
-                  //  viewReviews();
-                    break;
-                case "3":
-                  //  viewCatering();
-                    break;
-                case "4":
-                  //  checkSchedule();
-                    break;
-                case "5":
-                    exit();
-                    break;
+                Schedule();
+            }
+            else if (options == "6")
+            {
+                Console.Clear();
+                Main();
             }
         }
         private static void adminScreen()
@@ -174,14 +163,12 @@ namespace cinemaApp
             var nis = Console.ReadLine();
             if (nis == "Y" | nis == "y")
             {
-                
                 FilmInfoScreen();
             }
             else if (nis == "N" | nis == "n")
             {
                 mainScreen();
             }
-
         }
         private static bool accountchecker(string usernameORpassword)
         {
@@ -203,11 +190,13 @@ namespace cinemaApp
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
-            Console.WriteLine("These are the available films of our theater:\n1. Minari\n2. Sound of Metal\n3. Nomadland\n4. Another round\n5. The Father\n");         
+            Console.WriteLine("These are the available films of our theater:\n1. Minari\n2. Sound of Metal\n3. Nomadland\n4. Another round\n5. The Father\n");
             var Filminf = true;
             while (Filminf)
             {
                 Console.WriteLine("Type the number of the film you want to see more information about: ");
+                Console.WriteLine("Type \"exit\" to return to the main menu");
+
                 var options = Console.ReadLine();
                 if (options == "1")
                 {
@@ -330,8 +319,11 @@ namespace cinemaApp
                     else if (yis == "N" | yis == "n")
                     {
                         FilmInfoScreen();
-                    }
-                    
+                    }   
+                }
+                else if (options == "exit")
+                {
+                    mainScreen();
                 }
             }
         }
