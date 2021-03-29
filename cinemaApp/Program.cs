@@ -159,16 +159,7 @@ namespace cinemaApp
             }
 
         }
-        private static bool accountchecker(string usernameORpassword)
-        {
-            if (usernameORpassword == "customer" | usernameORpassword == "123")
-            {
-                return true;
-            }
-            else if(usernameORpassword == "admin" | usernameORpassword == "123")
-            {
-                return true;
-        }
+        
 
         
         
