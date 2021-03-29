@@ -90,6 +90,28 @@ namespace cinemaApp
             {
                 Schedule();
             }
+            Console.WriteLine("4. Check Schedule");
+            Console.WriteLine("5. Log Out");
+
+            var options = Console.ReadLine();
+            switch(options)
+            {
+                case "1":
+                   // viewMovies();
+                    break;
+                case "2":
+                  //  viewReviews();
+                    break;
+                case "3":
+                  //  viewCatering();
+                    break;
+                case "4":
+                  //  checkSchedule();
+                    break;
+                case "5":
+                    exit();
+                    break;
+            }
         }
         private static void adminScreen()
         {
@@ -100,6 +122,28 @@ namespace cinemaApp
             Console.WriteLine("2. Manage reservations");
             Console.WriteLine("3. Manage catering");
             Console.WriteLine("4. Manage Schedule");
+            Console.WriteLine("4. Check Schedule");
+            Console.WriteLine("5. Log Out");
+             
+            var options = Console.ReadLine();
+            switch(options)
+            {
+                case "1":
+                   // manageMovies();
+                    break;
+                case "2":
+                   // manageReservations();
+                    break;
+                case "3":
+                  //  manageCatering();
+                    break;
+                case "4":
+                   // checkSchedule();
+                    break;
+                case "5":
+                    exit();
+                    break;
+            }
         }
         private static void Schedule()
         {
@@ -274,6 +318,11 @@ namespace cinemaApp
                 }
             }
         }
-        
+
+        private static void exit()
+        {
+            Console.WriteLine("Press enter to continue");
+            string test = Console.ReadLine();
+        }
     }
 }
