@@ -93,8 +93,8 @@ namespace cinemaApp
             Console.WriteLine("4. Check Schedule");
             Console.WriteLine("5. Log Out");
 
-            var options = Console.ReadLine();
-            switch(options)
+            var option = Console.ReadLine();
+            switch(option)
             {
                 case "1":
                    // viewMovies();
