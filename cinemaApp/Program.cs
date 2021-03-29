@@ -61,21 +61,24 @@ namespace cinemaApp
         private static void mainScreen()
         {
             Console.Clear();
-            Console.WriteLine("Welcome to the cinema..\n");
-            Console.WriteLine("Please enter what you would like to do:\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            string h = "/// Welcome to our Cinema App ///\n";
+            Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
+            Console.WriteLine(h);
+            Console.ResetColor();
+            Console.WriteLine("Please enter the number of what you would like to do:\n");
             Console.WriteLine("1. View movies");
             Console.WriteLine("2. View reviews");
             Console.WriteLine("3. View catering");
             var options = Console.ReadLine();
             if (options == "1")
             {
-                FilmInfoScherm();
+                FilmInfoScreen();
             }
             else if (options == "2")
             {
                 Console.WriteLine("The review section is not available yet");
                 Console.Read();
-
             }
             else if (options == "3")
             {
@@ -105,7 +108,7 @@ namespace cinemaApp
             }
             return false;
         }
-        private static void FilmInfoScherm()
+        private static void FilmInfoScreen()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -136,11 +139,11 @@ namespace cinemaApp
                     {
                         Console.WriteLine("\nReservations are not available yet");
                         Console.Read();
-                        FilmInfoScherm();
+                        FilmInfoScreen();
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        FilmInfoScherm();
+                        FilmInfoScreen();
                     }
                  
                 }
@@ -161,11 +164,11 @@ namespace cinemaApp
                     {
                         Console.WriteLine("\nReservations are not available yet");
                         Console.Read();
-                        FilmInfoScherm();
+                        FilmInfoScreen();
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        FilmInfoScherm();
+                        FilmInfoScreen();
                     }
 
                 }
@@ -186,11 +189,11 @@ namespace cinemaApp
                     {
                         Console.WriteLine("\nReservations are not available yet");
                         Console.Read();
-                        FilmInfoScherm();
+                        FilmInfoScreen();
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        FilmInfoScherm();
+                        FilmInfoScreen();
                     }
                 }
 
@@ -211,11 +214,11 @@ namespace cinemaApp
                     {
                         Console.WriteLine("\nReservations are not available yet");
                         Console.Read();
-                        FilmInfoScherm();
+                        FilmInfoScreen();
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        FilmInfoScherm();
+                        FilmInfoScreen();
                     }
                 }
                 else if (options == "5")
@@ -235,11 +238,11 @@ namespace cinemaApp
                     {
                         Console.WriteLine("\nReservations are not available yet");
                         Console.Read();
-                        FilmInfoScherm();
+                        FilmInfoScreen();
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        FilmInfoScherm();
+                        FilmInfoScreen();
                     }
                     
                 }
