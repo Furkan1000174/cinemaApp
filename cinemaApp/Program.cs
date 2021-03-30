@@ -160,6 +160,8 @@ namespace cinemaApp
             }
            
         }
+        //TODO: Dit is leuk om aan de docenten te laten zien maar moet ook werken met JSON + Classes
+
         private static void FilmInfoScreen()
         {
             Console.Clear();
