@@ -19,7 +19,7 @@ namespace cinemaApp
                             break;
                         case 2:
                             //Register moet nog maken
-                            registerScreen();
+                            //registerScreen();
                             break;
                         case 3:
                             mainScreen();
@@ -29,7 +29,7 @@ namespace cinemaApp
                             break;
                         }           
                 }
-                catch (Exception e){
+                catch (Exception){
                     Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
                 }
             }  
@@ -41,7 +41,7 @@ namespace cinemaApp
         {
             Console.Clear();
             Console.WriteLine("Please enter your login info");
-            bool loggedIn = false
+            bool loggedIn = false;
             while (loggedIn == false){
                 Console.WriteLine("Please enter your username: ");
                 string username = Console.ReadLine();
@@ -110,7 +110,7 @@ namespace cinemaApp
                     Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
                 }
             }  
-        }
+        
         //Voor nu is dit wel oké maar dit gaan we met Json + classes doen zodat ik er geen ziektes meer van oploop
         private static void Schedule()
         {
@@ -130,20 +130,20 @@ namespace cinemaApp
             if (confirmation.ToLower() == "y")
             {
                 
-                FilmInfoScreen();
+                //FilmInfoScreen();
             }
             else if (confirmation.ToLower() == "n")
             {
-                mainScreen();
+                //mainScreen();
             }
             else
             {
-                Schedule();
+                //Schedule();
             }
 
         }
         //TODO: Maak JSon database en check of naam en password in 1 record zitten
-        private static bool accountchecker(string username, string password)
+        private static bool accountChecker(string username, string password)
         {
             if (username == "customer" && password == "123")
             {
@@ -155,7 +155,7 @@ namespace cinemaApp
             }
             else
             {
-                Console.WriteLine("The credentials you entered were incorrect. Please try again.")
+                Console.WriteLine("The credentials you entered were incorrect. Please try again.");
                 return false;
             }
            
@@ -305,9 +305,7 @@ namespace cinemaApp
                         FilmInfoScreen();
                     }
                     
-                }
+             }   }
             }
         }
-        
-    }
 }
