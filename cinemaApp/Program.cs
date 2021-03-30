@@ -106,7 +106,7 @@ namespace cinemaApp
                             break;
                         }           
                 }
-                catch (Exception e){
+                catch (Exception){
                     Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
                 }
             }  
