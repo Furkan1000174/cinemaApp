@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace cinemaApp
 {
@@ -7,144 +7,111 @@ namespace cinemaApp
         static void Main(string[] args)
         {
             //Welcome screen
-            Console.WriteLine("Welcome to the cinema!");
-            Console.WriteLine("Please enter what you would like to do: ");
-            Console.WriteLine("1. Login");
-            Console.WriteLine("2. Continue as guest");
-            var options = Console.ReadLine();
-            if (options == "1")
-            {
-                loginscherm();
-            }
-            else if (options == "2")
-            {
-                Console.WriteLine("Please enter your email");
-                var guestMail = Console.ReadLine();
-                mainScreen();
-            }
+            while(true){
+            Console.WriteLine("Welcome to Pathé Movie Theatre!\n What would you like to do? \n1. Login \n2. Register\n3. Continue as guest\n");
+            string options = Console.ReadLine();
+                try {
+                    int number = Int32.Parse(options);
+                    switch (number)
+                        {
+                        case 1:
+                            loginScreen();
+                            break;
+                        case 2:
+                            //Register moet nog maken
+                            //registerScreen();
+                            break;
+                        case 3:
+                            mainScreen();
+                            break;
+                        default:
+                            Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                            break;
+                        }           
+                }
+                catch (Exception){
+                    Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                }
+            }  
         }
-        private static void loginscherm()
+
+  
+
+        private static void loginScreen()
         {
-            Console.WriteLine("Please enter your login info...");
-            var logginIn = true;
-            while (logginIn)
-            {
+            Console.Clear();
+            Console.WriteLine("Please enter your login info");
+            bool loggedIn = false;
+            while (loggedIn == false){
                 Console.WriteLine("Please enter your username: ");
-                string enterUsername = Console.ReadLine();
-                if (accountchecker(enterUsername) == true)
-                {
-                    Console.WriteLine("Please enter your password: ");
-                    string enterPassword = Console.ReadLine();
-                    if (accountchecker(enterPassword) == true)
-                    {
-                        if(enterUsername == "admin"){
-                            if(enterPassword == "123")
-                            {
-                                adminScreen();
-                                break;
-                            }
-                        }
-                        mainScreen();
-                        logginIn = false;
-                    }
-                    else if (accountchecker(enterPassword) != true)
-                    {
-                        Console.WriteLine("Password is incorrect...");
-                    }
-                }
-                else if (accountchecker(enterUsername) != true)
-                {
-                    Console.WriteLine("Username is incorrect...");
-                }
+                string username = Console.ReadLine();
+                Console.WriteLine("Please enter your password: ");
+                string password = Console.ReadLine();
+
+                loggedIn = accountChecker(username,password);
+
+                // Account checker aangepast
             }
+            mainScreen();
         }
         private static void mainScreen()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            string h = "/// Welcome to our Cinema App ///\n";
+            //TODO: Maak functie dat checkt of je user of guest bent, als je user bent zeg je hoi user anders zeg je gwn hoi
+            string h = "/// Hello, user  ///\n";
             Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
             Console.WriteLine(h);
             Console.ResetColor();
-            Console.WriteLine("Please enter the number of what you would like to do:\n");
-            Console.WriteLine("1. View movies");
-            Console.WriteLine("2. View reviews");
-            Console.WriteLine("3. View catering");
-            Console.WriteLine("4. View Schedule");
-            var options = Console.ReadLine();
-            if (options == "1")
-            {
-                FilmInfoScreen();
-            }
-            else if (options == "2")
-            {
-                Console.WriteLine("The review section is not available yet");
-                Console.Read();
-            }
-            else if (options == "3")
-            {
-                Console.WriteLine("The catering section is not available yet");
-                Console.Read();
-            }
-            else if (options == "4")
-            {
-                Schedule();
-            }
-            Console.WriteLine("4. Check Schedule");
-            Console.WriteLine("5. Log Out");
-
-            var option = Console.ReadLine();
-            switch(option)
-            {
-                case "1":
-                   // viewMovies();
-                    break;
-                case "2":
-                  //  viewReviews();
-                    break;
-                case "3":
-                  //  viewCatering();
-                    break;
-                case "4":
-                  //  checkSchedule();
-                    break;
-                case "5":
-                    exit();
-                    break;
-            }
-        }
-        private static void adminScreen()
-        {
-            Console.Clear();
-            Console.WriteLine("Welcome administrator\n");
-            Console.WriteLine("Please select what you would like to do\n");
-            Console.WriteLine("1. Manage movies");
-            Console.WriteLine("2. Manage reservations");
-            Console.WriteLine("3. Manage catering");
-            Console.WriteLine("4. Manage Schedule");
-            Console.WriteLine("4. Check Schedule");
-            Console.WriteLine("5. Log Out");
-             
-            var options = Console.ReadLine();
-            switch(options)
-            {
-                case "1":
-                   // manageMovies();
-                    break;
-                case "2":
-                   // manageReservations();
-                    break;
-                case "3":
-                  //  manageCatering();
-                    break;
-                case "4":
-                   // checkSchedule();
-                    break;
-                case "5":
-                    exit();
-                    break;
-            }
-        }
+            Console.WriteLine("Please enter the number of what you would like to do:\n1. View movies\n2. View reviews\n3. View catering\n4. View Schedule\n");
+            //TODO: Maak Admin opties (if statement om te checken of de ingelogde gebruiker een admin is, dan deze opties laten zien)
+            //Console.Writeline("5. Manage movies\n6. Manage reservations\n7. Manage catering\n8.  Manage Schedule");
+            string options = Console.ReadLine();
+                try {
+                    int number = Int32.Parse(options);
+                    switch (number)
+                        {
+                        case 1:
+                            //movieScreen();
+                            break;
+                        case 2:
+                            //TODO: Maak review screen
+                            //reviewScreen();
+                            break;
+                        case 3:
+                            //TODO: Maak Catering Screen
+                            //cateringScreen();
+                            break;
+                        case 4:
+                            Schedule();
+                            break;
+                        case 5:
+                            //TODO: Maak Manage Movies Scherm
+                            //adminMovieScreen();
+                            //break;
+                        case 6:
+                            //TODO: Maak Manage Reservation Scherm
+                            //adminReservationScreen();
+                            //break;
+                        case 7:
+                            //TODO: Maak Catering Manage Scherm
+                            //adminCateringScreen();
+                            //break;
+                        case 8:
+                            //TODO: Maak Schedule Manage Scherm
+                            //adminScheduleScreen();
+                            //break;
+                        default:
+                            Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                            break;
+                        }           
+                }
+                catch (Exception){
+                    Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                }
+            }  
+        
+        //Voor nu is dit wel oké maar dit gaan we met Json + classes doen zodat ik er geen ziektes meer van oploop
         private static void Schedule()
         {
             Console.Clear();
@@ -153,31 +120,48 @@ namespace cinemaApp
             Console.WriteLine("Normadland:\n 18:00 | 22:00 | 22:30 | 01:00 | 02:00\n");
             Console.WriteLine("Another round:\n 13:00| 15:30 | 19:00 | 21:00 | 23:00 | 03:00 |\n");
             Console.WriteLine("The Father:\n 12:45 | 15:00 | 19:00 | 21:00 | 23:00\n");
+            
+    
+    
+    
             Console.WriteLine("Do you want to go to the film selection screeen? y/n: ");
-            var nis = Console.ReadLine();
-            if (nis == "Y" | nis == "y")
+           
+            string confirmation = Console.ReadLine();
+            if (confirmation.ToLower() == "y")
             {
                 
-                FilmInfoScreen();
+                //FilmInfoScreen();
             }
-            else if (nis == "N" | nis == "n")
+            else if (confirmation.ToLower() == "n")
             {
-                mainScreen();
+                //mainScreen();
+            }
+            else
+            {
+                //Schedule();
             }
 
         }
-        private static bool accountchecker(string usernameORpassword)
+        //TODO: Maak JSon database en check of naam en password in 1 record zitten
+        private static bool accountChecker(string username, string password)
         {
-            if (usernameORpassword == "customer" | usernameORpassword == "123")
+            if (username == "customer" && password == "123")
             {
                 return true;
             }
-            else if(usernameORpassword == "admin" | usernameORpassword == "123")
+            else if(username == "admin" && password == "123")
             {
                 return true;
             }
-            return false;
+            else
+            {
+                Console.WriteLine("The credentials you entered were incorrect. Please try again.");
+                return false;
+            }
+           
         }
+        //TODO: Dit is leuk om aan de docenten te laten zien maar moet ook werken met JSON + Classes
+
         private static void FilmInfoScreen()
         {
             Console.Clear();
@@ -186,11 +170,17 @@ namespace cinemaApp
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
-            Console.WriteLine("These are the available films of our theater:\n1. Minari\n2. Sound of Metal\n3. Nomadland\n4. Another round\n5. The Father\n");         
-            var Filminf = true;
-            while (Filminf)
+            while (true)
             {
-                Console.WriteLine("Type the number of the film you want to see more information about: ");
+
+                Console.WriteLine(@"These are the available movies of our theatre:
+                1. Minari
+                2. Sound of Metal
+                3. Nomadland
+                4. Another round
+                5. The Father
+                Enter the number of the movie you would like to get more information of: ");         
+
                 var options = Console.ReadLine();
                 if (options == "1")
                 {
@@ -315,14 +305,7 @@ namespace cinemaApp
                         FilmInfoScreen();
                     }
                     
-                }
+             }   }
             }
         }
-
-        private static void exit()
-        {
-            Console.WriteLine("Press enter to continue");
-            string test = Console.ReadLine();
-        }
-    }
 }
