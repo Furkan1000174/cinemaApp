@@ -59,7 +59,8 @@ namespace cinemaApp
             Console.WriteLine("Thank you your account has been registered!");
             var account = Tuple.Create(username,lastname,username,password,email);
             var jsonString = JsonSerializer.Serialize(account);
-            File.WriteAllText("Data.json", jsonString);
+            Console.WriteLine(jsonString);
+            //File.WriteAllText("Data.json", jsonString);
             System.Threading.Thread.Sleep(2000);
             mainScreen();
         }
