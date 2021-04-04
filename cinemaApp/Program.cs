@@ -257,7 +257,8 @@ namespace cinemaApp
                     "3.Nomadland\n" +
                     "4.Another round\n" +
                     "5.The Father\n\n" +
-                    "Enter the number of the movie you would like to get more information of:");
+                    "Enter the number of the movie you would like to get more information of:\n" +
+                    "Press 6 to exit");
                 var options = Console.ReadLine();
                 if (options == "1")
                 {
@@ -282,7 +283,7 @@ namespace cinemaApp
                     {
                         FilmInfoScreen();
                     }
-                 
+
                 }
                 else if (options == "2")
                 {
@@ -381,8 +382,12 @@ namespace cinemaApp
                     {
                         FilmInfoScreen();
                     }
-                    
-             }   }
+                }
+                else if (options == "6")
+                {
+                    mainScreen();
+                }
+            }
             }
         }
 }
