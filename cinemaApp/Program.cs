@@ -10,8 +10,9 @@ namespace cinemaApp
         
         static void Main()
         {
+            var loggingin = true;
             //Welcome screen
-            while(true){
+            while(loggingin){
             Console.WriteLine("Welcome to Pathé Movie Theatre!\n What would you like to do? \n1. Login \n2. Register\n3. Continue as guest\n");
             string options = Console.ReadLine();
                 try {
@@ -19,9 +20,11 @@ namespace cinemaApp
                     switch (number)
                         {
                         case 1:
+                            loggingin = false;
                             loginScreen();
                             break;
                         case 2:
+                            loggingin = false;
                             RegistrationScreen();
                             break;
                         case 3:
@@ -54,10 +57,10 @@ namespace cinemaApp
             Console.WriteLine("Please enter your email:");
             var email = Console.ReadLine();
             Console.WriteLine("Thank you your account has been registered!");
-            System.Threading.Thread.Sleep(2000);
             var account = Tuple.Create(username,lastname,username,password,email);
             var jsonString = JsonSerializer.Serialize(account);
             File.WriteAllText("Data.json", jsonString);
+            System.Threading.Thread.Sleep(2000);
             mainScreen();
         }
 
