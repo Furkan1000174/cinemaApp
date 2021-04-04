@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -6,6 +7,7 @@ namespace cinemaApp
 {
     class Program
     {
+        
         static void Main()
         {
             //Welcome screen
@@ -20,8 +22,7 @@ namespace cinemaApp
                             loginScreen();
                             break;
                         case 2:
-                            //Register moet nog maken
-                            //registerScreen();
+                            RegistrationScreen();
                             break;
                         case 3:
                             mainScreen();
@@ -37,7 +38,28 @@ namespace cinemaApp
             }  
         }
 
-  
+        private static void RegistrationScreen()
+        {
+            Console.Clear();
+            Console.WriteLine("Please enter your account details to register");
+            Console.WriteLine("To go back type \"exit\"");
+            Console.WriteLine("Please enter your firstname:");
+            var firstname = Console.ReadLine();
+            Console.WriteLine("Please enter your lastname:");
+            var lastname = Console.ReadLine();
+            Console.WriteLine("Please enter your username:");
+            var username = Console.ReadLine();
+            Console.WriteLine("Please enter your password:");
+            var password = Console.ReadLine();
+            Console.WriteLine("Please enter your email:");
+            var email = Console.ReadLine();
+            Console.WriteLine("Thank you your account has been registered!");
+            System.Threading.Thread.Sleep(2000);
+            var account = Tuple.Create(username,lastname,username,password,email);
+            var jsonString = JsonSerializer.Serialize(account);
+            File.WriteAllText("Data.json", jsonString);
+            mainScreen();
+        }
 
         private static void loginScreen()
         {
