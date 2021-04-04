@@ -103,11 +103,11 @@ namespace cinemaApp
                     {
                         case 1:
                             //TODO: Maak Movie Screen
-                            //movieScreen();
+                            FilmInfoScreen();
                             break;
                         case 2:
                             //TODO: Maak review screen
-                            //reviewScreen();
+                            reviewScreen();
                             break;
                         case 3:
                             //TODO: Maak Catering Screen
@@ -145,6 +145,58 @@ namespace cinemaApp
             }  
         
         //Voor nu is dit wel oké maar dit gaan we met Json + classes doen zodat ik er geen ziektes meer van oploop
+        private static void reviewScreen()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            string a = "/// MOVIE REVIEWS ///\n";
+            Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
+            Console.WriteLine(a);
+            Console.ResetColor();
+            Console.WriteLine("Please enter which review you would like to see\n\n" +
+                "1. Minari\n" +
+                "2. Sound of metal\n" +
+                "3. Normadland\n" +
+                "4. Another round\n" +
+                "5. The Father\n" +
+                "Type 6 to exit");
+            while (true)
+            {
+                string options = Console.ReadLine();
+                try
+                {
+                    int number = Int32.Parse(options);
+                    switch (number)
+                    {
+                        case 1:
+                            Console.WriteLine("Minari is the best movie ever!");
+                            break;
+                        case 2:
+                            Console.WriteLine("Sound of metal touched my heart.");
+                            break;
+                        case 3:
+                            Console.WriteLine("Normadland is a good movie to watch.");
+                            break;
+                        case 4:
+                            Console.WriteLine("Another round was alright.");
+                            break;
+                        case 5:
+                            Console.WriteLine("The Father is a good movie.");
+                            break;
+                        case 6:
+                            mainScreen();
+                            break;
+                        default:
+                            Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                }
+            }
+        }
         private static void Schedule()
         {
             Console.Clear();
@@ -153,25 +205,19 @@ namespace cinemaApp
             Console.WriteLine("Normadland:\n 18:00 | 22:00 | 22:30 | 01:00 | 02:00\n");
             Console.WriteLine("Another round:\n 13:00| 15:30 | 19:00 | 21:00 | 23:00 | 03:00 |\n");
             Console.WriteLine("The Father:\n 12:45 | 15:00 | 19:00 | 21:00 | 23:00\n");
-            
-    
-    
-    
             Console.WriteLine("Do you want to go to the film selection screeen? y/n: ");
-           
             string confirmation = Console.ReadLine();
             if (confirmation.ToLower() == "y")
             {
-                
-                //FilmInfoScreen();
+                FilmInfoScreen();
             }
             else if (confirmation.ToLower() == "n")
             {
-                //mainScreen();
+                mainScreen();
             }
             else
             {
-                //Schedule();
+                Schedule();
             }
         }
         //TODO: Maak JSon database en check of naam en password in 1 record zitten
@@ -204,15 +250,13 @@ namespace cinemaApp
             Console.ResetColor();
             while (true)
             {
-
-                Console.WriteLine(@"These are the available movies of our theatre:
-                1. Minari
-                2. Sound of Metal
-                3. Nomadland
-                4. Another round
-                5. The Father
-                Enter the number of the movie you would like to get more information of: ");         
-
+                Console.WriteLine("These are the available movies of our theatre:\n\n" +
+                    "1.Minari\n" +
+                    "2.Sound of Metal\n" +
+                    "3.Nomadland\n" +
+                    "4.Another round\n" +
+                    "5.The Father\n\n" +
+                    "Enter the number of the movie you would like to get more information of:");
                 var options = Console.ReadLine();
                 if (options == "1")
                 {
