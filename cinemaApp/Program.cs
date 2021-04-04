@@ -93,12 +93,16 @@ namespace cinemaApp
             Console.WriteLine("Please enter the number of what you would like to do:\n1. View movies\n2. View reviews\n3. View catering\n4. View Schedule\n");
             //TODO: Maak Admin opties (if statement om te checken of de ingelogde gebruiker een admin is, dan deze opties laten zien)
             //Console.Writeline("5. Manage movies\n6. Manage reservations\n7. Manage catering\n8.  Manage Schedule");
-            string options = Console.ReadLine();
-                try {
+            while (true)
+            {
+                string options = Console.ReadLine();
+                try
+                {
                     int number = Int32.Parse(options);
                     switch (number)
-                        {
+                    {
                         case 1:
+                            //TODO: Maak Movie Screen
                             //movieScreen();
                             break;
                         case 2:
@@ -113,29 +117,31 @@ namespace cinemaApp
                             Schedule();
                             break;
                         case 5:
-                            //TODO: Maak Manage Movies Scherm
-                            //adminMovieScreen();
-                            //break;
+                        //TODO: Maak Manage Movies Scherm
+                        //adminMovieScreen();
+                        //break;
                         case 6:
-                            //TODO: Maak Manage Reservation Scherm
-                            //adminReservationScreen();
-                            //break;
+                        //TODO: Maak Manage Reservation Scherm
+                        //adminReservationScreen();
+                        //break;
                         case 7:
-                            //TODO: Maak Catering Manage Scherm
-                            //adminCateringScreen();
-                            //break;
+                        //TODO: Maak Catering Manage Scherm
+                        //adminCateringScreen();
+                        //break;
                         case 8:
-                            //TODO: Maak Schedule Manage Scherm
-                            //adminScheduleScreen();
-                            //break;
+                        //TODO: Maak Schedule Manage Scherm
+                        //adminScheduleScreen();
+                        //break;
                         default:
                             Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
                             break;
-                        }           
+                    }
                 }
-                catch (Exception){
+                catch (Exception)
+                {
                     Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
                 }
+            }
             }  
         
         //Voor nu is dit wel oké maar dit gaan we met Json + classes doen zodat ik er geen ziektes meer van oploop
