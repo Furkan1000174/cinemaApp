@@ -1,17 +1,44 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace cinemaApp
 {
     class Program
     {
+
+        public class Account
+        {
+            public string ID { get; set; }
+            public string username { get; set; }
+            public string password { get; set; }
+
+            public override string ToString()
+            {
+                return string.Format("Account information:\n\tID: {0}, Username: {1}, Password: {2}", ID, username, password);
+            }
+        }
+
+        private static bool accountchecker(string enteredUsername, string enteredPassword, Account accountToCheck) { //checks the login info
+            if (accountToCheck.username == enteredUsername && accountToCheck.password == enteredPassword)
+            {
+                return true;
+            }
+
+            return false;
+        }
         static void Main(string[] args)
         {
+
             //Welcome screen
             Console.WriteLine("Welcome to the cinema!");
             Console.WriteLine("Please enter what you would like to do: ");
             Console.WriteLine("1. Login");
             Console.WriteLine("2. Continue as guest");
+            Console.WriteLine("3. Create account");
             var options = Console.ReadLine();
             if (options == "1")
             {
@@ -23,32 +50,95 @@ namespace cinemaApp
                 var guestMail = Console.ReadLine();
                 mainScreen();
             }
+            else if (options == "3")
+            {
+                createAccountScreen();
+            }
         }
-       
+        private static void createAccountScreen() //creates an account and adds it to the json file
+        {
+            Console.WriteLine("Please enter your first name: ");
+            string accountID = Console.ReadLine();
+            Console.WriteLine("Please choose your username: ");
+            string accountUsername = Console.ReadLine();
+            Console.WriteLine("Please choose your password: ");
+            string accountPassword = Console.ReadLine();
+
+            Account newAccount = new Account()
+            {
+                ID = accountID,
+                username = accountUsername,
+                password = accountPassword
+
+            };
+
+            string strNewaccountJson = JsonConvert.SerializeObject(newAccount);
+            using (StreamWriter sw = File.AppendText(@"accounts.json"))
+            {
+                sw.WriteLine(strNewaccountJson);
+                sw.Close();
+
+            }
+            Console.WriteLine("Account created!");
+
+            loginScreen();
+        }
+
         private static void loginScreen() {
             Console.WriteLine("Please enter your login info...");
             var logginIn = true;
             while (logginIn) {
-            Console.WriteLine("Please enter your username: ");
-            string enteredUsername = Console.ReadLine();
-            Console.WriteLine("Please enter your password: ");
-            string enteredPassword = Console.ReadLine();
-                if (accountchecker(enteredUsername, enteredPassword) == true) {
-                    if(enteredUsername == "admin"){
-                        if(enteredPassword == "adminPass") {
-                            adminScreen();
-                            break;
-                        }
+                Console.WriteLine("Please enter your username: ");
+                string enteredUsername = Console.ReadLine();
+                Console.WriteLine("Please enter your password: ");
+                string enteredPassword = Console.ReadLine();
+
+                Account tempAccount = new Account()
+                {
+                    ID = "firstID",
+                    username = "firstUser",
+                    password = "firstPass"
+
+                };//Dont delete, this becomes a placeholder in the next line
+                Account accountToCheck = tempAccount;
+                List<String> jsonContents = new List<String> { };
+                foreach (string line in File.ReadLines(@"accounts.json")) //Creates a list with every object from json file
+                {
+                    jsonContents.Add(line);
+                }
+                var accountList = new List<Account> { };
+                foreach (String account in jsonContents ){ //converts previous string list to account list
+                    accountList.Add(JsonConvert.DeserializeObject<Account>(account));
+
+                }
+                
+                
+            foreach (var account in accountList) //looks up the account that the user is trying to login with...
+            {
+                if (account.username == enteredUsername)
+                    {
+                        accountToCheck = account;//...and stores it in accountToCheck when found
                     }
-                    else if (enteredUsername != "admin") {
-                        mainScreen();
-                        logginIn = false;
-                    }
+            }
+            //Console.WriteLine(accountToCheck); //can be used to check what account is found
+
+            if (accountchecker(enteredUsername, enteredPassword, accountToCheck) == true) { //gives accountToCheck to the accountchecker
+                if(enteredUsername == "admin" && enteredPassword == "adminPass")
+                {
+                    adminScreen();
+                    break;
                         
                 }
-                else if (accountchecker(enteredUsername, enteredPassword) == false) {
-                    Console.WriteLine("pass or username is incorrect...");
+                else if (enteredUsername != "admin") {
+                    Console.WriteLine("accountChecker returns true, going to mainscreen...");
+                    mainScreen();
+                    logginIn = false;
                 }
+                        
+            }
+            else {
+                Console.WriteLine("pass or username is incorrect...");
+            }
             }
         }
         private static void mainScreen()
@@ -159,21 +249,7 @@ namespace cinemaApp
             }
 
         }
-        
-
-        
-        
-        private static bool accountchecker(string enteredUsername, string enteredPassword) {
-            IDictionary<string, string> accountDict = new Dictionary<string, string> { { "account1", "password1" }, { "account2", "password2" } };
-            accountDict.Add("admin", "adminPass"); //just testing if adding accounts works
-
-            if (accountDict.ContainsKey(enteredUsername)) {
-                if (accountDict[enteredUsername] == enteredPassword)
-                    return true;
-            }
-            
-            return false;
-        }
+       
         private static void FilmInfoScreen()
         {
             Console.Clear();
