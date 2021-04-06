@@ -34,7 +34,7 @@ namespace cinemaApp
         {
             //Welcome screen
             while (true) {
-                Console.WriteLine("Welcome to Pathé Movie Theatre!\n What would you like to do? \n1. Login \n2. Register\n3. Continue as guest\n");
+                Console.WriteLine("Welcome to Pathé Movie Theatre!\n What would you like to do? \n1. Login \n2. Create Account\n3. Continue as guest\n");
                 string options = Console.ReadLine();
                try {
                     int number = Int32.Parse(options);
@@ -44,8 +44,7 @@ namespace cinemaApp
                             loginScreen();
                             break;
                         case 2:
-                            //Register moet nog maken
-                            //registerScreen();
+                            createAccountScreen();
                             break;
                         case 3:
                             mainScreen();
