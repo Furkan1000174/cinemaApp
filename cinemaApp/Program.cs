@@ -1,86 +1,145 @@
+using Newtonsoft.Json;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
 
 namespace cinemaApp
 {
     class Program
     {
-        
-        static void Main()
+
+        public class Account
         {
-            var loggingin = true;
-            //Welcome screen
-            while(loggingin){
-            Console.WriteLine("Welcome to Pathé Movie Theatre!\n What would you like to do? \n1. Login \n2. Register\n3. Continue as guest\n");
-            string options = Console.ReadLine();
-                try {
-                    int number = Int32.Parse(options);
-                    switch (number)
-                        {
-                        case 1:
-                            loggingin = false;
-                            loginScreen();
-                            break;
-                        case 2:
-                            loggingin = false;
-                            RegistrationScreen();
-                            break;
-                        case 3:
-                            mainScreen();
-                            break;
-                        default:
-                            Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
-                            break;
-                        }           
-                }
-                catch (Exception){
-                    Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
-                }
-            }  
-        }
+            public string ID { get; set; }
+            public string username { get; set; }
+            public string password { get; set; }
 
-        private static void RegistrationScreen()
-        {
-            Console.Clear();
-            Console.WriteLine("Please enter your account details to register");
-            Console.WriteLine("To go back type \"exit\"");
-            Console.WriteLine("Please enter your firstname:");
-            var firstname = Console.ReadLine();
-            Console.WriteLine("Please enter your lastname:");
-            var lastname = Console.ReadLine();
-            Console.WriteLine("Please enter your username:");
-            var username = Console.ReadLine();
-            Console.WriteLine("Please enter your password:");
-            var password = Console.ReadLine();
-            Console.WriteLine("Please enter your email:");
-            var email = Console.ReadLine();
-            Console.WriteLine("Thank you your account has been registered!");
-            var account = Tuple.Create(username,lastname,username,password,email);
-            var jsonString = JsonSerializer.Serialize(account);
-            Console.WriteLine(jsonString);
-            //File.WriteAllText("Data.json", jsonString);
-            System.Threading.Thread.Sleep(2000);
-            mainScreen();
-        }
-
-        private static void loginScreen()
-        {
-            Console.Clear();
-            Console.WriteLine("Please enter your login info");
-            bool loggedIn = false;
-            while (loggedIn == false){
-                Console.WriteLine("Please enter your username: ");
-                string username = Console.ReadLine();
-                Console.WriteLine("Please enter your password: ");
-                string password = Console.ReadLine();
-
-                loggedIn = accountChecker(username,password);
-
-                // Account checker aangepast
+            public override string ToString()
+            {
+                return string.Format("Account information:\n\tID: {0}, Username: {1}, Password: {2}", ID, username, password);
             }
-            mainScreen();
+        }
+
+        private static bool accountchecker(string enteredUsername, string enteredPassword, Account accountToCheck) { //checks the login info
+            if (accountToCheck.username == enteredUsername && accountToCheck.password == enteredPassword)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        static void Main(string[] args)
+        {
+
+            //Welcome screen
+            Console.WriteLine("Welcome to the cinema!");
+            Console.WriteLine("Please enter what you would like to do: ");
+            Console.WriteLine("1. Login");
+            Console.WriteLine("2. Continue as guest");
+            Console.WriteLine("3. Create account");
+            var options = Console.ReadLine();
+            if (options == "1")
+            {
+                loginScreen();
+            }
+            else if (options == "2")
+            {
+                Console.WriteLine("Please enter your email");
+                var guestMail = Console.ReadLine();
+                mainScreen();
+            }
+            else if (options == "3")
+            {
+                createAccountScreen();
+            }
+        }
+        private static void createAccountScreen() //creates an account and adds it to the json file
+        {
+            Console.WriteLine("Please enter your first name: ");
+            string accountID = Console.ReadLine();
+            Console.WriteLine("Please choose your username: ");
+            string accountUsername = Console.ReadLine();
+            Console.WriteLine("Please choose your password: ");
+            string accountPassword = Console.ReadLine();
+
+            Account newAccount = new Account()
+            {
+                ID = accountID,
+                username = accountUsername,
+                password = accountPassword
+
+            };
+
+            string strNewaccountJson = JsonConvert.SerializeObject(newAccount);
+            using (StreamWriter sw = File.AppendText(@"accounts.json"))
+            {
+                sw.WriteLine(strNewaccountJson);
+                sw.Close();
+
+            }
+            Console.WriteLine("Account created!");
+
+            loginScreen();
+        }
+
+        private static void loginScreen() {
+            Console.WriteLine("Please enter your login info...");
+            var logginIn = true;
+            while (logginIn) {
+                Console.WriteLine("Please enter your username: ");
+                string enteredUsername = Console.ReadLine();
+                Console.WriteLine("Please enter your password: ");
+                string enteredPassword = Console.ReadLine();
+
+                Account tempAccount = new Account()
+                {
+                    ID = "firstID",
+                    username = "firstUser",
+                    password = "firstPass"
+
+                };//Dont delete, this becomes a placeholder in the next line
+                Account accountToCheck = tempAccount;
+                List<String> jsonContents = new List<String> { };
+                foreach (string line in File.ReadLines(@"accounts.json")) //Creates a list with every object from json file
+                {
+                    jsonContents.Add(line);
+                }
+                var accountList = new List<Account> { };
+                foreach (String account in jsonContents ){ //converts previous string list to account list
+                    accountList.Add(JsonConvert.DeserializeObject<Account>(account));
+
+                }
+                
+                
+            foreach (var account in accountList) //looks up the account that the user is trying to login with...
+            {
+                if (account.username == enteredUsername)
+                    {
+                        accountToCheck = account;//...and stores it in accountToCheck when found
+                    }
+            }
+            //Console.WriteLine(accountToCheck); //can be used to check what account is found
+
+            if (accountchecker(enteredUsername, enteredPassword, accountToCheck) == true) { //gives accountToCheck to the accountchecker
+                if(enteredUsername == "admin" && enteredPassword == "adminPass")
+                {
+                    adminScreen();
+                    break;
+                        
+                }
+                else if (enteredUsername != "admin") {
+                    Console.WriteLine("accountChecker returns true, going to mainscreen...");
+                    mainScreen();
+                    logginIn = false;
+                }
+                        
+            }
+            else {
+                Console.WriteLine("pass or username is incorrect...");
+            }
+            }
         }
         private static void mainScreen()
         {
@@ -221,26 +280,7 @@ namespace cinemaApp
                 Schedule();
             }
         }
-        //TODO: Maak JSon database en check of naam en password in 1 record zitten
-        private static bool accountChecker(string username, string password)
-        {
-            if (username == "customer" && password == "123")
-            {
-                return true;
-            }
-            else if(username == "admin" && password == "123")
-            {
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("The credentials you entered were incorrect. Please try again.");
-                return false;
-            }
-           
-        }
-        //TODO: Dit is leuk om aan de docenten te laten zien maar moet ook werken met JSON + Classes
-
+       
         private static void FilmInfoScreen()
         {
             Console.Clear();
