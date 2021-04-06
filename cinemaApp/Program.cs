@@ -220,6 +220,43 @@ namespace cinemaApp
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
+            Console.WriteLine("Please enter the number of what you would like to do:\n1. Manage movies\n2. Manage reviews\n3. Manage catering\n4. Manage Schedule\n5. To exit back to the main screen");
+            while (true)
+            {
+                string options = Console.ReadLine();
+                try
+                {
+                    int number = Int32.Parse(options);
+                    switch (number)
+                    {
+                        case 1:
+                            //TODO: Maak Movie Screen
+                            //FilmInfoScreen();
+                            break;
+                        case 2:
+                            //TODO: Maak review screen
+                            //reviewScreen();
+                            break;
+                        case 3:
+                            //TODO: Maak Catering Screen
+                            //cateringScreen();
+                            break;
+                        case 4:
+                            //Schedule();
+                            break;
+                        case 5:
+                            mainScreen();
+                            break;
+                        default:
+                            Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                }
+            }
         }
 
 
