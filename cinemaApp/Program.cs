@@ -30,7 +30,7 @@ namespace cinemaApp
 
             return false;
         }
-        static void Main(string[] args)
+        static void Main()
         {
 
             //Welcome screen
@@ -102,24 +102,33 @@ namespace cinemaApp
                 };//Dont delete, this becomes a placeholder in the next line
                 Account accountToCheck = tempAccount;
                 List<String> jsonContents = new List<String> { };
-                foreach (string line in File.ReadLines(@"accounts.json")) //Creates a list with every object from json file
+                try
                 {
-                    jsonContents.Add(line);
-                }
-                var accountList = new List<Account> { };
-                foreach (String account in jsonContents ){ //converts previous string list to account list
-                    accountList.Add(JsonConvert.DeserializeObject<Account>(account));
-
-                }
-                
-                
-            foreach (var account in accountList) //looks up the account that the user is trying to login with...
-            {
-                if (account.username == enteredUsername)
+                    foreach (string line in File.ReadLines(@"accounts.json")) //Creates a list with every object from json file
                     {
-                        accountToCheck = account;//...and stores it in accountToCheck when found
+                        jsonContents.Add(line);
                     }
-            }
+                    var accountList = new List<Account> { };
+                    foreach (String account in jsonContents)
+                    { //converts previous string list to account list
+                        accountList.Add(JsonConvert.DeserializeObject<Account>(account));
+
+                    }
+
+                    foreach (var account in accountList) //looks up the account that the user is trying to login with...
+                    {
+                        if (account.username == enteredUsername)
+                        {
+                            accountToCheck = account;//...and stores it in accountToCheck when found
+                        }
+                    }
+                }
+                catch (FileNotFoundException)
+                {
+                    Console.WriteLine("\nNo accounts found!\nPlease create an account first!\n");
+                    System.Threading.Thread.Sleep(2000);
+                    Main();
+                }
             //Console.WriteLine(accountToCheck); //can be used to check what account is found
 
             if (accountchecker(enteredUsername, enteredPassword, accountToCheck) == true) { //gives accountToCheck to the accountchecker
@@ -203,7 +212,17 @@ namespace cinemaApp
                 }
             }
             }  
-        
+        private static void adminScreen()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            string a = "/// Welcome Admin! ///\n";
+            Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
+            Console.WriteLine(a);
+            Console.ResetColor();
+        }
+
+
         //Voor nu is dit wel oké maar dit gaan we met Json + classes doen zodat ik er geen ziektes meer van oploop
         private static void reviewScreen()
         {
