@@ -1,9 +1,35 @@
+using Newtonsoft.Json;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace cinemaApp
 {
     class Program
     {
+
+        public class Account
+        {
+            public string ID { get; set; }
+            public string username { get; set; }
+            public string password { get; set; }
+
+            public override string ToString()
+            {
+                return string.Format("Account information:\n\tID: {0}, Username: {1}, Password: {2}", ID, username, password);
+            }
+        }
+
+        private static bool accountchecker(string enteredUsername, string enteredPassword, Account accountToCheck) { //checks the login info
+            if (accountToCheck.username == enteredUsername && accountToCheck.password == enteredPassword)
+            {
+                return true;
+            }
+
+            return false;
+        }
         static void Main(string[] args)
         {
             //Welcome screen
@@ -34,26 +60,90 @@ namespace cinemaApp
                 }
             }  
         }
-
-  
-
-        private static void loginScreen()
+        private static void createAccountScreen() //creates an account and adds it to the json file
         {
-            Console.Clear();
-            Console.WriteLine("Please enter your login info");
-            bool loggedIn = false;
-            while (loggedIn == false){
-                Console.WriteLine("Please enter your username: ");
-                string username = Console.ReadLine();
-                Console.WriteLine("Please enter your password: ");
-                string password = Console.ReadLine();
+            Console.WriteLine("Please enter your first name: ");
+            string accountID = Console.ReadLine();
+            Console.WriteLine("Please choose your username: ");
+            string accountUsername = Console.ReadLine();
+            Console.WriteLine("Please choose your password: ");
+            string accountPassword = Console.ReadLine();
 
-                loggedIn = accountChecker(username,password);
+            Account newAccount = new Account()
+            {
+                ID = accountID,
+                username = accountUsername,
+                password = accountPassword
 
-                // Account checker aangepast
+            };
+
+            string strNewaccountJson = JsonConvert.SerializeObject(newAccount);
+            using (StreamWriter sw = File.AppendText(@"accounts.json"))
+            {
+                sw.WriteLine(strNewaccountJson);
+                sw.Close();
+
             }
-            mainScreen();
+            Console.WriteLine("Account created!");
+
+            loginScreen();
         }
+
+        private static void loginScreen() {
+            var logginIn = true;
+            while (logginIn) {
+                Console.WriteLine("Please enter your username: ");
+                string enteredUsername = Console.ReadLine();
+                Console.WriteLine("Please enter your password: ");
+                string enteredPassword = Console.ReadLine();
+
+                Account tempAccount = new Account()
+                {
+                    ID = "firstID",
+                    username = "firstUser",
+                    password = "firstPass"
+
+                };//Dont delete, this becomes a placeholder in the next line
+                Account accountToCheck = tempAccount;
+                List<String> jsonContents = new List<String> { };
+                foreach (string line in File.ReadLines(@"accounts.json")) //Creates a list with every object from json file
+                {
+                    jsonContents.Add(line);
+                }
+                var accountList = new List<Account> { };
+                foreach (String account in jsonContents ){ //converts previous string list to account list
+                    accountList.Add(JsonConvert.DeserializeObject<Account>(account));
+
+                }
+                
+                
+            foreach (var account in accountList) //looks up the account that the user is trying to login with...
+            {
+                if (account.username == enteredUsername)
+                    {
+                        accountToCheck = account;//...and stores it in accountToCheck when found
+                    }
+            }
+            //Console.WriteLine(accountToCheck); //can be used to check what account is found
+
+            if (accountchecker(enteredUsername, enteredPassword, accountToCheck) == true) { //gives accountToCheck to the accountchecker
+                if(enteredUsername == "admin" && enteredPassword == "adminPass")
+                {
+                    adminScreen();
+                    break;
+                        
+                }
+                else if (enteredUsername != "admin") {
+                    Console.WriteLine("accountChecker returns true, going to mainscreen...");
+                    mainScreen();
+                    logginIn = false;
+                }
+                        
+            }
+            else {
+                Console.WriteLine("pass or username is incorrect...");
+            }
+
         private static void mainScreen()
         {
             Console.Clear();
@@ -142,26 +232,6 @@ namespace cinemaApp
             }
 
         }
-        //TODO: Maak JSon database en check of naam en password in 1 record zitten
-        private static bool accountChecker(string username, string password)
-        {
-            if (username == "customer" && password == "123")
-            {
-                return true;
-            }
-            else if(username == "admin" && password == "123")
-            {
-                return true;
-            }
-            else
-            {
-                Console.WriteLine("The credentials you entered were incorrect. Please try again.");
-                return false;
-            }
-           
-        }
-        //TODO: Dit is leuk om aan de docenten te laten zien maar moet ook werken met JSON + Classes
-
         private static void FilmInfoScreen()
         {
             Console.Clear();
