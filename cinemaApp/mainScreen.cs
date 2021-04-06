@@ -6,8 +6,6 @@ namespace cinemaApp
 {
     class mainScreen
     {
-
-    
     public static void Show()
     {
         Console.Clear();

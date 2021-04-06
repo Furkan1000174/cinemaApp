@@ -6,8 +6,6 @@ namespace cinemaApp
 {
     class MovieInfoScreen
     {
-
-
         public static void showMovies()
         {
             Console.Clear();
@@ -18,7 +16,6 @@ namespace cinemaApp
             Console.ResetColor();
             while (true)
             {
-
                 Console.WriteLine(@"These are the available movies of our theatre:
                 1. Minari
                 2. Sound of Metal
@@ -26,7 +23,6 @@ namespace cinemaApp
                 4. Another round
                 5. The Father
                 Enter the number of the movie you would like to get more information of: ");
-
                 var options = Console.ReadLine();
                 if (options == "1")
                 {
@@ -51,7 +47,6 @@ namespace cinemaApp
                     {
                         showMovies();
                     }
-
                 }
                 else if (options == "2")
                 {
@@ -76,7 +71,6 @@ namespace cinemaApp
                     {
                         showMovies();
                     }
-
                 }
                 else if (options == "3")
                 {
@@ -102,7 +96,6 @@ namespace cinemaApp
                         showMovies();
                     }
                 }
-
                 else if (options == "4")
                 {
                     Console.Clear();
@@ -150,7 +143,6 @@ namespace cinemaApp
                     {
                         showMovies();
                     }
-
                 }
             }
         }

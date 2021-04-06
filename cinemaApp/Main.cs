@@ -7,7 +7,7 @@ namespace cinemaApp
 {
     class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
             //Welcome screen
             while (true)
@@ -39,10 +39,7 @@ namespace cinemaApp
                 }
             }
         }
-      
-        
         }
-
     }
 
 

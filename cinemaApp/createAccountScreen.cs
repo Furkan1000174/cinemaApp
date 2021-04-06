@@ -23,7 +23,6 @@ namespace cinemaApp
                 ID = accountID,
                 username = accountUsername,
                 password = accountPassword
-
             };
 
             string strNewaccountJson = JsonConvert.SerializeObject(newAccount);
@@ -31,10 +30,8 @@ namespace cinemaApp
             {
                 sw.WriteLine(strNewaccountJson);
                 sw.Close();
-
             }
             Console.WriteLine("Account created!");
-
             loginScreen.Login();
         }
     }
