@@ -85,7 +85,6 @@ namespace cinemaApp
         }
 
         private static void loginScreen() {
-            Console.WriteLine("Please enter your login info...");
             var logginIn = true;
             while (logginIn) {
                 Console.WriteLine("Please enter your username: ");
