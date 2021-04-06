@@ -25,11 +25,10 @@ namespace cinemaApp
             switch (number)
             {
                 case 1:
-                    //movieScreen();
+                    MovieInfoScreen.showMovies();
                     break;
                 case 2:
-                    //TODO: Maak review screen
-                    //reviewScreen();
+                    review.reviewScreen();
                     break;
                 case 3:
                     //TODO: Maak Catering Screen
