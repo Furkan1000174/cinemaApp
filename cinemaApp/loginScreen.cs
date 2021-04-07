@@ -59,7 +59,7 @@ namespace cinemaApp
                 { //gives accountToCheck to the accountchecker
                         CurrentAccount.ID = accountToCheck.ID;
                         CurrentAccount.username = enteredUsername;
-                        Console.WriteLine("Login Successful, welcome " + enteredUsername + "! c:");
+                        Console.WriteLine("Login Successful, welcome! c:");
                         System.Threading.Thread.Sleep(2000);
                         mainScreen.Show(CurrentAccount);
                         loggingIn = false;
@@ -67,7 +67,7 @@ namespace cinemaApp
                 else
                 {
                     Console.WriteLine("Password or Username is incorrect...");
-                    System.Threading.Thread.Sleep(1500);
+                    System.Threading.Thread.Sleep(2000);
                 }
             }
         }
