@@ -10,15 +10,15 @@ namespace cinemaApp
 
         public static void showMovies()
         {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
-            string a = "/// FILM SELECTION ///\n";
-            Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
-            Console.WriteLine(a);
-            Console.ResetColor();
+
             while (true)
             {
-
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                string a = "/// FILM SELECTION ///\n";
+                Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
+                Console.WriteLine(a);
+                Console.ResetColor();
                 Console.WriteLine(@"These are the available movies of our theatre:
                 1. Minari
                 2. Sound of Metal
@@ -44,6 +44,7 @@ namespace cinemaApp
                     if (yis == "Y" | yis == "y")
                     {
                         Console.WriteLine("\nReservations are not available yet");
+                      
                         Console.Read();
                         showMovies();
                     }

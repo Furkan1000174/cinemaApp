@@ -15,4 +15,5 @@ namespace cinemaApp
                 return string.Format("Account information:\n\tID: {0}, Username: {1}, Password: {2}", ID, username, password);
             }
         }
+
 }
