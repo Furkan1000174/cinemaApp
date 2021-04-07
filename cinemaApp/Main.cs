@@ -7,7 +7,13 @@ namespace cinemaApp
 {
     class Program
     {
-        public static void Main(string[] args)
+        public static Account CurrentAccount = new Account()
+        {
+            ID = "",
+            username = "",
+            password = ""
+        };
+        public static void Main()
         {
             //Welcome screen
             while (true)
@@ -20,13 +26,13 @@ namespace cinemaApp
                     switch (number)
                     {
                         case 1:
-                            loginScreen.Login();
+                            loginScreen.Login(Program.CurrentAccount);
                             break;
                         case 2:
                             createAccountScreen.Create();
                             break;
                         case 3:
-                            mainScreen.Show();
+                            mainScreen.Show(Program.CurrentAccount);
                             break;
                         default:
                             Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");

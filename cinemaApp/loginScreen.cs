@@ -8,16 +8,15 @@ namespace cinemaApp
 {
     class loginScreen
     {
-        public static void Login()
+        public static void Login(Account CurrentAccount)
         {
-            var logginIn = true;
-            while (logginIn)
+            var loggingIn = true;
+            while (loggingIn)
             {
                 Console.WriteLine("Please enter your username: ");
                 string enteredUsername = Console.ReadLine();
                 Console.WriteLine("Please enter your password: ");
                 string enteredPassword = Console.ReadLine();
-
                 Account tempAccount = new Account()
                 {
                     ID = "firstID",
@@ -58,9 +57,11 @@ namespace cinemaApp
                     }
                     else if (enteredUsername != "admin")
                     {
+                        CurrentAccount.ID = accountToCheck.ID;
+                        CurrentAccount.username = enteredUsername;
                         Console.WriteLine("Login Successful, welcome! c:");
-                        mainScreen.Show();
-                        logginIn = false;
+                        mainScreen.Show(CurrentAccount);
+                        loggingIn = false;
                     }
 
                 }
