@@ -15,6 +15,9 @@ namespace cinemaApp
         };
         public static void Main()
         {
+            CurrentAccount.ID = "";
+            CurrentAccount.username = "";
+            CurrentAccount.password = "";
             //Welcome screen
             while (true)
             {
