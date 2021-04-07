@@ -10,9 +10,9 @@ namespace cinemaApp
     
     public static void Show(Account CurrentAccount)
     {
+            Console.Clear();
         string h = "";
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red;
         //TODO: Maak functie dat checkt of je user of guest bent, als je user bent zeg je hoi user anders zeg je gwn hoi
         if(CurrentAccount.username == "")
             {
@@ -20,7 +20,7 @@ namespace cinemaApp
             }
             else
             {
-                h = "/// Hello," + CurrentAccount.username + "///\n";
+                h = "/// Hello, " + CurrentAccount.username + "///\n";
             }
             Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
         Console.WriteLine(h);
@@ -45,16 +45,25 @@ namespace cinemaApp
             switch (number)
             {
                 case 1:
-                    //movieScreen();
-                    break;
+                        Console.WriteLine("This functionality has yet to be implemented, stay tuned!");
+                        System.Threading.Thread.Sleep(2000);
+                        Show(CurrentAccount);
+                        //movieScreen();
+                        break;
                 case 2:
-                    //TODO: Maak review screen
-                    //reviewScreen();
-                    break;
+                        Console.WriteLine("This functionality has yet to be implemented, stay tuned!");
+                        System.Threading.Thread.Sleep(2000);
+                        Show(CurrentAccount);
+                        //TODO: Maak review screen
+                        //reviewScreen();
+                        break;
                 case 3:
-                    //TODO: Maak Catering Screen
-                    //cateringScreen();
-                    break;
+                        Console.WriteLine("This functionality has yet to be implemented, stay tuned!");
+                        System.Threading.Thread.Sleep(2000);
+                        Show(CurrentAccount);
+                        //TODO: Maak Catering Screen
+                        //cateringScreen();
+                        break;
                 case 4:
                     Schedule.showSchedule();
                     break;
@@ -71,25 +80,42 @@ namespace cinemaApp
                     Program.Main();
                     break;
                     case 6:
+                        Console.WriteLine("This functionality has yet to be implemented, stay tuned!");
+                        System.Threading.Thread.Sleep(2000);
+                        Show(CurrentAccount);
+                        break;
                     //TODO: Maak Manage Movies Scherm
                     //adminMovieScreen();
                     //break;
                     case 7:
+                        Console.WriteLine("This functionality has yet to be implemented, stay tuned!");
+                        System.Threading.Thread.Sleep(2000);
+                        Show(CurrentAccount);
+                        break;
                     //TODO: Maak Manage Reservation Scherm
                     //adminReservationScreen();
                     //break;
                     case 8:
+                        Console.WriteLine("This functionality has yet to be implemented, stay tuned!");
+                        System.Threading.Thread.Sleep(2000);
+                        Show(CurrentAccount);
+                        break;
                     //TODO: Maak Catering Manage Scherm
                     //adminCateringScreen();
                     //break;
                     case 9:
+                        Console.WriteLine("This functionality has yet to be implemented, stay tuned!");
+                        System.Threading.Thread.Sleep(2000);
+                        Show(CurrentAccount);
+                        break;
                     //TODO: Maak Schedule Manage Scherm
                     //adminScheduleScreen();
                     //break;
                     default:
-                    Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
-                    break;
+                    Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");  
+                        break;
             }
+
         }
         catch (Exception)
         {

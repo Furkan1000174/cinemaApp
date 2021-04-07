@@ -16,7 +16,15 @@ namespace cinemaApp
                 Console.WriteLine("Please enter your username: ");
                 string enteredUsername = Console.ReadLine();
                 Console.WriteLine("Please enter your password: ");
-                string enteredPassword = Console.ReadLine();
+                string enteredPassword = null;
+                while (true)
+                {
+                    var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.Enter)
+                        break;
+                    enteredPassword += key.KeyChar;
+                    
+                }
                 Account tempAccount = new Account()
                 {
                     ID = "firstID",
@@ -51,13 +59,15 @@ namespace cinemaApp
                 { //gives accountToCheck to the accountchecker
                         CurrentAccount.ID = accountToCheck.ID;
                         CurrentAccount.username = enteredUsername;
-                        Console.WriteLine("Login Successful, welcome! c:");
+                        Console.WriteLine("Login Successful, welcome " + enteredUsername + "! c:");
+                        System.Threading.Thread.Sleep(2000);
                         mainScreen.Show(CurrentAccount);
                         loggingIn = false;
                 }
                 else
                 {
                     Console.WriteLine("Password or Username is incorrect...");
+                    System.Threading.Thread.Sleep(1500);
                 }
             }
         }

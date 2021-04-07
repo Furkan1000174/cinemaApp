@@ -25,6 +25,7 @@ namespace cinemaApp
                 3. Nomadland
                 4. Another round
                 5. The Father
+                6. Return to the main menu
                 Enter the number of the movie you would like to get more information of: ");
 
                 var options = Console.ReadLine();
@@ -43,7 +44,7 @@ namespace cinemaApp
                     var yis = Console.ReadLine();
                     if (yis == "Y" | yis == "y")
                     {
-                        Console.WriteLine("\nReservations are not available yet");
+                        Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                       
                         Console.Read();
                         showMovies();
@@ -69,7 +70,7 @@ namespace cinemaApp
                     var yis = Console.ReadLine();
                     if (yis == "Y" | yis == "y")
                     {
-                        Console.WriteLine("\nReservations are not available yet");
+                        Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                         Console.Read();
                         showMovies();
                     }
@@ -94,7 +95,7 @@ namespace cinemaApp
                     var yis = Console.ReadLine();
                     if (yis == "Y" | yis == "y")
                     {
-                        Console.WriteLine("\nReservations are not available yet");
+                        Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                         Console.Read();
                         showMovies();
                     }
@@ -119,7 +120,7 @@ namespace cinemaApp
                     var yis = Console.ReadLine();
                     if (yis == "Y" | yis == "y")
                     {
-                        Console.WriteLine("\nReservations are not available yet");
+                        Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                         Console.Read();
                         showMovies();
                     }
@@ -143,7 +144,7 @@ namespace cinemaApp
                     var yis = Console.ReadLine();
                     if (yis == "Y" | yis == "y")
                     {
-                        Console.WriteLine("\nReservations are not available yet");
+                        Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                         Console.Read();
                         showMovies();
                     }
@@ -151,7 +152,11 @@ namespace cinemaApp
                     {
                         showMovies();
                     }
-
+                    
+                }
+                else if (options == "6")
+                {
+                    mainScreen.Show(Program.CurrentAccount);
                 }
             }
         }
