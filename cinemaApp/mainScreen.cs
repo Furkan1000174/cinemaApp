@@ -33,8 +33,11 @@ namespace cinemaApp
             {
                 Console.WriteLine("Please enter the number of what you would like to do:\n1. View movies\n2. View reviews\n3. View catering\n4. View Schedule\n5. Log Out");
             }
-        //TODO: Maak Admin opties (if statement om te checken of de ingelogde gebruiker een admin is, dan deze opties laten zien)
-        //Console.Writeline("5. Manage movies\n6. Manage reservations\n7. Manage catering\n8.  Manage Schedule");
+
+            if(CurrentAccount.username == "admin")
+            {
+                Console.WriteLine("5. Manage movies\n6. Manage reservations\n7. Manage catering\n8. Manage Schedule");
+            }
         string options = Console.ReadLine();
         try
         {
@@ -67,24 +70,23 @@ namespace cinemaApp
                         }
                     Program.Main();
                     break;
-
-                case 6:
-                //TODO: Maak Manage Movies Scherm
-                //adminMovieScreen();
-                //break;
-                case 7:
-                //TODO: Maak Manage Reservation Scherm
-                //adminReservationScreen();
-                //break;
-                case 8:
-                //TODO: Maak Catering Manage Scherm
-                //adminCateringScreen();
-                //break;
-                case 9:
-                //TODO: Maak Schedule Manage Scherm
-                //adminScheduleScreen();
-                //break;
-                default:
+                    case 6:
+                    //TODO: Maak Manage Movies Scherm
+                    //adminMovieScreen();
+                    //break;
+                    case 7:
+                    //TODO: Maak Manage Reservation Scherm
+                    //adminReservationScreen();
+                    //break;
+                    case 8:
+                    //TODO: Maak Catering Manage Scherm
+                    //adminCateringScreen();
+                    //break;
+                    case 9:
+                    //TODO: Maak Schedule Manage Scherm
+                    //adminScheduleScreen();
+                    //break;
+                    default:
                     Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
                     break;
             }

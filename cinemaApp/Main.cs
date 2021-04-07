@@ -29,13 +29,13 @@ namespace cinemaApp
                     switch (number)
                     {
                         case 1:
-                            loginScreen.Login(Program.CurrentAccount);
+                            loginScreen.Login(CurrentAccount);
                             break;
                         case 2:
                             createAccountScreen.Create();
                             break;
                         case 3:
-                            mainScreen.Show(Program.CurrentAccount);
+                            mainScreen.Show(CurrentAccount);
                             break;
                         default:
                             Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");

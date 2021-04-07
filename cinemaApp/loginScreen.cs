@@ -49,21 +49,11 @@ namespace cinemaApp
 
                 if (accountChecker.check(enteredUsername, enteredPassword, accountToCheck) == true)
                 { //gives accountToCheck to the accountchecker
-                    if (enteredUsername == "admin" && enteredPassword == "adminPass")
-                    {
-                        //adminScreen();
-                        break;
-
-                    }
-                    else if (enteredUsername != "admin")
-                    {
                         CurrentAccount.ID = accountToCheck.ID;
                         CurrentAccount.username = enteredUsername;
                         Console.WriteLine("Login Successful, welcome! c:");
                         mainScreen.Show(CurrentAccount);
                         loggingIn = false;
-                    }
-
                 }
                 else
                 {

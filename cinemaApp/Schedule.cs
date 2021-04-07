@@ -26,15 +26,15 @@ namespace cinemaApp
         if (confirmation.ToLower() == "y")
         {
 
-            //FilmInfoScreen();
+            MovieInfoScreen.showMovies();
         }
         else if (confirmation.ToLower() == "n")
         {
-            //mainScreen();
+            mainScreen.Show(Program.CurrentAccount);
         }
         else
         {
-            //Schedule();
+            showSchedule();
         }
 
     }
