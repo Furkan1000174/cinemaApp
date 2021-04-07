@@ -16,13 +16,7 @@ namespace cinemaApp
             Console.ResetColor();
             while (true)
             {
-                Console.WriteLine(@"These are the available movies of our theatre:
-                1. Minari
-                2. Sound of Metal
-                3. Nomadland
-                4. Another round
-                5. The Father
-                Enter the number of the movie you would like to get more information of: ");
+                Console.WriteLine("These are the available movies of our theatre:\n\n1. Minari\n2. Sound of Metal\n3. Nomadland\n4. Another round\n5. The Father\n\nEnter the number of the movie you would like to get more information of: ");
                 var options = Console.ReadLine();
                 if (options == "1")
                 {

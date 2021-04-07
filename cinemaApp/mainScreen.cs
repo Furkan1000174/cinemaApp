@@ -17,7 +17,6 @@ namespace cinemaApp
         Console.ResetColor();
         Console.WriteLine("Please enter the number of what you would like to do:\n1. View movies\n2. View reviews\n3. View catering\n4. View Schedule\n");
         //TODO: Maak Admin opties (if statement om te checken of de ingelogde gebruiker een admin is, dan deze opties laten zien)
-        //Console.Writeline("5. Manage movies\n6. Manage reservations\n7. Manage catering\n8.  Manage Schedule");
         string options = Console.ReadLine();
         try
         {
