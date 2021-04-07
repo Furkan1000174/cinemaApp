@@ -19,15 +19,15 @@ namespace cinemaApp
         string confirmation = Console.ReadLine();
         if (confirmation.ToLower() == "y")
         {
-            //FilmInfoScreen();
+                MovieInfoScreen.showMovies();
         }
         else if (confirmation.ToLower() == "n")
         {
-            //mainScreen();
+                mainScreen.Show();
         }
         else
         {
-            //Schedule();
+            showSchedule();
         }
     }
     }
