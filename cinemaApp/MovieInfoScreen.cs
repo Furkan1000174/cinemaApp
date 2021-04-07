@@ -7,7 +7,6 @@ namespace cinemaApp
     class MovieInfoScreen
     {
 
-
         public static void showMovies()
         {
 
@@ -22,7 +21,7 @@ namespace cinemaApp
                 Console.WriteLine(@"These are the available movies of our theatre:
                 1. Minari
                 2. Sound of Metal
-                3. Nomadland
+                3. Nomadland 
                 4. Another round
                 5. The Father
                 6. Return to the main menu
