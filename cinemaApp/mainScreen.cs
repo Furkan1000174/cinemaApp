@@ -37,9 +37,9 @@ namespace cinemaApp
                     Schedule.showSchedule();
                     break;
                 case 5:
-                //TODO: Maak Manage Movies Scherm
-                //adminMovieScreen();
-                //break;
+                    //TODO: Maak Manage Movies Scherm
+                    createMovieScreen.createMovie();
+                    break;
                 case 6:
                 //TODO: Maak Manage Reservation Scherm
                 //adminReservationScreen();
