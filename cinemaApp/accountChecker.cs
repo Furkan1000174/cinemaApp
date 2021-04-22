@@ -9,7 +9,7 @@ namespace cinemaApp
 
             public static bool check(string enteredUsername, string enteredPassword, Account accountToCheck)
             { //checks the login info
-                if (accountToCheck.username == enteredUsername && accountToCheck.password == enteredPassword)
+                if (accountToCheck.UserName == enteredUsername && accountToCheck.PassWord == enteredPassword)
                 {
                     return true;
                 }

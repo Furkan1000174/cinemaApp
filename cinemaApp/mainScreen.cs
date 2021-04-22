@@ -14,18 +14,18 @@ namespace cinemaApp
         string h = "";
             Console.ForegroundColor = ConsoleColor.Red;
         //TODO: Maak functie dat checkt of je user of guest bent, als je user bent zeg je hoi user anders zeg je gwn hoi
-        if(CurrentAccount.username == "")
+        if(CurrentAccount.UserName == "")
             {
                 h = "/// Hello, guest  ///\n";
             }
             else
             {
-                h = "/// Hello, " + CurrentAccount.username + "///\n";
+                h = "/// Hello, " + CurrentAccount.UserName + "///\n";
             }
             Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
         Console.WriteLine(h);
         Console.ResetColor();
-            if (CurrentAccount.username == "")
+            if (CurrentAccount.UserName == "")
             {
                 Console.WriteLine("Please enter the number of what you would like to do:\n1. View movies\n2. View reviews\n3. View catering\n4. View Schedule\n5. Go Back");
             }
@@ -34,7 +34,7 @@ namespace cinemaApp
                 Console.WriteLine("Please enter the number of what you would like to do:\n1. View movies\n2. View reviews\n3. View catering\n4. View Schedule\n5. Log Out");
             }
 
-            if(CurrentAccount.username == "admin")
+            if(CurrentAccount.UserName == "admin")
             {
                 Console.WriteLine("5. Manage movies\n6. Manage reservations\n7. Manage catering\n8. Manage Schedule");
             }
@@ -65,17 +65,17 @@ namespace cinemaApp
                         //cateringScreen();
                         break;
                 case 4:
-                    Schedule.showSchedule();
+                    Schedule.showSchedule(CurrentAccount);
                     break;
                     case 5:
                     Console.Clear();
-                        if (CurrentAccount.username == "")
+                        if (CurrentAccount.UserName == "")
                         {
                             Console.WriteLine("See you, guest!");
                         }
                         else
                         {
-                            Console.WriteLine("See you," + CurrentAccount.username);
+                            Console.WriteLine("See you," + CurrentAccount.UserName);
                         }
                     Program.Main();
                     break;

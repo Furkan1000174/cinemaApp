@@ -8,7 +8,7 @@ namespace cinemaApp
     {
 
 
-    public static void showSchedule()
+    public static void showSchedule(Account CurrentAccount)
     {
         Console.Clear();
         Console.WriteLine("Minari:\n 19:00 | 21:00 | 23:00 | 01:00 | 03:00\n");
@@ -26,15 +26,15 @@ namespace cinemaApp
         if (confirmation.ToLower() == "y")
         {
 
-            MovieInfoScreen.showMovies();
+            MovieInfoScreen.showMovies(CurrentAccount);
         }
         else if (confirmation.ToLower() == "n")
         {
-            mainScreen.Show(Program.CurrentAccount);
+            mainScreen.Show(CurrentAccount);
         }
         else
         {
-            showSchedule();
+            showSchedule(CurrentAccount);
         }
 
     }

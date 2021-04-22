@@ -25,13 +25,7 @@ namespace cinemaApp
                     enteredPassword += key.KeyChar;
                     
                 }
-                Account tempAccount = new Account()
-                {
-                    ID = "firstID",
-                    username = "firstUser",
-                    password = "firstPass"
-
-                };//Dont delete, this becomes a placeholder in the next line
+                Account tempAccount = new Account("firstID", "firstUser", "firstPass");
                 Account accountToCheck = tempAccount;
                 List<String> jsonContents = new List<String> { };
                 foreach (string line in File.ReadLines(@"accounts.json")) //Creates a list with every object from json file
@@ -48,7 +42,7 @@ namespace cinemaApp
 
                 foreach (var account in accountList) //looks up the account that the user is trying to login with...
                 {
-                    if (account.username.ToLower() == enteredUsername.ToLower())
+                    if (account.UserName.ToLower() == enteredUsername.ToLower())
                     {
                         accountToCheck = account;//...and stores it in accountToCheck when found
                     }
@@ -58,7 +52,7 @@ namespace cinemaApp
                 if (accountChecker.check(enteredUsername, enteredPassword, accountToCheck) == true)
                 { //gives accountToCheck to the accountchecker
                         CurrentAccount.ID = accountToCheck.ID;
-                        CurrentAccount.username = enteredUsername;
+                        CurrentAccount.UserName = enteredUsername;
                         Console.WriteLine("Login Successful, welcome! c:");
                         System.Threading.Thread.Sleep(2000);
                         mainScreen.Show(CurrentAccount);

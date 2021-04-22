@@ -9,7 +9,7 @@ namespace cinemaApp
 {
     class createAccountScreen
     {
-        public static void Create() //creates an account and adds it to the json file
+        public static void Create(Account CurrentAccount) //creates an account and adds it to the json file
         {
             Console.WriteLine("Please enter your first name: ");
             string accountID = Console.ReadLine();
@@ -18,13 +18,7 @@ namespace cinemaApp
             Console.WriteLine("Please choose your password: ");
             string accountPassword = Console.ReadLine();
 
-            Account newAccount = new Account()
-            {
-                ID = accountID,
-                username = accountUsername,
-                password = accountPassword
-
-            };
+            Account newAccount = new Account(accountID,accountUsername,accountPassword);
 
             string strNewaccountJson = JsonConvert.SerializeObject(newAccount);
             using (StreamWriter sw = File.AppendText(@"accounts.json"))
@@ -35,7 +29,7 @@ namespace cinemaApp
             }
             Console.WriteLine("Account created!");
 
-            loginScreen.Login(Program.CurrentAccount);
+            loginScreen.Login(CurrentAccount);
         }
     }
 }

@@ -7,17 +7,9 @@ namespace cinemaApp
 {
     class Program
     {
-        public static Account CurrentAccount = new Account()
-        {
-            ID = "",
-            username = "",
-            password = ""
-        };
         public static void Main()
         {
-            CurrentAccount.ID = "";
-            CurrentAccount.username = "";
-            CurrentAccount.password = "";
+            Account CurrentAccount = new Account("", "", "");
             //Welcome screen
             while (true)
             {
@@ -32,7 +24,7 @@ namespace cinemaApp
                             loginScreen.Login(CurrentAccount);
                             break;
                         case 2:
-                            createAccountScreen.Create();
+                            createAccountScreen.Create(CurrentAccount);
                             break;
                         case 3:
                             mainScreen.Show(CurrentAccount);

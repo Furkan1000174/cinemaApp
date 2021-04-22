@@ -7,12 +7,19 @@ namespace cinemaApp
         public class Account
         {
             public string ID { get; set; }
-            public string username { get; set; }
-            public string password { get; set; }
+            public string UserName { get; set; }
+            public string PassWord { get; set; }
+
+        public Account(string id, string username, string password)
+        {
+            ID = id;
+            UserName = username;
+            PassWord = password;
+        }
 
             public override string ToString()
             {
-                return string.Format("Account information:\n\tID: {0}, Username: {1}, Password: {2}", ID, username, password);
+                return string.Format("Account information:\n\tID: {0}, Username: {1}, Password: {2}", ID, UserName, PassWord);
             }
         }
 

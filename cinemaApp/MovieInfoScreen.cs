@@ -7,7 +7,7 @@ namespace cinemaApp
     class MovieInfoScreen
     {
 
-        public static void showMovies()
+        public static void showMovies(Account CurrentAccount)
         {
 
             while (true)
@@ -46,11 +46,11 @@ namespace cinemaApp
                         Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                       
                         Console.Read();
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
 
                 }
@@ -71,11 +71,11 @@ namespace cinemaApp
                     {
                         Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                         Console.Read();
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
 
                 }
@@ -96,11 +96,11 @@ namespace cinemaApp
                     {
                         Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                         Console.Read();
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                 }
 
@@ -121,11 +121,11 @@ namespace cinemaApp
                     {
                         Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                         Console.Read();
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                 }
                 else if (options == "5")
@@ -145,17 +145,17 @@ namespace cinemaApp
                     {
                         Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                         Console.Read();
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                     
                 }
                 else if (options == "6")
                 {
-                    mainScreen.Show(Program.CurrentAccount);
+                    mainScreen.Show(CurrentAccount);
                 }
             }
         }
