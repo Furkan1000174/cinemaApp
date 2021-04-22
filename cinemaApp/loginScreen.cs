@@ -38,7 +38,6 @@ namespace cinemaApp
                     foreach (String account in jsonContents)
                     { //converts previous string list to account list
                         accountList.Add(JsonConvert.DeserializeObject<Account>(account));
-
                     }
                     foreach (var account in accountList) //looks up the account that the user is trying to login with...
                     {

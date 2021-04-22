@@ -1,4 +1,7 @@
 ﻿using System;
+using Newtonsoft.Json;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,6 +17,32 @@ namespace cinemaApp
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
+            List<String> jsonContents = new List<String> { };
+            try
+            {
+                foreach (string line in File.ReadLines(@"movies.json")) //Creates a list with every object from json file
+                {
+                    jsonContents.Add(line);
+                }
+                var movieList = new List<Movie> { };
+                foreach (String movie in jsonContents)
+                { //converts previous string list to account list
+                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                }
+                foreach (var movie in movieList) //looks up the account that the user is trying to login with...
+                {
+                    Console.WriteLine(movie);
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("\nNo movies found!\nPlease create an listing first!\n");
+                System.Threading.Thread.Sleep(2000);
+                Program.Main();
+            }
+
+
+            /*
             while (true)
             {
                 Console.WriteLine("These are the available movies of our theatre:\n\n1. Minari\n2. Sound of Metal\n3. Nomadland\n4. Another round\n5. The Father\n\nEnter the number of the movie you would like to get more information of: ");
@@ -139,6 +168,7 @@ namespace cinemaApp
                     }
                 }
             }
+         */
         }
     }
 }
