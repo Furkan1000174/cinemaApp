@@ -15,7 +15,7 @@ namespace cinemaApp
         public string synopsis { get; set; }
         public override string ToString()
         {
-            return string.Format("\nMovie information: \n\nTitle: {0}\nGenre: {1}\nLanguage: {2}\nRuntime: {3}\nAge rating: {4}\nImdb score: {5}\n\nSynopsis: {6}\n\n", title, genre, language, runtime, ageRating, imdb, synopsis);
+            return string.Format("\nTitle: {0}\nGenre: {1}\nLanguage: {2}\nRuntime: {3}\nAge rating: {4}\nImdb score: {5}\n\nSynopsis: {6}\n\n", title, genre, language, runtime, ageRating, imdb, synopsis);
         }
     }
 }
