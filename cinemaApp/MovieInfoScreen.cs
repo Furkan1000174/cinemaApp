@@ -69,7 +69,8 @@ namespace cinemaApp
                             }
                             break;
                         case 2:
-                            mainScreen.Show();
+                            string name = "";
+                            mainScreen.Show(name);
                             break;
                         default:
                             Console.WriteLine("The input you gave is incorrect.");

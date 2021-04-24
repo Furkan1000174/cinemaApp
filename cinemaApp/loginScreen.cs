@@ -64,8 +64,9 @@ namespace cinemaApp
                     else if (enteredUsername != "admin")
                     {
                         Console.WriteLine("Login Successful, welcome! c:");
-                        mainScreen.Show();
+                        mainScreen.Show(enteredUsername);
                         logginIn = false;
+
                     }
                 }
                 else

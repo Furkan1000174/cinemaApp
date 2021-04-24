@@ -23,7 +23,8 @@ namespace cinemaApp
         }
         else if (confirmation.ToLower() == "n")
         {
-                mainScreen.Show();
+                string name = "";
+                mainScreen.Show(name);
         }
         else
         {

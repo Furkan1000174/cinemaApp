@@ -9,8 +9,9 @@ namespace cinemaApp
     {
         public static void Main()
         {
+            var choosing = true;
             //Welcome screen
-            while (true)
+            while (choosing)
             {
                 Console.WriteLine("Welcome to Pathé Movie Theatre!\n What would you like to do? \n1. Login \n2. Create Account\n3. Continue as guest\n");
                 string options = Console.ReadLine();
@@ -21,12 +22,16 @@ namespace cinemaApp
                     {
                         case 1:
                             loginScreen.Login();
+                            choosing = false;
                             break;
                         case 2:
                             createAccountScreen.Create();
+                            choosing = false;
                             break;
                         case 3:
-                            mainScreen.Show();
+                            string name = "guest";
+                            mainScreen.Show(name);
+                            choosing = false;
                             break;
                         default:
                             Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
