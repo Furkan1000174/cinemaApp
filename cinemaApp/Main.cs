@@ -1,7 +1,9 @@
-﻿
-using System;
-using System.Collections;
+﻿using System;
+using Newtonsoft.Json;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 
 namespace cinemaApp
 {
@@ -9,7 +11,19 @@ namespace cinemaApp
     {
         public static void Main()
         {
-            Account CurrentAccount = new Account("", "", "");
+            if( new FileInfo(@"accounts.json").Length == 0)
+            {
+                Account adminAccount = new Account(1, "Admin", "adminPass", "Admin");
+                string createAdminAcc = JsonConvert.SerializeObject(adminAccount);
+                using (StreamWriter sw = File.AppendText(@"accounts.json"))
+                {
+                    sw.WriteLine(createAdminAcc);
+                    sw.Close();
+
+                }
+            }
+
+            Account CurrentAccount = new Account(0, "", "","");
             //Welcome screen
             while (true)
             {

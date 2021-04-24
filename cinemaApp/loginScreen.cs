@@ -16,7 +16,7 @@ namespace cinemaApp
                 Console.WriteLine("Please enter your username: ");
                 string enteredUsername = Console.ReadLine();
                 Console.WriteLine("Please enter your password: ");
-                string enteredPassword = null;
+                string enteredPassword = "";
                 while (true)
                 {
                     var key = Console.ReadKey(true);
@@ -25,7 +25,7 @@ namespace cinemaApp
                     enteredPassword += key.KeyChar;
                     
                 }
-                Account tempAccount = new Account("firstID", "firstUser", "firstPass");
+                Account tempAccount = new Account(1, "firstUser", "firstPass","User");
                 Account accountToCheck = tempAccount;
                 List<String> jsonContents = new List<String> { };
                 foreach (string line in File.ReadLines(@"accounts.json")) //Creates a list with every object from json file
@@ -53,6 +53,7 @@ namespace cinemaApp
                 { //gives accountToCheck to the accountchecker
                         CurrentAccount.ID = accountToCheck.ID;
                         CurrentAccount.UserName = enteredUsername;
+                    CurrentAccount.Role = accountToCheck.Role;
                         Console.WriteLine("Login Successful, welcome! c:");
                         System.Threading.Thread.Sleep(2000);
                         mainScreen.Show(CurrentAccount);

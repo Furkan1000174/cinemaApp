@@ -11,7 +11,8 @@ namespace cinemaApp
     public static void Show(Account CurrentAccount)
     {
             Console.Clear();
-        string h = "";
+            string h;
+            Console.WriteLine(CurrentAccount.Role);
             Console.ForegroundColor = ConsoleColor.Red;
         //TODO: Maak functie dat checkt of je user of guest bent, als je user bent zeg je hoi user anders zeg je gwn hoi
         if(CurrentAccount.UserName == "")
@@ -34,7 +35,7 @@ namespace cinemaApp
                 Console.WriteLine("Please enter the number of what you would like to do:\n1. View movies\n2. View reviews\n3. View catering\n4. View Schedule\n5. Log Out");
             }
 
-            if(CurrentAccount.UserName == "admin")
+            if(CurrentAccount.Role == "Admin")
             {
                 Console.WriteLine("5. Manage movies\n6. Manage reservations\n7. Manage catering\n8. Manage Schedule");
             }
