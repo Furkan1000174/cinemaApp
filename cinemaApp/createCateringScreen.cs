@@ -40,7 +40,10 @@ namespace cinemaApp
                 sw.WriteLine(strNewCateringJSN);
                 sw.Close();
             }
-            Console.WriteLine("Menu added!");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("\n\nMenu added! You will be send back to the mainscreen\n");
+            System.Threading.Thread.Sleep(2500);
+            Console.ResetColor();
 
             mainScreen.Show(Program.CurrentAccount);
         }

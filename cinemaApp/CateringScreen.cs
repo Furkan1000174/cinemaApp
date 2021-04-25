@@ -74,7 +74,11 @@ namespace cinemaApp
                             }
                             break;
                         case 2:
-
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("\nYou will be send back to the mainscreen\n");
+                            Console.ResetColor();
+                            System.Threading.Thread.Sleep(2000);
+                            Console.Clear();
                             mainScreen.Show(Program.CurrentAccount);
                             break;
                         default:
