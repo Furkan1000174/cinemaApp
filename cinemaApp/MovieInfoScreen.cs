@@ -1,4 +1,7 @@
 ﻿using System;
+using Newtonsoft.Json;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,27 +9,83 @@ namespace cinemaApp
 {
     class MovieInfoScreen
     {
-
-
         public static void showMovies()
         {
-
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            string a = "/// FILM SELECTION ///\n";
+            Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
+            Console.WriteLine(a);
+            Console.ResetColor();
+            int counter = 1;
+            bool choosing = true;
+                List<String> jsonContents = new List<String> { };
+                try
+                {
+                    foreach (string line in File.ReadLines(@"movies.json")) //Creates a list with every object from json file
+                    {
+                        jsonContents.Add(line);
+                    }
+                    var movieList = new List<Movie> { };
+                    foreach (String movie in jsonContents)
+                    {
+                        movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                    }
+                    foreach (var movie in movieList)
+                    {
+                        Console.Write("[" + counter + "]");
+                        counter++;
+                        Console.WriteLine(movie);
+                    }
+                }
+                catch (FileNotFoundException)
+                {
+                    Console.WriteLine("\nNo movies found!\nPlease create an listing first!\n");
+                    System.Threading.Thread.Sleep(2000);
+                    Program.Main();
+                }
+            while (choosing)
+            {
+                Console.WriteLine("Would you like to make a reservation?\n1. Yes\n2. No\n");
+                string options = Console.ReadLine();
+                try
+                {
+                    int number = Int32.Parse(options);
+                    switch (number)
+                    {
+                        case 1:
+                            try
+                            {
+                                Console.WriteLine("\nPlease enter the movie number\n");
+                                string choice = Console.ReadLine();
+                                int result = Int32.Parse(choice);
+                                movieSelecter(result);
+                                choosing = false;
+                                break;
+                            }
+                            catch
+                            {
+                                showMovies();
+                            }
+                            break;
+                        case 2:
+                            string name = "";
+                            mainScreen.Show(name);
+                            break;
+                        default:
+                            Console.WriteLine("The input you gave is incorrect.");
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Please enter a number");
+                }
+            }
+            /*
             while (true)
             {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Green;
-                string a = "/// FILM SELECTION ///\n";
-                Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
-                Console.WriteLine(a);
-                Console.ResetColor();
-                Console.WriteLine(@"These are the available movies of our theatre:
-                1. Minari
-                2. Sound of Metal
-                3. Nomadland
-                4. Another round
-                5. The Father
-                Enter the number of the movie you would like to get more information of: ");
-
+                Console.WriteLine("These are the available movies of our theatre:\n\n1. Minari\n2. Sound of Metal\n3. Nomadland\n4. Another round\n5. The Father\n\nEnter the number of the movie you would like to get more information of: ");
                 var options = Console.ReadLine();
                 if (options == "1")
                 {
@@ -44,7 +103,6 @@ namespace cinemaApp
                     if (yis == "Y" | yis == "y")
                     {
                         Console.WriteLine("\nReservations are not available yet");
-                      
                         Console.Read();
                         showMovies();
                     }
@@ -52,7 +110,6 @@ namespace cinemaApp
                     {
                         showMovies();
                     }
-
                 }
                 else if (options == "2")
                 {
@@ -77,7 +134,6 @@ namespace cinemaApp
                     {
                         showMovies();
                     }
-
                 }
                 else if (options == "3")
                 {
@@ -103,7 +159,6 @@ namespace cinemaApp
                         showMovies();
                     }
                 }
-
                 else if (options == "4")
                 {
                     Console.Clear();
@@ -151,9 +206,33 @@ namespace cinemaApp
                     {
                         showMovies();
                     }
-
                 }
             }
+         */
+        }
+        public static void movieSelecter(int option)
+        {
+            Console.Clear();
+            Console.ResetColor();
+                List<String> jsonContents = new List<String> { };
+                try
+                {
+
+                    foreach (string line in File.ReadLines(@"movies.json")) //Creates a list with every object from json file
+                    {
+                        jsonContents.Add(line);
+                    }
+                    var movieList = new List<Movie> { };
+                    foreach (String movie in jsonContents)
+                    {
+                        movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                    }
+                    Console.WriteLine(movieList[option - 1]);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Please enter a number");
+                }
         }
     }
 }
