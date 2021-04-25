@@ -36,65 +36,77 @@ namespace cinemaApp
 
             if(CurrentAccount.username == "admin")
             {
-                Console.WriteLine("5. Manage movies\n6. Manage reservations\n7. Manage catering\n8. Manage Schedule");
+                Console.WriteLine("6. Manage movies\n7. Manage reservations\n8. Manage catering\n9. Manage Schedule");
             }
-        string options = Console.ReadLine();
-        try
-        {
-            int number = Int32.Parse(options);
-            switch (number)
+        bool choosing = true;
+            while (choosing)
             {
-                case 1:
-                    //movieScreen();
-                    break;
-                case 2:
-                    //TODO: Maak review screen
-                    //reviewScreen();
-                    break;
-                case 3:
-                    //TODO: Maak Catering Screen
-                    //cateringScreen();
-                    break;
-                case 4:
-                    Schedule.showSchedule();
-                    break;
-                    case 5:
-                    Console.Clear();
-                        if (CurrentAccount.username == "")
-                        {
-                            Console.WriteLine("See you, guest!");
-                        }
-                        else
-                        {
-                            Console.WriteLine("See you," + CurrentAccount.username);
-                        }
-                    Program.Main();
-                    break;
-                    case 6:
-                    //TODO: Maak Manage Movies Scherm
-                    //adminMovieScreen();
-                    //break;
-                    case 7:
-                    //TODO: Maak Manage Reservation Scherm
-                    //adminReservationScreen();
-                    //break;
-                    case 8:
-                    //TODO: Maak Catering Manage Scherm
-                    //adminCateringScreen();
-                    //break;
-                    case 9:
-                    //TODO: Maak Schedule Manage Scherm
-                    //adminScheduleScreen();
-                    //break;
-                    default:
+                string options = Console.ReadLine();
+                try
+                {
+                    int number = Int32.Parse(options);
+                    switch (number)
+                    {
+                        case 1:
+                            MovieInfoScreen.showMovies();
+                            choosing = false;
+                            break;
+                        case 2:
+                            //TODO: Maak review screen
+                            //reviewScreen();
+                            Console.WriteLine("Reviews are coming soon!");
+                            break;
+                        case 3:
+                            //TODO: Maak Catering Screen
+                            //cateringScreen();
+                            Console.WriteLine("Catering is coming soon!");
+                            break;
+                        case 4:
+                            Schedule.showSchedule();
+                            choosing = false;
+                            break;
+
+                        case 5:
+                            Console.Clear();
+                            if (CurrentAccount.username == "")
+                            {
+                                choosing = false;
+                                Console.WriteLine("See you, guest!");
+                            }
+                            else
+                            {
+                                choosing = false;
+                                Console.WriteLine("See you," + CurrentAccount.username);
+                            }
+                            Program.Main();
+                            break;
+                        case 6:
+                            createMovieScreen.createMovie();
+                            choosing = false;
+                            break;
+                        case 7:
+                        //TODO: Maak Manage Reservation Scherm
+                        //adminReservationScreen();
+                        //break;
+                        case 8:
+                        //TODO: Maak Catering Manage Scherm
+                        //adminCateringScreen();
+                        //break;
+                        case 9:
+                        //TODO: Maak Schedule Manage Scherm
+                        //adminScheduleScreen();
+                        //break;
+                        default:
+                            choosing = false;
+                            Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
                     Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
-                    break;
+                }
             }
-        }
-        catch (Exception)
-        {
-            Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
-        }
     }
     }
 }

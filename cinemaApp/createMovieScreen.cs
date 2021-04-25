@@ -44,8 +44,8 @@ namespace cinemaApp
                 sw.Close();
             }
             Console.WriteLine("Movie added!");
-            string name = "";
-            mainScreen.Show(name);
+            
+            mainScreen.Show(Program.CurrentAccount);
         }
     }
 }
