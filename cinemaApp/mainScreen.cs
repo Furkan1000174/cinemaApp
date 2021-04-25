@@ -20,7 +20,7 @@ namespace cinemaApp
             }
             else
             {
-                h = "/// Hello," + CurrentAccount.username + "///\n";
+                h = "/// Hello, " + CurrentAccount.username + "///\n";
             }
             Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
         Console.WriteLine(h);
@@ -36,7 +36,7 @@ namespace cinemaApp
 
             if(CurrentAccount.username == "admin")
             {
-                Console.WriteLine("6. Manage movies\n7. Manage reservations\n8. Manage catering\n9. Manage Schedule");
+                Console.WriteLine("6. Add movies\n7. Manage reservations\n8. Manage catering\n9. Manage Schedule");
             }
         bool choosing = true;
             while (choosing)
