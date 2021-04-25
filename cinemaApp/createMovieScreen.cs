@@ -11,6 +11,12 @@ namespace cinemaApp
     {
         public static void createMovie() //Create a movie listing for json
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            string a = "/// Movie creation ///\n";
+            Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
+            Console.WriteLine(a);
+            Console.ResetColor();
             Console.WriteLine("Please enter the movie title:");
             string movieTitle = Console.ReadLine();
             Console.WriteLine("Please enter the genre:");

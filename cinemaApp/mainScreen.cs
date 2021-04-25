@@ -57,9 +57,8 @@ namespace cinemaApp
                             Console.WriteLine("Reviews are coming soon!");
                             break;
                         case 3:
-                            //TODO: Maak Catering Screen
-                            //cateringScreen();
-                            Console.WriteLine("Catering is coming soon!");
+                            CateringScreen.showCatering();
+                            choosing = false;
                             break;
                         case 4:
                             Schedule.showSchedule();
@@ -85,13 +84,15 @@ namespace cinemaApp
                             choosing = false;
                             break;
                         case 7:
-                        //TODO: Maak Manage Reservation Scherm
-                        //adminReservationScreen();
-                        //break;
+                            //TODO: Maak Manage Reservation Scherm
+                            //adminReservationScreen();
+                            //break;
+                            Console.WriteLine("Reservations are coming soon!");
+                            break;
                         case 8:
-                        //TODO: Maak Catering Manage Scherm
-                        //adminCateringScreen();
-                        //break;
+                            createCateringScreen.CateringCreate();
+                            choosing = false;
+                            break;
                         case 9:
                         //TODO: Maak Schedule Manage Scherm
                         //adminScheduleScreen();
