@@ -9,7 +9,7 @@ namespace cinemaApp
 {
     class MovieInfoScreen
     {
-        public static void showMovies()
+        public static void showMovies(Account CurrentAccount)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -43,7 +43,7 @@ namespace cinemaApp
                     Console.WriteLine("\nNo movies found!\nPlease create a listing first!\n");
                     System.Threading.Thread.Sleep(3500);
                     Console.Clear();
-                    mainScreen.Show(Program.CurrentAccount);
+                    mainScreen.Show(CurrentAccount);
                 }
             while (choosing)
             {
@@ -67,12 +67,12 @@ namespace cinemaApp
                                 System.Threading.Thread.Sleep(7000);
                                 Console.ResetColor();
                                 Console.Clear();
-                                mainScreen.Show(Program.CurrentAccount);
+                                mainScreen.Show(CurrentAccount);
                                 break;
                             }
                             catch
                             {
-                                showMovies();
+                                showMovies(CurrentAccount);
                             }
                             break;
                         case 2:
@@ -81,7 +81,7 @@ namespace cinemaApp
                             Console.ResetColor();
                             System.Threading.Thread.Sleep(2000);
                             Console.Clear();
-                            mainScreen.Show(Program.CurrentAccount);
+                            mainScreen.Show(CurrentAccount);
                             break;
                         default:
                             Console.WriteLine("The input you gave is incorrect.");

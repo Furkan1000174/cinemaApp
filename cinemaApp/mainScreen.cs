@@ -21,7 +21,7 @@ namespace cinemaApp
             }
             else
             {
-                h = "/// Hello, " + CurrentAccount.username + " ///\n";
+                h = "/// Hello, " + CurrentAccount.UserName + " ///\n";
             }
             Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
         Console.WriteLine(h);
@@ -49,7 +49,7 @@ namespace cinemaApp
                     switch (number)
                     {
                         case 1:
-                            MovieInfoScreen.showMovies();
+                            MovieInfoScreen.showMovies(CurrentAccount);
                             choosing = false;
                             break;
                         case 2:
@@ -58,17 +58,17 @@ namespace cinemaApp
                             Console.WriteLine("Reviews are coming soon!");
                             break;
                         case 3:
-                            CateringScreen.showCatering();
+                            CateringScreen.showCatering(CurrentAccount);
                             choosing = false;
                             break;
                         case 4:
-                            Schedule.showSchedule();
+                            Schedule.showSchedule(CurrentAccount);
                             choosing = false;
                             break;
 
                         case 5:
                             Console.Clear();
-                            if (CurrentAccount.username == "")
+                            if (CurrentAccount.UserName == "")
                             {
                                 choosing = false;
                                 Console.WriteLine("See you, guest!");
@@ -76,12 +76,12 @@ namespace cinemaApp
                             else
                             {
                                 choosing = false;
-                                Console.WriteLine("See you," + CurrentAccount.username);
+                                Console.WriteLine("See you," + CurrentAccount.UserName);
                             }
                             Program.Main();
                             break;
                         case 6:
-                            createMovieScreen.createMovie();
+                            createMovieScreen.createMovie(CurrentAccount);
                             choosing = false;
                             break;
                         case 7:
@@ -91,7 +91,7 @@ namespace cinemaApp
                             Console.WriteLine("Reservations are coming soon!");
                             break;
                         case 8:
-                            createCateringScreen.CateringCreate();
+                            createCateringScreen.CateringCreate(CurrentAccount);
                             choosing = false;
                             break;
                         case 9:

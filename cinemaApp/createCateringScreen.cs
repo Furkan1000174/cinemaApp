@@ -9,7 +9,7 @@ namespace cinemaApp
 {
     class createCateringScreen
     {
-        public static void CateringCreate()
+        public static void CateringCreate(Account CurrentAccount)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -45,7 +45,7 @@ namespace cinemaApp
             System.Threading.Thread.Sleep(2500);
             Console.ResetColor();
 
-            mainScreen.Show(Program.CurrentAccount);
+            mainScreen.Show(CurrentAccount);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace cinemaApp
 {
     class createMovieScreen
     {
-        public static void createMovie() //Create a movie listing for json
+        public static void createMovie(Account CurrentAccount) //Create a movie listing for json
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -51,7 +51,7 @@ namespace cinemaApp
             }
             Console.WriteLine("Movie added!");
             
-            mainScreen.Show(Program.CurrentAccount);
+            mainScreen.Show(CurrentAccount);
         }
     }
 }

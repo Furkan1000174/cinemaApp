@@ -9,7 +9,7 @@ namespace cinemaApp
 {
     class CateringScreen
     {
-        public static void showCatering()
+        public static void showCatering(Account CurrentAccount)
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Magenta;
@@ -48,7 +48,7 @@ namespace cinemaApp
                 Console.WriteLine("\nNo catering information found!\nThis page is under construction\n");
                 System.Threading.Thread.Sleep(3500);
                 Console.Clear();
-                mainScreen.Show(Program.CurrentAccount);
+                mainScreen.Show(CurrentAccount);
             }
             while (choosing)
             {
@@ -72,12 +72,12 @@ namespace cinemaApp
                                 System.Threading.Thread.Sleep(5000);
                                 Console.ResetColor();
                                 Console.Clear();
-                                mainScreen.Show(Program.CurrentAccount);
+                                mainScreen.Show(CurrentAccount);
                                 break;
                             }
                             catch
                             {
-                                showCatering();
+                                showCatering(CurrentAccount);
                             }
                             break;
                         case 2:
@@ -86,7 +86,7 @@ namespace cinemaApp
                             Console.ResetColor();
                             System.Threading.Thread.Sleep(2000);
                             Console.Clear();
-                            mainScreen.Show(Program.CurrentAccount);
+                            mainScreen.Show(CurrentAccount);
                             break;
                         default:
                             Console.WriteLine("The input you gave is incorrect.");
