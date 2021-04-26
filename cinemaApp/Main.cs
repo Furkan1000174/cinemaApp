@@ -1,23 +1,29 @@
-﻿
-using System;
-using System.Collections;
+﻿using System;
+using Newtonsoft.Json;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 
 namespace cinemaApp
 {
     class Program
     {
-        public static Account CurrentAccount = new Account()
-        {
-            ID = "",
-            username = "",
-            password = ""
-        };
         public static void Main()
         {
-            CurrentAccount.ID = "";
-            CurrentAccount.username = "";
-            CurrentAccount.password = "";
+            if( new FileInfo(@"accounts.json").Length == 0)
+            {
+                Account adminAccount = new Account(1, "Admin", "adminPass", "Admin");
+                string createAdminAcc = JsonConvert.SerializeObject(adminAccount);
+                using (StreamWriter sw = File.AppendText(@"accounts.json"))
+                {
+                    sw.WriteLine(createAdminAcc);
+                    sw.Close();
+
+                }
+            }
+
+            Account CurrentAccount = new Account(0, "", "","");
             //Welcome screen
             while (true)
             {
@@ -38,7 +44,7 @@ namespace cinemaApp
                             loginScreen.Login(CurrentAccount);
                             break;
                         case 2:
-                            createAccountScreen.Create();
+                            createAccountScreen.Create(CurrentAccount);
                             break;
                         case 3:
                             mainScreen.Show(CurrentAccount);

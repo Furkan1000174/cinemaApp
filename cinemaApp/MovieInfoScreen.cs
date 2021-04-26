@@ -115,11 +115,11 @@ namespace cinemaApp
                     {
                         Console.WriteLine("\nReservations are not available yet");
                         Console.Read();
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                 }
                 else if (options == "2")
@@ -137,13 +137,13 @@ namespace cinemaApp
                     var yis = Console.ReadLine();
                     if (yis == "Y" | yis == "y")
                     {
-                        Console.WriteLine("\nReservations are not available yet");
+                        Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                         Console.Read();
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                 }
                 else if (options == "3")
@@ -161,13 +161,13 @@ namespace cinemaApp
                     var yis = Console.ReadLine();
                     if (yis == "Y" | yis == "y")
                     {
-                        Console.WriteLine("\nReservations are not available yet");
+                        Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                         Console.Read();
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                 }
                 else if (options == "4")
@@ -185,13 +185,13 @@ namespace cinemaApp
                     var yis = Console.ReadLine();
                     if (yis == "Y" | yis == "y")
                     {
-                        Console.WriteLine("\nReservations are not available yet");
+                        Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                         Console.Read();
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                 }
                 else if (options == "5")
@@ -209,13 +209,13 @@ namespace cinemaApp
                     var yis = Console.ReadLine();
                     if (yis == "Y" | yis == "y")
                     {
-                        Console.WriteLine("\nReservations are not available yet");
+                        Console.WriteLine("\nReservations are not available yet. Please press the enter key to continue.");
                         Console.Read();
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                     else if (yis == "N" | yis == "n")
                     {
-                        showMovies();
+                        showMovies(CurrentAccount);
                     }
                 }
             }

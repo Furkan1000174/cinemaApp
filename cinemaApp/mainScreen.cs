@@ -10,11 +10,12 @@ namespace cinemaApp
     
     public static void Show(Account CurrentAccount)
     {
-        string h = "";
-        Console.Clear();
-        Console.ForegroundColor = ConsoleColor.Red;
+            Console.Clear();
+            string h;
+            Console.WriteLine(CurrentAccount.Role);
+            Console.ForegroundColor = ConsoleColor.Red;
         //TODO: Maak functie dat checkt of je user of guest bent, als je user bent zeg je hoi user anders zeg je gwn hoi
-        if(CurrentAccount.username == "")
+        if(CurrentAccount.UserName == "")
             {
                 h = "/// Hello, guest  ///\n";
             }
@@ -25,7 +26,7 @@ namespace cinemaApp
             Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
         Console.WriteLine(h);
         Console.ResetColor();
-            if (CurrentAccount.username == "")
+            if (CurrentAccount.UserName == "")
             {
                 Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] View reviews\n[3] View catering\n[4] View Schedule\n[5] Go Back");
             }
@@ -34,7 +35,7 @@ namespace cinemaApp
                 Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] View reviews\n[3] View catering\n[4] View Schedule\n[5] Log Out");
             }
 
-            if(CurrentAccount.username == "admin")
+            if(CurrentAccount.Role == "Admin")
             {
                 Console.WriteLine("[6] Add movies\n[7] Manage reservations\n[8] Manage catering\n[9] Manage Schedule");
             }

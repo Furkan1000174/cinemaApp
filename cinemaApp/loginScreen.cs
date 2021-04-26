@@ -16,14 +16,16 @@ namespace cinemaApp
                 Console.WriteLine("Please enter your username: ");
                 string enteredUsername = Console.ReadLine();
                 Console.WriteLine("Please enter your password: ");
-                string enteredPassword = Console.ReadLine();
-                Account tempAccount = new Account()
+                string enteredPassword = "";
+                while (true)
                 {
-                    ID = "firstID",
-                    username = "firstUser",
-                    password = "firstPass"
-
-                };//Dont delete, this becomes a placeholder in the next line
+                    var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.Enter)
+                        break;
+                    enteredPassword += key.KeyChar;
+                    
+                }
+                Account tempAccount = new Account(1, "firstUser", "firstPass","User");
                 Account accountToCheck = tempAccount;
                 List<String> jsonContents = new List<String> { };
                 foreach (string line in File.ReadLines(@"accounts.json")) //Creates a list with every object from json file
@@ -40,7 +42,7 @@ namespace cinemaApp
 
                 foreach (var account in accountList) //looks up the account that the user is trying to login with...
                 {
-                    if (account.username.ToLower() == enteredUsername.ToLower())
+                    if (account.UserName.ToLower() == enteredUsername.ToLower())
                     {
                         accountToCheck = account;//...and stores it in accountToCheck when found
                     }
@@ -50,14 +52,17 @@ namespace cinemaApp
                 if (accountChecker.check(enteredUsername, enteredPassword, accountToCheck) == true)
                 { //gives accountToCheck to the accountchecker
                         CurrentAccount.ID = accountToCheck.ID;
-                        CurrentAccount.username = enteredUsername;
+                        CurrentAccount.UserName = enteredUsername;
+                    CurrentAccount.Role = accountToCheck.Role;
                         Console.WriteLine("Login Successful, welcome! c:");
+                        System.Threading.Thread.Sleep(2000);
                         mainScreen.Show(CurrentAccount);
                         loggingIn = false;
                 }
                 else
                 {
                     Console.WriteLine("Password or Username is incorrect...");
+                    System.Threading.Thread.Sleep(2000);
                 }
             }
         }
