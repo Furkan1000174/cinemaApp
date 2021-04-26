@@ -1,9 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.IO;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
 
 namespace cinemaApp
 {
