@@ -20,23 +20,23 @@ namespace cinemaApp
             }
             else
             {
-                h = "/// Hello, " + CurrentAccount.username + "///\n";
+                h = "/// Hello, " + CurrentAccount.username + " ///\n";
             }
             Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
         Console.WriteLine(h);
         Console.ResetColor();
             if (CurrentAccount.username == "")
             {
-                Console.WriteLine("Please enter the number of what you would like to do:\n1. View movies\n2. View reviews\n3. View catering\n4. View Schedule\n5. Go Back");
+                Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] View reviews\n[3] View catering\n[4] View Schedule\n[5] Go Back");
             }
             else
             {
-                Console.WriteLine("Please enter the number of what you would like to do:\n1. View movies\n2. View reviews\n3. View catering\n4. View Schedule\n5. Log Out");
+                Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] View reviews\n[3] View catering\n[4] View Schedule\n[5] Log Out");
             }
 
             if(CurrentAccount.username == "admin")
             {
-                Console.WriteLine("6. Add movies\n7. Manage reservations\n8. Manage catering\n9. Manage Schedule");
+                Console.WriteLine("[6] Add movies\n[7] Manage reservations\n[8] Manage catering\n[9] Manage Schedule");
             }
         bool choosing = true;
             while (choosing)

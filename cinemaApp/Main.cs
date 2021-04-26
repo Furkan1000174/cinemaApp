@@ -21,7 +21,13 @@ namespace cinemaApp
             //Welcome screen
             while (true)
             {
-                Console.WriteLine("Welcome to our Movie Theatre!\n What would you like to do? \n1. Login \n2. Create Account\n3. Continue as guest\n");
+     
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string h = "Welcome to our Movie Theatre!\n\n";
+                Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
+                Console.WriteLine(h);
+                Console.ResetColor();
+                Console.WriteLine("What would you like to do?\n\n[1] Login \n[2] Create Account\n[3] Continue as guest\n");
                 string options = Console.ReadLine();
                 try
                 {
@@ -38,13 +44,15 @@ namespace cinemaApp
                             mainScreen.Show(CurrentAccount);
                             break;
                         default:
-                            Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                            Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
                             break;
                     }
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                    Console.WriteLine("\n\nThe input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                    System.Threading.Thread.Sleep(2500);
+                    Console.Clear();
                 }
             }
         }

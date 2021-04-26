@@ -40,9 +40,10 @@ namespace cinemaApp
                 }
                 catch (FileNotFoundException)
                 {
-                    Console.WriteLine("\nNo movies found!\nPlease create an listing first!\n");
-                    System.Threading.Thread.Sleep(2000);
-                    Program.Main();
+                    Console.WriteLine("\nNo movies found!\nPlease create a listing first!\n");
+                    System.Threading.Thread.Sleep(3500);
+                    Console.Clear();
+                    mainScreen.Show(Program.CurrentAccount);
                 }
             while (choosing)
             {
@@ -61,6 +62,12 @@ namespace cinemaApp
                                 int result = Int32.Parse(choice);
                                 movieSelecter(result);
                                 choosing = false;
+                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                Console.WriteLine("\nYou selected this film! but the reservation section is currently under construction\nYou will be send back to the mainscreen");
+                                System.Threading.Thread.Sleep(7000);
+                                Console.ResetColor();
+                                Console.Clear();
+                                mainScreen.Show(Program.CurrentAccount);
                                 break;
                             }
                             catch
@@ -69,7 +76,11 @@ namespace cinemaApp
                             }
                             break;
                         case 2:
-                            
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("\nYou will be send back to the mainscreen\n");
+                            Console.ResetColor();
+                            System.Threading.Thread.Sleep(2000);
+                            Console.Clear();
                             mainScreen.Show(Program.CurrentAccount);
                             break;
                         default:
@@ -213,6 +224,10 @@ namespace cinemaApp
         public static void movieSelecter(int option)
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            string a = "/// YOUR RESERVATION ///\n";
+            Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
+            Console.WriteLine(a);
             Console.ResetColor();
                 List<String> jsonContents = new List<String> { };
                 try

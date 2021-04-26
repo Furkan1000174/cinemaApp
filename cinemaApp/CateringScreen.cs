@@ -12,12 +12,12 @@ namespace cinemaApp
         public static void showCatering()
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Magenta;
             string a = "/// CATERING ///\n";
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
-            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             string b = "Choose one of the available combo deals!!\n";
             Console.SetCursorPosition((Console.WindowWidth - b.Length) / 2, Console.CursorTop);
             Console.WriteLine(b);
@@ -45,13 +45,14 @@ namespace cinemaApp
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("\nNo catering information found!\nPlease create a listing first!\n");
-                System.Threading.Thread.Sleep(2000);
-                Program.Main();
+                Console.WriteLine("\nNo catering information found!\nThis page is under construction\n");
+                System.Threading.Thread.Sleep(3500);
+                Console.Clear();
+                mainScreen.Show(Program.CurrentAccount);
             }
             while (choosing)
             {
-                Console.WriteLine("Would you like to reserve a combo deal?\n1. Yes\n2. No\n");
+                Console.WriteLine("Would you like to pre-order a combo deal?\n1. Yes\n2. No\n");
                 string options = Console.ReadLine();
                 try
                 {
@@ -66,6 +67,12 @@ namespace cinemaApp
                                 int result = Int32.Parse(choice);
                                 cateSelecter(result);
                                 choosing = false;
+                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                Console.WriteLine("\nThe combo deal has been added to your basket!\nYou will be send back to the mainscreen");
+                                System.Threading.Thread.Sleep(5000);
+                                Console.ResetColor();
+                                Console.Clear();
+                                mainScreen.Show(Program.CurrentAccount);
                                 break;
                             }
                             catch
