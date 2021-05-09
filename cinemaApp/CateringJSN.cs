@@ -6,13 +6,14 @@ namespace cinemaApp
 {
     class CateringJSN
     {
+        public int ID { get; set; }
         public string food { get; set; }
         public string drink { get; set; }
         public string size { get; set; }
         public string price { get; set; }
         public override string ToString()
         {
-            return string.Format("\nFood: {0}\nDrink: {1}\nSize: {2}\nPrice(euro): {3}\n\n", food, drink, size, price);
+            return string.Format("\n[{0}]\nFood: {1}\nDrink: {2}\nSize: {3}\nPrice(euro): {4}\n\n", ID, food, drink, size, price);
         }
     }
 }

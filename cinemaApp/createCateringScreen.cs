@@ -11,6 +11,28 @@ namespace cinemaApp
     {
         public static void CateringCreate(Account CurrentAccount)
         {
+            int ID = 1;
+            List<String> jsonContents = new List<String> { };
+            foreach (string line in File.ReadLines(@"catering.json"))
+            {
+             jsonContents.Add(line);
+            }
+            var cateList = new List<CateringJSN> { };
+            foreach (String cate in jsonContents)
+            {
+                cateList.Add(JsonConvert.DeserializeObject<CateringJSN>(cate));
+            }
+            foreach (var cate in cateList)
+            {
+                if(cate.ID == ID)
+                {
+                    ID++;
+                }
+                else
+                {
+                    ID++;
+                }
+            }
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
             string a = "/// Catering creation ///\n";
@@ -28,6 +50,7 @@ namespace cinemaApp
 
             CateringJSN newCateringJSN = new CateringJSN()
             {
+                ID = ID,
                 food = foodItem,
                 drink = drinkItem,
                 size = menuSize,
