@@ -28,16 +28,16 @@ namespace cinemaApp
         Console.ResetColor();
             if (CurrentAccount.UserName == "")
             {
-                Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] View reviews\n[3] View catering\n[4] View Schedule\n[5] Go Back");
+                Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] View reviews\n[3] View catering\n[4] View Schedule\n[5] View Cart\n[6] Go Back");
             }
             else
             {
-                Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] View reviews\n[3] View catering\n[4] View Schedule\n[5] Log Out");
+                Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] View reviews\n[3] View catering\n[4] View Schedule\n[5] View Cart\n[6] Log Out");
             }
 
             if(CurrentAccount.Role == "Admin")
             {
-                Console.WriteLine("[6] Add movies\n[7] Manage reservations\n[8] Manage catering\n[9] Manage Schedule");
+                Console.WriteLine("[7] Add movies\n[8] Manage reservations\n[9] Manage catering\n[10] Manage Schedule");
             }
         bool choosing = true;
             while (choosing)
@@ -65,8 +65,11 @@ namespace cinemaApp
                             Schedule.showSchedule(CurrentAccount);
                             choosing = false;
                             break;
-
                         case 5:
+                            cartScreen.showCart(CurrentAccount);
+                            choosing = false;
+                            break;
+                        case 6:
                             Console.Clear();
                             if (CurrentAccount.UserName == "")
                             {
@@ -80,22 +83,21 @@ namespace cinemaApp
                             }
                             Program.Main();
                             break;
-                      
-                        case 6:
+                        case 7:
                             createMovieScreen.createMovie(CurrentAccount);
                             choosing = false;
                             break;
-                        case 7:
+                        case 8:
                             //TODO: Maak Manage Reservation Scherm
                             //adminReservationScreen();
                             //break;
                             Console.WriteLine("admin manage Reservations are coming soon!");
                             break;
-                        case 8:
+                        case 9:
                             createCateringScreen.CateringCreate(CurrentAccount);
                             choosing = false;
                             break;
-                        case 9:
+                        case 10:
                         //TODO: Maak Schedule Manage Scherm
                         //adminScheduleScreen();
                         //break;

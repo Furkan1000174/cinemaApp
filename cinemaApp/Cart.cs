@@ -10,7 +10,7 @@ namespace cinemaApp
         public string price { get; set; }
         public override string ToString()
         {
-            return string.Format("\nItem: {0}\n, item\nPrice: {1}\n");
+            return string.Format("\nItem: {0}\nPrice: {1}\n",item,price);
         }
     }
    
