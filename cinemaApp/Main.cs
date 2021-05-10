@@ -11,6 +11,7 @@ namespace cinemaApp
     {
         public static void Main()
         {
+            //Create admin acc
             if( new FileInfo(@"accounts.json").Length == 0)
             {
                 Account adminAccount = new Account(1, "Admin", "adminPass", "Admin");
