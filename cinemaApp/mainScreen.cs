@@ -12,6 +12,7 @@ namespace cinemaApp
     {
             Console.Clear();
             string h;
+            string b = "Type 'B' to view your basket\n";
             Console.WriteLine(CurrentAccount.Role);
             Console.ForegroundColor = ConsoleColor.Red;
         //TODO: Maak functie dat checkt of je user of guest bent, als je user bent zeg je hoi user anders zeg je gwn hoi
@@ -25,7 +26,9 @@ namespace cinemaApp
             }
             Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
         Console.WriteLine(h);
+        Console.WriteLine(b);
         Console.ResetColor();
+
             if (CurrentAccount.UserName == "")
             {
                 Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] View reviews\n[3] View catering\n[4] View Schedule\n[5] Go Back");
@@ -39,12 +42,18 @@ namespace cinemaApp
             {
                 Console.WriteLine("[6] Add movies\n[7] Manage reservations\n[8] Manage catering\n[9] Manage Schedule");
             }
-        bool choosing = true;
+
+
+            bool choosing = true;
             while (choosing)
             {
                 string options = Console.ReadLine();
                 try
                 {
+                    if (options == "B")
+                    {
+                        BasketScreen.showBasket(CurrentAccount);
+                    }
                     int number = Int32.Parse(options);
                     switch (number)
                     {
