@@ -17,6 +17,28 @@ namespace cinemaApp
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
+
+
+            int id = 1;
+            List<String> jsonContents = new List<String> { };
+            foreach (string line in File.ReadLines(@"movies.json"))
+            {
+                jsonContents.Add(line);
+            }
+            var movieList = new List<CateringJSN> { };
+            foreach (String cate in jsonContents)
+            {
+                movieList.Add(JsonConvert.DeserializeObject<CateringJSN>(cate));
+            }
+            foreach (var movie in movieList)
+            {
+               if(movie.ID >= id)
+                {
+                    id = movie.ID + 1;
+                }
+            }
+
+
             Console.WriteLine("Please enter the movie title:");
             string movieTitle = Console.ReadLine();
             Console.WriteLine("Please enter the genre:");
@@ -32,7 +54,7 @@ namespace cinemaApp
             Console.WriteLine("Please enter the synopsis");
             string movieSynopsis = Console.ReadLine();
 
-            Movie newMovie = new Movie(movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieImdb, movieSynopsis);
+            Movie newMovie = new Movie(id,movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieImdb, movieSynopsis);
 
             string strNewMovieJson = JsonConvert.SerializeObject(newMovie);
             using (StreamWriter sw = File.AppendText(@"movies.json"))

@@ -11,7 +11,7 @@ namespace cinemaApp
     {
         public static void CateringCreate(Account CurrentAccount)
         {
-            int ID = 1;
+            int id = 1;
             List<String> jsonContents = new List<String> { };
             foreach (string line in File.ReadLines(@"catering.json"))
             {
@@ -24,14 +24,10 @@ namespace cinemaApp
             }
             foreach (var cate in cateList)
             {
-                if(cate.ID == ID)
-                {
-                    ID++;
-                }
-                else
-                {
-                    ID++;
-                }
+              if (cate.ID >= id)
+              {
+               id = cate.ID + 1;
+              }
             }
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -48,7 +44,7 @@ namespace cinemaApp
             Console.WriteLine("Please enter the overall price:");
             string menuPrice = Console.ReadLine();
 
-            CateringJSN newCateringJSN = new CateringJSN(ID, foodItem, drinkItem, menuSize, menuPrice);
+            CateringJSN newCateringJSN = new CateringJSN(id, foodItem, drinkItem, menuSize, menuPrice);
 
             string strNewCateringJSN = JsonConvert.SerializeObject(newCateringJSN);
             using (StreamWriter sw = File.AppendText(@"catering.json"))

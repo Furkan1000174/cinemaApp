@@ -14,7 +14,7 @@ namespace cinemaApp
            var creatingAccount = true;
             while (creatingAccount)
             {
-                int accountID = 1;
+                int id = 1;
 
 
                 List<string> jsonContents = new List<String> { };
@@ -30,10 +30,10 @@ namespace cinemaApp
                 }
                 foreach (var account in accountList)
                 {
-                    if (account.ID <= accountID)
-                    {
-                        accountID = account.ID + 1;
-                    }
+                 if (account.ID >= id)
+                 {
+                  id = account.ID + 1;
+                 }
                 }
                 Console.WriteLine("Please choose your username: ");
                 string accountUsername = Console.ReadLine();
@@ -55,7 +55,7 @@ namespace cinemaApp
 
                 }
                 string accountRole = "User";
-                Account newAccount = new Account(accountID, accountUsername, accountPassword, accountRole);
+                Account newAccount = new Account(id, accountUsername, accountPassword, accountRole);
 
                 string strNewaccountJson = JsonConvert.SerializeObject(newAccount);
                 using (StreamWriter sw = File.AppendText(@"accounts.json"))

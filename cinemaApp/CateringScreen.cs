@@ -79,7 +79,7 @@ namespace cinemaApp
                                 {
                                     if (cate.ID == result)
                                     {
-                                        Cart newCartJSON = new Cart(cate.Food + " " + cate.Drink, cate.Price);
+                                        Cart newCartJSON = new Cart(CurrentAccount.ID,cate.Food + " " + cate.Drink, cate.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
                                         using (StreamWriter sw = File.AppendText(@"cart.json"))
                                         {

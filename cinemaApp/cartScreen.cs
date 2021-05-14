@@ -38,7 +38,11 @@ namespace cinemaApp
                 }
                 foreach (var cart in cartList)
                 {
-                    Console.WriteLine(cart);
+                    if(CurrentAccount.ID == cart.ID)
+                    {
+                        Console.WriteLine(cart);
+                    }
+                   
                 }
             }
 
