@@ -40,7 +40,7 @@ namespace cinemaApp
                     foreach (var account in accountList)
                     {
 
-                    if (string.IsNullOrEmpty(accountUsername))
+                    while (string.IsNullOrEmpty(accountUsername))
                     {
                         Console.WriteLine("Your username can't be empty, please try again.");
                         accountUsername = Console.ReadLine();
