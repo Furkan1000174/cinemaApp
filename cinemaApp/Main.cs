@@ -33,7 +33,7 @@ namespace cinemaApp
 
                 }
             }
-
+            movieRooms.createRoom();
             Account CurrentAccount = new Account(0, "", "","");
             //Welcome screen
             while (true)
