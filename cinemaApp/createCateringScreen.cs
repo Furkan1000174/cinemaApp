@@ -37,13 +37,32 @@ namespace cinemaApp
             Console.ResetColor();
             Console.WriteLine("Please enter the food item:");
             string foodItem = Console.ReadLine();
+            if (string.IsNullOrEmpty(foodItem))
+            {
+                Console.WriteLine("The food item can't be empty, please try again.");
+                foodItem = Console.ReadLine();
+            }
             Console.WriteLine("Please enter the drink item:");
             string drinkItem = Console.ReadLine();
+            if (string.IsNullOrEmpty(drinkItem))
+            {
+                Console.WriteLine("The drink item can't be empty, please try again.");
+                drinkItem = Console.ReadLine();
+            }
             Console.WriteLine("Please enter the menu size (Small/Medium/Large:");
             string menuSize = Console.ReadLine();
+            if (string.IsNullOrEmpty(menuSize))
+            {
+                Console.WriteLine("The menu Size can't be empty, please try again.");
+                menuSize = Console.ReadLine();
+            }
             Console.WriteLine("Please enter the overall price:");
             string menuPrice = Console.ReadLine();
-
+            if (string.IsNullOrEmpty(menuPrice))
+            {
+                Console.WriteLine("The menu price can't be empty, please try again.");
+                menuPrice = Console.ReadLine();
+            }
             CateringJSN newCateringJSN = new CateringJSN(id, foodItem, drinkItem, menuSize, menuPrice);
 
             string strNewCateringJSN = JsonConvert.SerializeObject(newCateringJSN);

@@ -39,7 +39,15 @@ namespace cinemaApp
                 string accountUsername = Console.ReadLine();
                     foreach (var account in accountList)
                     {
-                        while (account.UserName == accountUsername)
+
+                    if (string.IsNullOrEmpty(accountUsername))
+                    {
+                        Console.WriteLine("Your username can't be empty, please try again.");
+                        accountUsername = Console.ReadLine();
+                    }
+
+
+                    while (account.UserName == accountUsername)
                         {
                             Console.WriteLine("This username already exists. Please enter a different one.\nPlease choose your username:");
                             accountUsername = Console.ReadLine();

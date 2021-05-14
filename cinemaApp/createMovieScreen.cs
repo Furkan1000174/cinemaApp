@@ -41,18 +41,53 @@ namespace cinemaApp
 
             Console.WriteLine("Please enter the movie title:");
             string movieTitle = Console.ReadLine();
+            if (string.IsNullOrEmpty(movieTitle))
+            {
+                Console.WriteLine("The movie title can't be empty, please try again.");
+                movieTitle = Console.ReadLine();
+            }
             Console.WriteLine("Please enter the genre:");
             string movieGenre = Console.ReadLine();
+            if (string.IsNullOrEmpty(movieGenre))
+            {
+                Console.WriteLine("The movie genre can't be empty, please try again.");
+                movieGenre = Console.ReadLine();
+            }
             Console.WriteLine("Please enter the movie language:");
             string movieLanguage = Console.ReadLine();
+            if (string.IsNullOrEmpty(movieLanguage))
+            {
+                Console.WriteLine("The movie language can't be empty, please try again.");
+                movieLanguage = Console.ReadLine();
+            }
             Console.WriteLine("Please enter the runtime");
             string movieRuntime = Console.ReadLine();
+            if (string.IsNullOrEmpty(movieRuntime))
+            {
+                Console.WriteLine("The menu Size can't be empty, please try again.");
+                movieRuntime = Console.ReadLine();
+            }
             Console.WriteLine("Please enter the age rating");
             string movieAgeRating = Console.ReadLine();
+            if (string.IsNullOrEmpty(movieAgeRating))
+            {
+                Console.WriteLine("The movie age rating can't be empty, please try again.");
+                movieAgeRating = Console.ReadLine();
+            }
             Console.WriteLine("Please enter the IMDB score");
             string movieImdb = Console.ReadLine();
-            Console.WriteLine("Please enter the synopsis");
+            if (string.IsNullOrEmpty(movieImdb))
+            {
+                Console.WriteLine("The menu Size can't be empty, please try again.");
+                movieImdb = Console.ReadLine();
+            }
+            Console.WriteLine("Please enter the synopsis(Short Summary of the movie)");
             string movieSynopsis = Console.ReadLine();
+            if (string.IsNullOrEmpty(movieSynopsis))
+            {
+                Console.WriteLine("The menu Size can't be empty, please try again.");
+                movieSynopsis = Console.ReadLine();
+            }
 
             Movie newMovie = new Movie(id,movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieImdb, movieSynopsis);
 
