@@ -32,16 +32,7 @@ namespace cinemaApp
             Console.WriteLine("Please enter the synopsis");
             string movieSynopsis = Console.ReadLine();
 
-            Movie newMovie = new Movie()
-            {
-                title = movieTitle,
-                genre = movieGenre,
-                language = movieLanguage,
-                runtime = movieRuntime,
-                ageRating = movieAgeRating,
-                imdb = movieImdb,
-                synopsis = movieSynopsis
-            };
+            Movie newMovie = new Movie(movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieImdb, movieSynopsis);
 
             string strNewMovieJson = JsonConvert.SerializeObject(newMovie);
             using (StreamWriter sw = File.AppendText(@"movies.json"))

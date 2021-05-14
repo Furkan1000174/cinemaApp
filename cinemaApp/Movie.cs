@@ -6,16 +6,29 @@ namespace cinemaApp
 {
     public class Movie
     {
-        public string title { get; set; }
-        public string genre { get; set; }
-        public string language { get; set; }
-        public string runtime { get; set; }
-        public string ageRating { get; set; }
-        public string imdb { get; set; }
-        public string synopsis { get; set; }
+        public string Title { get; set; }
+        public string Genre { get; set; }
+        public string Language { get; set; }
+        public string Runtime { get; set; }
+        public string AgeRating { get; set; }
+        public string IMDB { get; set; }
+        public string Synopsis { get; set; }
+        
+        public Movie(string title, string genre, string language, string runtime, string agerating, string imdb, string synopsis)
+        {
+            Title = title;
+            Language = language;
+            Runtime = runtime;
+            AgeRating = agerating;
+            IMDB = imdb;
+            Synopsis = synopsis;
+        }
+        
+        
+        
         public override string ToString()
         {
-            return string.Format("\nTitle: {0}\nGenre: {1}\nLanguage: {2}\nRuntime: {3}\nAge rating: {4}\nImdb score: {5}\n\nSynopsis: {6}\n\n", title, genre, language, runtime, ageRating, imdb, synopsis);
+            return string.Format("\nTitle: {0}\nGenre: {1}\nLanguage: {2}\nRuntime: {3}\nAge rating: {4}\nImdb score: {5}\n\nSynopsis: {6}\n\n", Title, Genre, Language, Runtime, AgeRating, IMDB, Synopsis);
         }
     }
 }

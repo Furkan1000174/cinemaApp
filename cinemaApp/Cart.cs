@@ -6,11 +6,21 @@ namespace cinemaApp
 {
     class Cart
     {
-        public string item { get; set; }
-        public string price { get; set; }
+        public string Item { get; set; }
+        public string Price { get; set; }
+        
+        
+        public Cart(string item, string price)
+        {
+            Item = item;
+            Price = price;
+        }
+        
+        
+        
         public override string ToString()
         {
-            return string.Format("\nItem: {0}\nPrice: {1}\n",item,price);
+            return string.Format("\nItem: {0}\nPrice: {1}\n",Item,Price);
         }
     }
    
