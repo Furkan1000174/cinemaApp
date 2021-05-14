@@ -1,9 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.IO;
-using System.Linq;
 using System.Collections.Generic;
-using System.Text;
+using System.Security;
 namespace cinemaApp
 {
     class loginScreen
@@ -16,14 +15,39 @@ namespace cinemaApp
                 Console.WriteLine("Please enter your username: ");
                 string enteredUsername = Console.ReadLine();
                 Console.WriteLine("Please enter your password: ");
-                string enteredPassword = "";
-                while (true)
+
+
+
+                //Ik heb de onzichtbare password nonsense eruitgehaald, hij weergeeft nu asterisks inplaats ervan
+                //(ﾉ◕ヮ◕)ﾉ *:･ﾟ✧ ✧ﾟ･: *ヽ(◕ヮ◕ヽ)
+
+                SecureString pass = maskInputString();
+                string enteredPassword = new System.Net.NetworkCredential(string.Empty, pass).Password;
+                Console.WriteLine("\n");
+
+                static SecureString maskInputString()
                 {
-                    var key = Console.ReadKey(true);
-                    if (key.Key == ConsoleKey.Enter)
-                        break;
-                    enteredPassword += key.KeyChar;
-                    
+                    SecureString pass = new SecureString();
+                    ConsoleKeyInfo keyInfo;
+                    do
+                    {
+                        keyInfo = Console.ReadKey(true);
+                        if (!char.IsControl(keyInfo.KeyChar))
+                        {
+                            pass.AppendChar(keyInfo.KeyChar);
+                            Console.Write("*");
+                        }
+                        else if(keyInfo.Key == ConsoleKey.Backspace && pass.Length > 0)
+                        {
+                            pass.RemoveAt(pass.Length - 1);
+                            Console.Write("\b \b");
+                        }
+                    }
+                    while (keyInfo.Key != ConsoleKey.Enter);
+                    {
+                        return pass;
+                    }
+
                 }
                 try
                 {

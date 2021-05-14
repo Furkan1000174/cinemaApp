@@ -48,6 +48,7 @@ namespace cinemaApp
                 Console.WriteLine(h);
                 Console.ResetColor();
                 Console.WriteLine("What would you like to do?\n\n[1] Login \n[2] Create Account\n[3] Continue as guest\n");
+                Console.WriteLine("Please enter a number on screen to perform the desired action.");
                 string options = Console.ReadLine();
                 try
                 {

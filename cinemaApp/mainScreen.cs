@@ -12,8 +12,7 @@ namespace cinemaApp
     {
             Console.Clear();
             string h;
-            Console.WriteLine(CurrentAccount.Role);
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Cyan;
         //TODO: Maak functie dat checkt of je user of guest bent, als je user bent zeg je hoi user anders zeg je gwn hoi
         if(CurrentAccount.UserName == "")
             {

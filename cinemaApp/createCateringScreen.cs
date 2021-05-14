@@ -48,7 +48,7 @@ namespace cinemaApp
             Console.WriteLine("Please enter the overall price:");
             string menuPrice = Console.ReadLine();
 
-            CateringJSN newCateringJSN = new CateringJSN(ID,foodItem,drinkItem,menuSize,menuPrice)
+            CateringJSN newCateringJSN = new CateringJSN(ID, foodItem, drinkItem, menuSize, menuPrice);
 
             string strNewCateringJSN = JsonConvert.SerializeObject(newCateringJSN);
             using (StreamWriter sw = File.AppendText(@"catering.json"))
