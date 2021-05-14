@@ -25,44 +25,54 @@ namespace cinemaApp
                     enteredPassword += key.KeyChar;
                     
                 }
-                Account tempAccount = new Account(1, "firstUser", "firstPass","User");
-                Account accountToCheck = tempAccount;
-                List<String> jsonContents = new List<String> { };
-                foreach (string line in File.ReadLines(@"accounts.json")) //Creates a list with every object from json file
+                try
                 {
-                    jsonContents.Add(line);
-                }
-                var accountList = new List<Account> { };
-                foreach (String account in jsonContents)
-                { //converts previous string list to account list
-                    accountList.Add(JsonConvert.DeserializeObject<Account>(account));
-
-                }
-
-
-                foreach (var account in accountList) //looks up the account that the user is trying to login with...
-                {
-                    if (account.UserName.ToLower() == enteredUsername.ToLower())
+                    Account tempAccount = new Account(1, "firstUser", "firstPass", "User");
+                    Account accountToCheck = tempAccount;
+                    List<String> jsonContents = new List<String> { };
+                    foreach (string line in File.ReadLines(@"accounts.json")) //Creates a list with every object from json file
                     {
-                        accountToCheck = account;//...and stores it in accountToCheck when found
+                        jsonContents.Add(line);
                     }
-                }
-                //Console.WriteLine(accountToCheck); //can be used to check what account is found
+                    var accountList = new List<Account> { };
+                    foreach (String account in jsonContents)
+                    { //converts previous string list to account list
+                        accountList.Add(JsonConvert.DeserializeObject<Account>(account));
 
-                if (accountChecker.check(enteredUsername, enteredPassword, accountToCheck) == true)
-                { //gives accountToCheck to the accountchecker
+                    }
+
+
+                    foreach (var account in accountList) //looks up the account that the user is trying to login with...
+                    {
+                        if (account.UserName.ToLower() == enteredUsername.ToLower())
+                        {
+                            accountToCheck = account;//...and stores it in accountToCheck when found
+                        }
+                    }
+                    //Console.WriteLine(accountToCheck); //can be used to check what account is found
+
+                    if (accountChecker.check(enteredUsername, enteredPassword, accountToCheck) == true)
+                    { //gives accountToCheck to the accountchecker
                         CurrentAccount.ID = accountToCheck.ID;
                         CurrentAccount.UserName = enteredUsername;
-                    CurrentAccount.Role = accountToCheck.Role;
+                        CurrentAccount.Role = accountToCheck.Role;
                         Console.WriteLine("Login Successful, welcome! c:");
                         System.Threading.Thread.Sleep(2000);
                         mainScreen.Show(CurrentAccount);
                         loggingIn = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Password or Username is incorrect...");
+                        System.Threading.Thread.Sleep(2000);
+                    }
                 }
-                else
+                catch (FileNotFoundException)
                 {
-                    Console.WriteLine("Password or Username is incorrect...");
-                    System.Threading.Thread.Sleep(2000);
+                    Console.WriteLine("No accounts found please!\nPlease create a account first!");
+                    System.Threading.Thread.Sleep(3500);
+                    Console.Clear();
+                    Program.Main();
                 }
             }
         }

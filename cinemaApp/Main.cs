@@ -8,7 +8,21 @@ namespace cinemaApp
     {
         public static void Main()
         {
-            if( new FileInfo(@"accounts.json").Length == 0)
+            try
+            {
+                if (new FileInfo(@"accounts.json").Length == 0)
+                {
+                    Account adminAccount = new Account(1, "Admin", "adminPass", "Admin");
+                    string createAdminAcc = JsonConvert.SerializeObject(adminAccount);
+                    using (StreamWriter sw = File.AppendText(@"accounts.json"))
+                    {
+                        sw.WriteLine(createAdminAcc);
+                        sw.Close();
+
+                    }
+                }
+            }
+            catch(FileNotFoundException)
             {
                 Account adminAccount = new Account(1, "Admin", "adminPass", "Admin");
                 string createAdminAcc = JsonConvert.SerializeObject(adminAccount);
