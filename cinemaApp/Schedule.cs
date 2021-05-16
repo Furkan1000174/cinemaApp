@@ -1,4 +1,7 @@
 ﻿using System;
+using Newtonsoft.Json;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,17 +13,39 @@ namespace cinemaApp
 
     public static void showSchedule(Account CurrentAccount)
     {
-        Console.Clear();
-        Console.WriteLine("Minari:\n 19:00 | 21:00 | 23:00 | 01:00 | 03:00\n");
-        Console.WriteLine("Sound of metal:\n 18:30 | 20:30 | 22:30 | 00:30 | 02:00\n");
-        Console.WriteLine("Normadland:\n 18:00 | 22:00 | 22:30 | 01:00 | 02:00\n");
-        Console.WriteLine("Another round:\n 13:00| 15:30 | 19:00 | 21:00 | 23:00 | 03:00 |\n");
-        Console.WriteLine("The Father:\n 12:45 | 15:00 | 19:00 | 21:00 | 23:00\n");
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            string a = "/// FILM SELECTION ///\n";
+            Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
+            Console.WriteLine(a);
+            Console.ResetColor();
+            List<String> jsonContents = new List<String> { };
+            try
+            {
+                foreach (string line in File.ReadLines(@"schedules.json"))
+                {
+                    jsonContents.Add(line);
+                }
+                var scheduleList = new List<ScheduleClass> { };
+                foreach (String schedule in jsonContents)
+                {
+                    scheduleList.Add(JsonConvert.DeserializeObject<ScheduleClass>(schedule));
+                }
+                foreach (var schedule in scheduleList)
+                {
+                    Console.WriteLine(schedule);
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("\nNo movie information found!\nPlease add some movies first!\n");
+                System.Threading.Thread.Sleep(3500);
+                Console.Clear();
+                mainScreen.Show(CurrentAccount);
+            }
 
 
-
-
-        Console.WriteLine("Do you want to go to the film selection screeen? y/n: ");
+            Console.WriteLine("Do you want to go to the film selection screeen? y/n: ");
 
         string confirmation = Console.ReadLine();
         if (confirmation.ToLower() == "y")

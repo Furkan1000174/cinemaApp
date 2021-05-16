@@ -19,7 +19,12 @@ namespace cinemaApp
 
         public override string ToString()
         {
-            return string.Format("\nMovie Name: {0}\nMovie Times: {1}");
+            string scheduleTime = "";
+            foreach(string times in MovieTimes)
+            {
+                scheduleTime = scheduleTime + times + " | ";
+            }
+            return string.Format("\nMovie Name: {0}\nMovie Times: " + scheduleTime,MovieName,MovieTimes);
         }
     }
 }

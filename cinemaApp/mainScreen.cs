@@ -98,9 +98,8 @@ namespace cinemaApp
                             choosing = false;
                             break;
                         case 10:
-                        //TODO: Maak Schedule Manage Scherm
-                        //adminScheduleScreen();
-                        //break;
+                            createScheduleScreen.createSchedule(CurrentAccount);
+                            break;
                         default:
                             choosing = false;
                             Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
