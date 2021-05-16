@@ -12,8 +12,7 @@ namespace cinemaApp
     {
             Console.Clear();
             string h;
-            Console.WriteLine(CurrentAccount.Role);
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Cyan;
         //TODO: Maak functie dat checkt of je user of guest bent, als je user bent zeg je hoi user anders zeg je gwn hoi
         if(CurrentAccount.UserName == "")
             {
@@ -34,12 +33,13 @@ namespace cinemaApp
             {
                 Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] View reviews\n[3] View catering\n[4] View Schedule\n[5] View Cart\n[6] Log Out");
             }
-
-            if(CurrentAccount.Role == "Admin")
+           
+            if (CurrentAccount.Role == "Admin")
             {
                 Console.WriteLine("[7] Add movies\n[8] Manage reservations\n[9] Manage catering\n[10] Manage Schedule");
             }
-        bool choosing = true;
+            Console.WriteLine("Please enter a number on screen to perform the desired action.");
+            bool choosing = true;
             while (choosing)
             {
                 string options = Console.ReadLine();
@@ -98,9 +98,8 @@ namespace cinemaApp
                             choosing = false;
                             break;
                         case 10:
-                        //TODO: Maak Schedule Manage Scherm
-                        //adminScheduleScreen();
-                        //break;
+                            createScheduleScreen.createSchedule(CurrentAccount);
+                            break;
                         default:
                             choosing = false;
                             Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
