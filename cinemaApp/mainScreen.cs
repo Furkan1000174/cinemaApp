@@ -91,7 +91,7 @@ namespace cinemaApp
                             //TODO: Maak Manage Reservation Scherm
                             //adminReservationScreen();
                             //break;
-                            Console.WriteLine("Reservations are coming soon!");
+                            Console.WriteLine("admin manage Reservations are coming soon!");
                             break;
                         case 9:
                             createCateringScreen.CateringCreate(CurrentAccount);

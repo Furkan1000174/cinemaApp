@@ -9,6 +9,11 @@ namespace cinemaApp
 {
     class MovieInfoScreen
     {
+
+        public static void reserve(Account currentAccount)
+        {
+
+        }
         public static void showMovies(Account CurrentAccount)
         {
             Console.Clear();
