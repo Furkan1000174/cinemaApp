@@ -53,8 +53,7 @@ namespace cinemaApp
 
 
 
-            while (choosing)
-            {
+           
                 Console.WriteLine("Would you like to pre-order a combo deal?\n1. Yes\n2. No\n");
                 string options = Console.ReadLine();
                 try
@@ -63,7 +62,10 @@ namespace cinemaApp
                     switch (number)
                     {
                         case 1:
-                            try
+
+                        try
+                        {
+                            while (choosing)
                             {
                                 Console.WriteLine("\nPlease enter the combo deal number\n");
                                 string choice = Console.ReadLine();
@@ -79,33 +81,38 @@ namespace cinemaApp
                                 {
                                     if (cate.ID == result)
                                     {
-                                        Cart newCartJSON = new Cart(CurrentAccount.ID,cate.Food + " " + cate.Drink, cate.Price);
+                                        Cart newCartJSON = new Cart(CurrentAccount.ID, cate.Food + " " + cate.Drink, cate.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
                                         using (StreamWriter sw = File.AppendText(@"cart.json"))
                                         {
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
-                                    }
+                                        cateSelecter(result);
+                                        choosing = false;
+                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
 
+                                        Console.WriteLine("\nThe combo deal has been added to your basket!\nYou will be send back to the mainscreen");
+                                        System.Threading.Thread.Sleep(5000);
+                                        Console.ResetColor();
+                                        Console.Clear();
+                                        mainScreen.Show(CurrentAccount);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("There is no catering item with that Index, please try again.");
+                                        break;
+                                    }
                                 }
 
 
-                                cateSelecter(result);
-                                choosing = false;
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-
-                                Console.WriteLine("\nThe combo deal has been added to your basket!\nYou will be send back to the mainscreen");
-                                System.Threading.Thread.Sleep(5000);
-                                Console.ResetColor();
-                                Console.Clear();
-                                mainScreen.Show(CurrentAccount);
-                                break;
                             }
-                            catch
-                            {
-                                showCatering(CurrentAccount);
-                            }
+                        }
+                        catch
+                        {
+                            Console.WriteLine("There is no catering item with that index, please try again.");
+                        }
                             break;
                         case 2:
                             Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -124,8 +131,6 @@ namespace cinemaApp
                 {
                     Console.WriteLine("Please enter a number");
                 }
-
-            }
         }
         public static void cateSelecter(int option)
         {

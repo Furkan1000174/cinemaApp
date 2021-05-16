@@ -8,10 +8,10 @@ namespace cinemaApp
     {
         public int ID { get; set; }
         public string Item { get; set; }
-        public string Price { get; set; }
+        public double Price { get; set; }
         
         
-        public Cart(int id,string item, string price)
+        public Cart(int id,string item, double price)
         {
             ID = id;
             Item = item;

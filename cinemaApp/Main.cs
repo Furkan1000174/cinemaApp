@@ -37,7 +37,7 @@ namespace cinemaApp
                 }
             }
 
-            Account CurrentAccount = new Account(0, "", "","");
+            Account CurrentAccount = new Account(0, "Guest", "","");
             //Welcome screen
             while (true)
             {

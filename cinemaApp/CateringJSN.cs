@@ -10,10 +10,10 @@ namespace cinemaApp
         public string Food { get; set; }
         public string Drink { get; set; }
         public string Size { get; set; }
-        public string Price { get; set; }
+        public double Price { get; set; }
         
         
-        public CateringJSN(int id, string food, string drink, string size, string price)
+        public CateringJSN(int id, string food, string drink, string size, double price)
         {
             ID = id;
             Food = food;

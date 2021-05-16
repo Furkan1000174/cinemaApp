@@ -37,13 +37,14 @@ namespace cinemaApp
                     id = movie.ID + 1;
                 }
             }
-
+            //Hier blijft het doorzeuren tot er wel iets is ingevoerd, geen lege data meer
 
             Console.WriteLine("Please enter the movie title:");
             string movieTitle = Console.ReadLine();
             while (string.IsNullOrEmpty(movieTitle))
             {
                 Console.WriteLine("The movie title can't be empty, please try again.");
+                Console.WriteLine("Please enter the movie title:");
                 movieTitle = Console.ReadLine();
             }
             Console.WriteLine("Please enter the genre:");
@@ -51,6 +52,7 @@ namespace cinemaApp
             while (string.IsNullOrEmpty(movieGenre))
             {
                 Console.WriteLine("The movie genre can't be empty, please try again.");
+                Console.WriteLine("Please enter the genre:");
                 movieGenre = Console.ReadLine();
             }
             Console.WriteLine("Please enter the movie language:");
@@ -58,38 +60,56 @@ namespace cinemaApp
             while (string.IsNullOrEmpty(movieLanguage))
             {
                 Console.WriteLine("The movie language can't be empty, please try again.");
+                Console.WriteLine("Please enter the movie language:");
                 movieLanguage = Console.ReadLine();
             }
-            Console.WriteLine("Please enter the runtime");
-            string movieRuntime = Console.ReadLine();
-            while (string.IsNullOrEmpty(movieRuntime))
+            Console.WriteLine("Please enter the runtime\n(Please use a comma for decimals)");
+            string runtimeInput = Console.ReadLine();
+            double movieRuntime;
+            bool correctRuntime = double.TryParse(runtimeInput, out movieRuntime);
+            movieRuntime = Math.Truncate(movieRuntime * 100) / 100;
+            while (!correctRuntime)
             {
-                Console.WriteLine("The menu Size can't be empty, please try again.");
-                movieRuntime = Console.ReadLine();
+                Console.WriteLine("That was not a correct input for runtime, please try again");
+                Console.WriteLine("Please enter the runtime\n(Please use a comma for decimals)");
+                runtimeInput = Console.ReadLine();
+                correctRuntime = double.TryParse(runtimeInput, out movieRuntime);
+                movieRuntime = Math.Truncate(movieRuntime * 100) / 100;
             }
-            Console.WriteLine("Please enter the age rating");
-            string movieAgeRating = Console.ReadLine();
-            while (string.IsNullOrEmpty(movieAgeRating))
+            Console.WriteLine("Please enter the age rating\n(Please enter just an integer)");
+            string ageRatingInput = Console.ReadLine();
+            int movieAgeRating;
+            bool correctAgeRating = int.TryParse(ageRatingInput, out movieAgeRating);
+            while (!correctAgeRating)
             {
-                Console.WriteLine("The movie age rating can't be empty, please try again.");
-                movieAgeRating = Console.ReadLine();
+                Console.WriteLine("That was not a correct input for age rating, please try again");
+                Console.WriteLine("Please enter the age rating\n(Please enter just an integer)");
+                ageRatingInput = Console.ReadLine();
+                correctAgeRating = int.TryParse(ageRatingInput, out movieAgeRating);
             }
-            Console.WriteLine("Please enter the IMDB score");
-            string movieImdb = Console.ReadLine();
-            while (string.IsNullOrEmpty(movieImdb))
+            Console.WriteLine("Please enter the IMDB score\n(Please use a comma for decimals)");
+            string IMDBInput = Console.ReadLine();
+            double movieIMDB;
+            bool correctInput = double.TryParse(IMDBInput, out movieIMDB);
+            movieIMDB = Math.Truncate(movieIMDB * 100) / 100;
+            while (!correctInput)
             {
-                Console.WriteLine("The menu Size can't be empty, please try again.");
-                movieImdb = Console.ReadLine();
+                Console.WriteLine("That was not a correct input for IMDB, please try again");
+                Console.WriteLine("Please enter the IMDB score:\n(Please use a comma for decimals)");
+                IMDBInput = Console.ReadLine();
+                correctInput = double.TryParse(IMDBInput, out movieIMDB);
+                movieIMDB = Math.Truncate(movieIMDB * 100) / 100;
             }
             Console.WriteLine("Please enter the synopsis(Short Summary of the movie)");
             string movieSynopsis = Console.ReadLine();
             while (string.IsNullOrEmpty(movieSynopsis))
             {
                 Console.WriteLine("The menu Size can't be empty, please try again.");
+                Console.WriteLine("Please enter the synopsis(Short Summary of the movie)");
                 movieSynopsis = Console.ReadLine();
             }
 
-            Movie newMovie = new Movie(id,movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieImdb, movieSynopsis);
+            Movie newMovie = new Movie(id,movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieIMDB, movieSynopsis);
 
             string strNewMovieJson = JsonConvert.SerializeObject(newMovie);
             using (StreamWriter sw = File.AppendText(@"movies.json"))

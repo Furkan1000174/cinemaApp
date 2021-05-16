@@ -25,6 +25,9 @@ namespace cinemaApp
             Console.ResetColor();
             bool choosing = true;
             List<String> jsonContents = new List<String> { };
+            double totalPrice = 0;
+            //Haalt alle cart items op
+            
             try
             {
                 foreach (string line in File.ReadLines(@"cart.json"))
@@ -36,16 +39,19 @@ namespace cinemaApp
                 {
                     cartList.Add(JsonConvert.DeserializeObject<Cart>(cartItem));
                 }
+                //Laat alleen de Cart items zien van de ingelogde gebruiker
                 foreach (var cart in cartList)
                 {
                     if(CurrentAccount.ID == cart.ID)
                     {
                         Console.WriteLine(cart);
+                        totalPrice = totalPrice + cart.Price;
                     }
                    
                 }
+                Console.WriteLine("The total price of the items you ordered is: " + totalPrice + "\n");
             }
-
+            //Als er niks is gevonden
             catch (FileNotFoundException)
             {
                 Console.WriteLine("\nNo cart information found!\nThis page is under construction\n");
