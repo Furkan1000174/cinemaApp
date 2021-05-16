@@ -48,7 +48,7 @@ namespace cinemaApp
                 Console.Clear();
                 mainScreen.Show(CurrentAccount);
             }
-            Console.WriteLine("Would you like to add a schedule?\n[1] Yes\n[2]Return to main menu");
+            Console.WriteLine("Would you like to add a schedule?\n[1] Yes\n[2] Return to main menu");
             string options = Console.ReadLine();
             try
             {
