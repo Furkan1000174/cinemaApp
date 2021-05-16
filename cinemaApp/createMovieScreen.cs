@@ -21,24 +21,30 @@ namespace cinemaApp
 
             int id = 1;
             List<String> jsonContents = new List<String> { };
-            foreach (string line in File.ReadLines(@"movies.json"))
+            try
             {
-                jsonContents.Add(line);
-            }
-            var movieList = new List<CateringJSN> { };
-            foreach (String cate in jsonContents)
-            {
-                movieList.Add(JsonConvert.DeserializeObject<CateringJSN>(cate));
-            }
-            foreach (var movie in movieList)
-            {
-               if(movie.ID >= id)
+                foreach (string line in File.ReadLines(@"movies.json"))
                 {
-                    id = movie.ID + 1;
+                    jsonContents.Add(line);
                 }
+                var movieList = new List<CateringJSN> { };
+                foreach (String cate in jsonContents)
+                {
+                    movieList.Add(JsonConvert.DeserializeObject<CateringJSN>(cate));
+                }
+                foreach (var movie in movieList)
+                {
+                    if (movie.ID >= id)
+                    {
+                        id = movie.ID + 1;
+                    }
+                }
+                //Hier blijft het doorzeuren tot er wel iets is ingevoerd, geen lege data meer
             }
-            //Hier blijft het doorzeuren tot er wel iets is ingevoerd, geen lege data meer
-
+            catch (FileNotFoundException)
+            {
+                
+            }
             Console.WriteLine("Please enter the movie title:");
             string movieTitle = Console.ReadLine();
             while (string.IsNullOrEmpty(movieTitle))
