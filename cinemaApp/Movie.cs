@@ -22,9 +22,6 @@
             IMDB = imdb;
             Synopsis = synopsis;
         }
-        
-        
-        
         public override string ToString()
         {
             return string.Format("{0}\nTitle: {1}\nGenre: {2}\nLanguage: {3}\nRuntime: {4}\nAge rating: {5}\nImdb score: {6}\n\nSynopsis: {7}\n\n",ID, Title, Genre, Language, Runtime, AgeRating, IMDB, Synopsis);

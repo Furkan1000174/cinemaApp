@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace cinemaApp
 {
     class movieRooms
@@ -60,7 +61,19 @@ namespace cinemaApp
 
         public static void roomScreen()
         {
-
+            List<string> jsonContent = new List<string> { };
+            foreach (string line in File.ReadLines(@"room.json"))
+            {
+                jsonContent.Add(line);
+            }
+            var roomList = new List<Room> { };
+            foreach(string room in jsonContent)
+            {
+                roomList.Add(JsonConvert.DeserializeObject<Room>(room));
+                Console.WriteLine(room);
+            }
+            
+            
         }
     }
 }
