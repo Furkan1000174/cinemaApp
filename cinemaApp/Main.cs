@@ -1,9 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.IO;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
 
 namespace cinemaApp
 {
@@ -36,7 +33,7 @@ namespace cinemaApp
 
                 }
             }
-
+            movieRooms.createRoom();
             Account CurrentAccount = new Account(0, "", "","");
             //Welcome screen
             while (true)
