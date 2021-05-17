@@ -54,8 +54,6 @@ namespace cinemaApp
                     switch (number)
                     {
                         case 1:
-                        try
-                        {
                             while (choosing)
                             {
                                 Console.WriteLine("\nPlease enter the movie number\n");
@@ -81,19 +79,10 @@ namespace cinemaApp
                                         Console.Clear();
                                         mainScreen.Show(CurrentAccount);
                                         break;
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("There is no movie with that Index, please try again.");
-                                        break;
-                                    }
+                                    } 
                                 }  
                             }
-                        }
-                        catch
-                        {
-                            Console.WriteLine("There is no movie with that Index, please try again.");
-                        }
+                       
                             break;
                         case 2:
                             Console.ForegroundColor = ConsoleColor.DarkRed;
