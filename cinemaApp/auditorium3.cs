@@ -7,7 +7,7 @@ using System.Text;
 
 namespace cinemaApp
 {
-    class movieRooms
+    class auditorium_500
     {
         public static void createRoom()
         {
