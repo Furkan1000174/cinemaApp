@@ -9,15 +9,18 @@ namespace cinemaApp
         public string[][] room { get; set; }
         public override string ToString()
         {
-            string row = ""; 
+            string roomString = "";
             foreach(string[] roomArray in room)
             {
                 foreach(string rowLine in roomArray)
                 {
-                    row += rowLine;
+                    foreach(char seat in rowLine)
+                    {
+                        roomString += seat;
+                    }
                 }
             }
-            return row;
+            return roomString;
         }
     }
 

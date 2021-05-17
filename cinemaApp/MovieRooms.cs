@@ -60,7 +60,20 @@ namespace cinemaApp
 
         public static void roomScreen()
         {
-
+            List<string> jsonContent = new List<string> { };
+            foreach (string line in File.ReadLines(@"room.json"))
+            {
+                jsonContent.Add(line);
+            }
+            var roomList = new List<Room> { };
+            foreach (string room in jsonContent)
+            {
+                roomList.Add(JsonConvert.DeserializeObject<Room>(room));
+            }
+            foreach(var line in roomList)
+            {
+                Console.WriteLine(line);
+            }
         }
     }
 }
