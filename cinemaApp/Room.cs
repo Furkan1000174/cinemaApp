@@ -19,6 +19,7 @@ namespace cinemaApp
                         roomString += seat;
                     }
                 }
+                roomString += "\n";
             }
             return roomString;
         }
