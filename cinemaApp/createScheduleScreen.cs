@@ -31,10 +31,10 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
-                var movieList = new List<CateringJSN> { };
+                var movieList = new List<Movie> { };
                 foreach (String movie in jsonContents)
                 {
-                    movieList.Add(JsonConvert.DeserializeObject<CateringJSN>(movie));
+                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
                 }
                 foreach (var movie in movieList)
                 {
@@ -48,7 +48,7 @@ namespace cinemaApp
                 Console.Clear();
                 mainScreen.Show(CurrentAccount);
             }
-            Console.WriteLine("Would you like to add a schedule?\n[1] Yes\n[2]Return to main menu");
+            Console.WriteLine("Would you like to add a schedule?\n[1] Yes\n[2] Return to main menu");
             string options = Console.ReadLine();
             try
             {
@@ -56,61 +56,47 @@ namespace cinemaApp
                 switch (number)
                 {
                     case 1:
-
-                        try
-                        {
                             while (choosing)
+                        {
+                            Console.WriteLine("\nPlease enter the movie number\n");
+                            string choice = Console.ReadLine();
+                            int result = Int32.Parse(choice);
+
+
+                            var movieList = new List<Movie> { };
+                            foreach (String movie in jsonContents)
                             {
-                                Console.WriteLine("\nPlease enter the movie number\n");
-                                string choice = Console.ReadLine();
-                                int result = Int32.Parse(choice);
-
-
-                                var movieList = new List<Movie> { };
-                                foreach (String movie in jsonContents)
+                                movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                            }
+                            foreach (var movie in movieList)
+                            {
+                                if (movie.ID == result)
                                 {
-                                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
-                                }
-                                foreach (var movie in movieList)
-                                {
-                                    if (movie.ID == result)
+                                    Console.WriteLine("\nPlease enter some schedule times(Type any time like so: 00:00. Press Enter to add it.");
+                                    string[] times = new string[5];
+                                    for (int i = 0; i < times.Length; i++)
                                     {
-                                        Console.WriteLine("\nPlease enter some schedule times(Type any time like so: 00:00. Press Enter to add it.");
-                                        string[] times = new string[5];
-                                        for (int i = 0; i < times.Length; i++)
-                                        {
-                                            times[i] = Console.ReadLine();
-                                        }
-                                        ScheduleClass newSchedule = new ScheduleClass(movie.Title, times);
-                                        string strNewCartJSON = JsonConvert.SerializeObject(newSchedule);
-                                        using (StreamWriter sw = File.AppendText(@"schedules.json"))
-                                        {
-                                            sw.WriteLine(strNewCartJSON);
-                                            sw.Close();
-                                        }
-                                        choosing = false;
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-
-                                        Console.WriteLine("\nYour Schedule has been added! You will be taken back to the Main Screen now.");
-                                        System.Threading.Thread.Sleep(5000);
-                                        Console.ResetColor();
-                                        Console.Clear();
-                                        mainScreen.Show(CurrentAccount);
-                                        break;
+                                        times[i] = Console.ReadLine();
                                     }
-                                    else
+                                    ScheduleClass newSchedule = new ScheduleClass(movie.Title, times);
+                                    string strNewCartJSON = JsonConvert.SerializeObject(newSchedule);
+                                    using (StreamWriter sw = File.AppendText(@"schedules.json"))
                                     {
-                                        Console.WriteLine("There is no Movie item with that Index, please try again.");
-                                        break;
+                                        sw.WriteLine(strNewCartJSON);
+                                        sw.Close();
                                     }
-                                }
+                                    choosing = false;
+                                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
 
+                                    Console.WriteLine("\nYour Schedule has been added! You will be taken back to the Main Screen now.");
+                                    System.Threading.Thread.Sleep(5000);
+                                    Console.ResetColor();
+                                    Console.Clear();
+                                    mainScreen.Show(CurrentAccount);
+                                    break;
+                                }
 
                             }
-                        }
-                        catch
-                        {
-                            Console.WriteLine("There is no Movie item with that index, please try again.");
                         }
                         break;
                     case 2:
