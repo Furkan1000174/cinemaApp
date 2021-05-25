@@ -46,7 +46,7 @@ namespace cinemaApp
                     mainScreen.Show(CurrentAccount);
                 }
 
-                Console.WriteLine("Would you like to make a reservation?\n1. Yes\n2. No\n");
+                Console.WriteLine("Would you like to make a reservation and see the reviews of a selected film?\n1. Yes\n2. No\n");
                 string options = Console.ReadLine();
                 try
                 {
@@ -70,22 +70,43 @@ namespace cinemaApp
                                 }
                                 foreach (var movie in movieList)
                                 {
-                                    if(movie.ID == result)
+                                    if (movie.ID == result)
                                     {
                                         movieSelecter(result);
                                         choosing = false;
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nYou selected this film! but the reservation section is currently under construction\nYou will be send back to the mainscreen");
-                                        System.Threading.Thread.Sleep(7000);
-                                        Console.ResetColor();
-                                        Console.Clear();
-                                        mainScreen.Show(CurrentAccount);
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("There is no movie with that Index, please try again.");
-                                        break;
+                                        Console.WriteLine("\nWould you like to make a reservation?\n1. Yes\n2. No\n");
+                                        string opti = Console.ReadLine();
+                                        try
+                                        {
+                                            int numb = Int32.Parse(opti);
+                                            switch (numb)
+                                            {
+                                                case 1:
+
+                                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                    Console.WriteLine("\nYou selected this film! but the reservation section is currently under construction\nYou will be send back to the mainscreen");
+                                                    System.Threading.Thread.Sleep(7000);
+                                                    Console.ResetColor();
+                                                    Console.Clear();
+                                                    mainScreen.Show(CurrentAccount);
+                                                    break;
+                                                case 2:
+                                                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                                                    Console.WriteLine("\nYou will be send back to the mainscreen\n");
+                                                    Console.ResetColor();
+                                                    System.Threading.Thread.Sleep(2000);
+                                                    Console.Clear();
+                                                    mainScreen.Show(CurrentAccount);
+                                                    break;
+                                                default:
+                                                    Console.WriteLine("The input you gave is incorrect.");
+                                                    break;
+                                            }
+                                        }
+                                        catch (Exception)
+                                        {
+                                            Console.WriteLine("Please enter a number");
+                                        }
                                     }
                                 }  
                             }
@@ -134,6 +155,29 @@ namespace cinemaApp
                         movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
                     }
                     Console.WriteLine(movieList[option - 1]);
+
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Please enter a number");
+                }
+                List<String> jsonCuntents = new List<String> { };
+                try
+                {
+                    
+                    foreach (string line in File.ReadLines(@"reviews.json")) 
+                    {
+                        jsonCuntents.Add(line);
+                    }
+                    var reviewList = new List<ReviewJSN> { };
+                    foreach (String review in jsonCuntents)
+                    {
+                        reviewList.Add(JsonConvert.DeserializeObject<ReviewJSN>(review));
+                    }
+                    foreach (var review in reviewList)
+                    {
+                    Console.WriteLine(review);
+                    }
                 }
                 catch (Exception)
                 {

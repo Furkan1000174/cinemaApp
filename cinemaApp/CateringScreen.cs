@@ -99,11 +99,6 @@ namespace cinemaApp
                                         mainScreen.Show(CurrentAccount);
                                         break;
                                     }
-                                    else
-                                    {
-                                        Console.WriteLine("There is no catering item with that Index, please try again.");
-                                        break;
-                                    }
                                 }
 
 
