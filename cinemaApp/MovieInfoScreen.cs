@@ -8,6 +8,10 @@ namespace cinemaApp
     class MovieInfoScreen
     {
 
+        public static void reserve(Account currentAccount)
+        {
+
+        }
         public static void showMovies(Account CurrentAccount)
         {
             Console.Clear();
@@ -64,35 +68,47 @@ namespace cinemaApp
                                 {
                                     movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
                                 }
-
                                 foreach (var movie in movieList)
                                 {
                                     if (movie.ID == result)
                                     {
-                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movie.Title, movie.Price);
-                                        string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
-                                        using (StreamWriter sw = File.AppendText(@"cart.json"))
-                                        {
-                                            sw.WriteLine(strNewCartJSON);
-                                            sw.Close();
-                                        }
                                         movieSelecter(result);
                                         choosing = false;
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                        Console.WriteLine("\nWould you like to make a reservation?\n1. Yes\n2. No\n");
+                                        string opti = Console.ReadLine();
+                                        try
+                                        {
+                                            int numb = Int32.Parse(opti);
+                                            switch (numb)
+                                            {
+                                                case 1:
 
-                                        Console.WriteLine("\nYour reservation has been made!\nYou will be send back to the mainscreen");
-                                        System.Threading.Thread.Sleep(5000);
-                                        Console.ResetColor();
-                                        Console.Clear();
-                                        mainScreen.Show(CurrentAccount);
-                                        break;
+                                                    movieRooms.roomScreen(CurrentAccount);
+                                                    break;
+                                                case 2:
+                                                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                                                    Console.WriteLine("\nYou will be send back to the mainscreen\n");
+                                                    Console.ResetColor();
+                                                    System.Threading.Thread.Sleep(2000);
+                                                    Console.Clear();
+                                                    mainScreen.Show(CurrentAccount);
+                                                    break;
+                                                default:
+                                                    Console.WriteLine("The input you gave is incorrect.");
+                                                    break;
+                                            }
+                                        }
+                                        catch (Exception)
+                                        {
+                                            Console.WriteLine("Please enter a number");
+                                        }
                                     }
                                 }
                             }
                         }
                         catch
                         {
-                            Console.WriteLine("There is no movie with that number, please try again.");
+                            Console.WriteLine("There is no movie with that Index, please try again.");
                         }
                         break;
                     case 2:
@@ -163,6 +179,5 @@ namespace cinemaApp
                 Console.WriteLine("Please enter a number");
             }
         }
-        
     }
 }
