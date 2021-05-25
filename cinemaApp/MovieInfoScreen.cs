@@ -111,7 +111,7 @@ namespace cinemaApp
                                         choosing = false;
                                         Console.ForegroundColor = ConsoleColor.DarkMagenta;
 
-                                        Console.WriteLine("\nThe movie has been added to your basket!\nYou will be send back to the mainscreen");
+                                        Console.WriteLine("\nYour reservation has been made!\nYou will be send back to the mainscreen");
                                         System.Threading.Thread.Sleep(5000);
                                         Console.ResetColor();
                                         Console.Clear();
