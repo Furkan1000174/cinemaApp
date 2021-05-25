@@ -83,12 +83,7 @@ namespace cinemaApp
                                             {
                                                 case 1:
 
-                                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                                    Console.WriteLine("\nYou selected this film! but the reservation section is currently under construction\nYou will be send back to the mainscreen");
-                                                    System.Threading.Thread.Sleep(7000);
-                                                    Console.ResetColor();
-                                                    Console.Clear();
-                                                    mainScreen.Show(CurrentAccount);
+                                                    movieRooms.roomScreen(CurrentAccount);
                                                     break;
                                                 case 2:
                                                     Console.ForegroundColor = ConsoleColor.DarkRed;

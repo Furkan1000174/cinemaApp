@@ -33,7 +33,6 @@ namespace cinemaApp
 
                 }
             }
-            movieRooms.roomScreen();
             Account CurrentAccount = new Account(0, "Guest", "","");
             //Welcome screen
             while (true)
