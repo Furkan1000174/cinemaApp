@@ -169,6 +169,7 @@ namespace cinemaApp
                 List<String> jsonCuntents = new List<String> { };
                 try
                 {
+                    
                     foreach (string line in File.ReadLines(@"reviews.json")) 
                     {
                         jsonCuntents.Add(line);
@@ -178,9 +179,11 @@ namespace cinemaApp
                     {
                         reviewList.Add(JsonConvert.DeserializeObject<ReviewJSN>(review));
                     }
-                    Console.WriteLine(reviewList[option - 1]);
+                    foreach (var review in reviewList)
+                    {
+                    Console.WriteLine(review);
+                    }
                 }
-                    //review copy
                 catch (Exception)
                 {
                     Console.WriteLine("Please enter a number");
