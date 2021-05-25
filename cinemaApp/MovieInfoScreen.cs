@@ -7,6 +7,11 @@ namespace cinemaApp
 {
     class MovieInfoScreen
     {
+
+        public static void reserve(Account currentAccount)
+        {
+
+        }
         public static void showMovies(Account CurrentAccount)
         {
             Console.Clear();
@@ -15,7 +20,6 @@ namespace cinemaApp
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
-            int counter = 1;
             bool choosing = true;
                 List<String> jsonContents = new List<String> { };
                 try
@@ -31,9 +35,7 @@ namespace cinemaApp
                     }
                     foreach (var movie in movieList)
                     {
-                        Console.Write("[" + counter + "]");
-                        counter++;
-                        Console.WriteLine(movie);
+                    Console.WriteLine(movie);
                     }
                 }
                 catch (FileNotFoundException)
@@ -43,8 +45,7 @@ namespace cinemaApp
                     Console.Clear();
                     mainScreen.Show(CurrentAccount);
                 }
-            while (choosing)
-            {
+
                 Console.WriteLine("Would you like to make a reservation?\n1. Yes\n2. No\n");
                 string options = Console.ReadLine();
                 try
@@ -53,25 +54,46 @@ namespace cinemaApp
                     switch (number)
                     {
                         case 1:
-                            try
+                        try
+                        {
+                            while (choosing)
                             {
                                 Console.WriteLine("\nPlease enter the movie number\n");
                                 string choice = Console.ReadLine();
                                 int result = Int32.Parse(choice);
-                                movieSelecter(result);
-                                choosing = false;
-                                Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                Console.WriteLine("\nYou selected this film! but the reservation section is currently under construction\nYou will be send back to the mainscreen");
-                                System.Threading.Thread.Sleep(7000);
-                                Console.ResetColor();
-                                Console.Clear();
-                                mainScreen.Show(CurrentAccount);
-                                break;
+                               
+
+                                var movieList = new List<Movie> { };
+                                foreach (String movie in jsonContents)
+                                {
+                                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                                }
+                                foreach (var movie in movieList)
+                                {
+                                    if(movie.ID == result)
+                                    {
+                                        movieSelecter(result);
+                                        choosing = false;
+                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                        Console.WriteLine("\nYou selected this film! but the reservation section is currently under construction\nYou will be send back to the mainscreen");
+                                        System.Threading.Thread.Sleep(7000);
+                                        Console.ResetColor();
+                                        Console.Clear();
+                                        mainScreen.Show(CurrentAccount);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("There is no movie with that Index, please try again.");
+                                        break;
+                                    }
+                                }  
                             }
-                            catch
-                            {
-                                showMovies(CurrentAccount);
-                            }
+                        }
+                        catch
+                        {
+                            Console.WriteLine("There is no movie with that Index, please try again.");
+                        }
                             break;
                         case 2:
                             Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -90,7 +112,6 @@ namespace cinemaApp
                 {
                     Console.WriteLine("Please enter a number");
                 }
-            }
         }
         public static void movieSelecter(int option)
         {
@@ -103,7 +124,6 @@ namespace cinemaApp
                 List<String> jsonContents = new List<String> { };
                 try
                 {
-
                     foreach (string line in File.ReadLines(@"movies.json")) //Creates a list with every object from json file
                     {
                         jsonContents.Add(line);

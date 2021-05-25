@@ -22,7 +22,6 @@ namespace cinemaApp
             Console.SetCursorPosition((Console.WindowWidth - b.Length) / 2, Console.CursorTop);
             Console.WriteLine(b);
             Console.ResetColor();
-            int counter = 1;
             bool choosing = true;
             List<String> jsonContents = new List<String> { };
             try
@@ -38,8 +37,6 @@ namespace cinemaApp
                 }
                 foreach (var cate in cateList)
                 {
-                    Console.Write("[" + counter + "]");
-                    counter++;
                     Console.WriteLine(cate);
                 }
             }
@@ -50,8 +47,13 @@ namespace cinemaApp
                 Console.Clear();
                 mainScreen.Show(CurrentAccount);
             }
-            while (choosing)
-            {
+
+
+
+
+
+
+           
                 Console.WriteLine("Would you like to pre-order a combo deal?\n1. Yes\n2. No\n");
                 string options = Console.ReadLine();
                 try
@@ -60,25 +62,57 @@ namespace cinemaApp
                     switch (number)
                     {
                         case 1:
-                            try
+
+                        try
+                        {
+                            while (choosing)
                             {
                                 Console.WriteLine("\nPlease enter the combo deal number\n");
                                 string choice = Console.ReadLine();
                                 int result = Int32.Parse(choice);
-                                cateSelecter(result);
-                                choosing = false;
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nThe combo deal has been added to your basket!\nYou will be send back to the mainscreen");
-                                System.Threading.Thread.Sleep(5000);
-                                Console.ResetColor();
-                                Console.Clear();
-                                mainScreen.Show(CurrentAccount);
-                                break;
+
+
+                                var cateList = new List<CateringJSN> { };
+                                foreach (String cate in jsonContents)
+                                {
+                                    cateList.Add(JsonConvert.DeserializeObject<CateringJSN>(cate));
+                                }
+                                foreach (var cate in cateList)
+                                {
+                                    if (cate.ID == result)
+                                    {
+                                        Cart newCartJSON = new Cart(CurrentAccount.ID, cate.Food + " " + cate.Drink, cate.Price);
+                                        string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
+                                        using (StreamWriter sw = File.AppendText(@"cart.json"))
+                                        {
+                                            sw.WriteLine(strNewCartJSON);
+                                            sw.Close();
+                                        }
+                                        cateSelecter(result);
+                                        choosing = false;
+                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+
+                                        Console.WriteLine("\nThe combo deal has been added to your basket!\nYou will be send back to the mainscreen");
+                                        System.Threading.Thread.Sleep(5000);
+                                        Console.ResetColor();
+                                        Console.Clear();
+                                        mainScreen.Show(CurrentAccount);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("There is no catering item with that Index, please try again.");
+                                        break;
+                                    }
+                                }
+
+
                             }
-                            catch
-                            {
-                                showCatering(CurrentAccount);
-                            }
+                        }
+                        catch
+                        {
+                            Console.WriteLine("There is no catering item with that index, please try again.");
+                        }
                             break;
                         case 2:
                             Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -97,8 +131,6 @@ namespace cinemaApp
                 {
                     Console.WriteLine("Please enter a number");
                 }
-
-            }
         }
         public static void cateSelecter(int option)
         {
