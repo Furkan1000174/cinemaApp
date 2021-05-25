@@ -7,38 +7,6 @@ namespace cinemaApp
 {
     class MovieInfoScreen
     {
-        public static void movieSelecter(int option)
-        {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
-            string a = "/// YOUR RESERVATION ///\n";
-            Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
-            Console.WriteLine(a);
-            Console.ResetColor();
-                List<String> jsonContents = new List<String> { };
-                try
-                {
-                    foreach (string line in File.ReadLines(@"movies.json")) //Creates a list with every object from json file
-                    {
-                        jsonContents.Add(line);
-                    }
-                    var movieList = new List<Movie> { };
-                    foreach (String movie in jsonContents)
-                    {
-                        movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
-                    }
-                    Console.WriteLine(movieList[option - 1]);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Please enter a number");
-                }
-        }
-        public static void reserve(Account currentAccount)
-        {
-
-        }
-
 
         public static void showMovies(Account CurrentAccount)
         {
@@ -117,11 +85,6 @@ namespace cinemaApp
                                         Console.ResetColor();
                                         Console.Clear();
                                         mainScreen.Show(CurrentAccount);
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("There is no movie with that number, please try again.");
                                         break;
                                     }
                                 }
