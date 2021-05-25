@@ -31,10 +31,10 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
-                var movieList = new List<Movie> { };
+                var movieList = new List<CateringJSN> { };
                 foreach (String movie in jsonContents)
                 {
-                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                    movieList.Add(JsonConvert.DeserializeObject<CateringJSN>(movie));
                 }
                 foreach (var movie in movieList)
                 {
@@ -48,7 +48,7 @@ namespace cinemaApp
                 Console.Clear();
                 mainScreen.Show(CurrentAccount);
             }
-            Console.WriteLine("Would you like to add a schedule?\n[1] Yes\n[2] Return to main menu");
+            Console.WriteLine("Would you like to add a schedule?\n[1] Yes\n[2]Return to main menu");
             string options = Console.ReadLine();
             try
             {
@@ -56,11 +56,14 @@ namespace cinemaApp
                 switch (number)
                 {
                     case 1:
-                            while (choosing)
+
+                        try
                         {
-                            Console.WriteLine("\nPlease enter the movie number\n");
-                            string choice = Console.ReadLine();
-                            int result = Int32.Parse(choice);
+                            while (choosing)
+                            {
+                                Console.WriteLine("\nPlease enter the movie number\n");
+                                string choice = Console.ReadLine();
+                                int result = Int32.Parse(choice);
 
 
                                 var movieList = new List<Movie> { };
@@ -104,7 +107,12 @@ namespace cinemaApp
                                     }
                                 }
 
+
                             }
+                        }
+                        catch
+                        {
+                            Console.WriteLine("There is no Movie item with that index, please try again.");
                         }
                         break;
                     case 2:
