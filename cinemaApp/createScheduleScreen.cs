@@ -80,6 +80,13 @@ namespace cinemaApp
                                         for (int i = 0; i < times.Length; i++)
                                         {
                                             times[i] = Console.ReadLine();
+                                            while (string.IsNullOrEmpty(times[i]))
+                                            {
+                                                Console.WriteLine("The schedule time can't be empty, please try again.");
+                                                Console.WriteLine("Please enter some schedule times(Type any time like so: 00:00. Press Enter to add it.");
+                                                times[i] = Console.ReadLine();
+                                            }
+
                                         }
                                         ScheduleClass newSchedule = new ScheduleClass(movie.Title, times);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newSchedule);
@@ -96,11 +103,6 @@ namespace cinemaApp
                                         Console.ResetColor();
                                         Console.Clear();
                                         mainScreen.Show(CurrentAccount);
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("There is no Movie item with that Index, please try again.");
                                         break;
                                     }
                                 }

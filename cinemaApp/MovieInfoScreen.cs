@@ -108,11 +108,6 @@ namespace cinemaApp
                                             Console.WriteLine("Please enter a number");
                                         }
                                     }
-                                    else
-                                    {
-                                        Console.WriteLine("There is no movie with that Index, please try again.");
-                                        break;
-                                    }
                                 }  
                             }
                         }

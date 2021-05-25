@@ -79,11 +79,6 @@ namespace cinemaApp
                                         mainScreen.Show(CurrentAccount);
                                         choosing = false;
                                     }
-                                    else
-                                    {
-                                        Console.WriteLine("There is no movie with that Index, please try again.");
-                                        break;
-                                    }
                                 }
                             }
                         }
