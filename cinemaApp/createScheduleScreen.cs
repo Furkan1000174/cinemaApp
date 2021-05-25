@@ -63,37 +63,45 @@ namespace cinemaApp
                             int result = Int32.Parse(choice);
 
 
-                            var movieList = new List<Movie> { };
-                            foreach (String movie in jsonContents)
-                            {
-                                movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
-                            }
-                            foreach (var movie in movieList)
-                            {
-                                if (movie.ID == result)
+                                var movieList = new List<Movie> { };
+                                foreach (String movie in jsonContents)
                                 {
-                                    Console.WriteLine("\nPlease enter some schedule times(Type any time like so: 00:00. Press Enter to add it.");
-                                    string[] times = new string[5];
-                                    for (int i = 0; i < times.Length; i++)
+                                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                                }
+                                foreach (var movie in movieList)
+                                {
+                                    if (movie.ID == result)
                                     {
-                                        times[i] = Console.ReadLine();
-                                    }
-                                    ScheduleClass newSchedule = new ScheduleClass(movie.Title, times);
-                                    string strNewCartJSON = JsonConvert.SerializeObject(newSchedule);
-                                    using (StreamWriter sw = File.AppendText(@"schedules.json"))
-                                    {
-                                        sw.WriteLine(strNewCartJSON);
-                                        sw.Close();
-                                    }
-                                    choosing = false;
-                                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                        Console.WriteLine("\nPlease enter some schedule times(Type any time like so: 00:00. Press Enter to add it.");
+                                        string[] times = new string[5];
+                                        for (int i = 0; i < times.Length; i++)
+                                        {
+                                            times[i] = Console.ReadLine();
+                                            while (string.IsNullOrEmpty(times[i]))
+                                            {
+                                                Console.WriteLine("The schedule time can't be empty, please try again.");
+                                                Console.WriteLine("Please enter some schedule times(Type any time like so: 00:00. Press Enter to add it.");
+                                                times[i] = Console.ReadLine();
+                                            }
 
-                                    Console.WriteLine("\nYour Schedule has been added! You will be taken back to the Main Screen now.");
-                                    System.Threading.Thread.Sleep(5000);
-                                    Console.ResetColor();
-                                    Console.Clear();
-                                    mainScreen.Show(CurrentAccount);
-                                    break;
+                                        }
+                                        ScheduleClass newSchedule = new ScheduleClass(movie.Title, times);
+                                        string strNewCartJSON = JsonConvert.SerializeObject(newSchedule);
+                                        using (StreamWriter sw = File.AppendText(@"schedules.json"))
+                                        {
+                                            sw.WriteLine(strNewCartJSON);
+                                            sw.Close();
+                                        }
+                                        choosing = false;
+                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+
+                                        Console.WriteLine("\nYour Schedule has been added! You will be taken back to the Main Screen now.");
+                                        System.Threading.Thread.Sleep(5000);
+                                        Console.ResetColor();
+                                        Console.Clear();
+                                        mainScreen.Show(CurrentAccount);
+                                        break;
+                                    }
                                 }
 
                             }
