@@ -58,7 +58,7 @@ namespace cinemaApp
 
         }
 
-        public static void roomScreen()
+        public static void roomScreen(Account CurrentAccount)
         {
             List<string> jsonContent = new List<string> { };
             foreach (string line in File.ReadLines(@"room.json"))
