@@ -12,22 +12,29 @@ namespace cinemaApp
         public static void CateringCreate(Account CurrentAccount)
         {
             int id = 1;
-            List<String> jsonContents = new List<String> { };
-            foreach (string line in File.ReadLines(@"catering.json"))
+            try
             {
-             jsonContents.Add(line);
+                List<String> jsonContents = new List<String> { };
+                foreach (string line in File.ReadLines(@"catering.json"))
+                {
+                    jsonContents.Add(line);
+                }
+                var cateList = new List<CateringJSN> { };
+                foreach (String cate in jsonContents)
+                {
+                    cateList.Add(JsonConvert.DeserializeObject<CateringJSN>(cate));
+                }
+                foreach (var cate in cateList)
+                {
+                    if (cate.ID >= id)
+                    {
+                        id = cate.ID + 1;
+                    }
+                }
             }
-            var cateList = new List<CateringJSN> { };
-            foreach (String cate in jsonContents)
+            catch (FileNotFoundException)
             {
-                cateList.Add(JsonConvert.DeserializeObject<CateringJSN>(cate));
-            }
-            foreach (var cate in cateList)
-            {
-              if (cate.ID >= id)
-              {
-               id = cate.ID + 1;
-              }
+                
             }
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
