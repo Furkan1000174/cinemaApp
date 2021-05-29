@@ -115,20 +115,7 @@ namespace cinemaApp
                 movieSynopsis = Console.ReadLine();
             }
             Console.WriteLine("Please enter the price");
-            string priceInput = Console.ReadLine();
-            double moviePrice;
-            bool correctInput2 = double.TryParse(priceInput, out moviePrice);
-            moviePrice = Math.Truncate(moviePrice * 100) / 100;
-            while (!correctInput)
-            {
-                Console.WriteLine("That was not a correct input for price, please try again");
-                Console.WriteLine("Please enter the price");
-                priceInput = Console.ReadLine();
-                correctInput = double.TryParse(priceInput, out moviePrice);
-                moviePrice = Math.Truncate(moviePrice * 100) / 100;
-            }
-
-            Movie newMovie = new Movie(id,movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieIMDB, movieSynopsis, moviePrice);
+            Movie newMovie = new Movie(id,movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieIMDB, movieSynopsis);
 
             string strNewMovieJson = JsonConvert.SerializeObject(newMovie);
             using (StreamWriter sw = File.AppendText(@"movies.json"))

@@ -78,7 +78,7 @@ namespace cinemaApp
                                             {
                                                 case 1:
 
-                                                    movieRooms.roomScreen(CurrentAccount);
+                                                    movieRooms.roomScreen(CurrentAccount,movie.Title);
                                                     break;
                                                 case 2:
                                                     Console.ForegroundColor = ConsoleColor.DarkRed;
