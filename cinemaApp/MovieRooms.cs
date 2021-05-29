@@ -60,20 +60,36 @@ namespace cinemaApp
 
         public static void roomScreen(Account CurrentAccount)
         {
-            List<string> jsonContent = new List<string> { };
-            foreach (string line in File.ReadLines(@"room.json"))
+            while (true)
             {
-                jsonContent.Add(line);
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                string h = "Welcome to the seat selection!\n\n";
+                Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
+                Console.WriteLine(h);
+                Console.ResetColor();
+                List<string> jsonContent = new List<string> { };
+                foreach (string line in File.ReadLines(@"room.json"))
+                {
+                    jsonContent.Add(line);
+                }
+                var roomList = new List<Room> { };
+                foreach (string room in jsonContent)
+                {
+                    roomList.Add(JsonConvert.DeserializeObject<Room>(room));
+                }
+                foreach (var line in roomList)
+                {
+                    Console.WriteLine(line);
+                }
+                Console.WriteLine("Please enter which seats you would like to reserve");
+                Console.WriteLine("Please enter them as (X, Y) for example (Row 1, Seat 1)");
+                string options = Console.ReadLine();
+                if (options == "exit")
+                {
+                    MovieInfoScreen.showMovies(CurrentAccount);
+                }
             }
-            var roomList = new List<Room> { };
-            foreach (string room in jsonContent)
-            {
-                roomList.Add(JsonConvert.DeserializeObject<Room>(room));
-            }
-            foreach(var line in roomList)
-            {
-                Console.WriteLine(line);
-            }
-        }
+        }   
     }
 }
