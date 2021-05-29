@@ -26,7 +26,7 @@
         }
         public override string ToString()
         {
-            return string.Format("{0}\nTitle: {1}\nGenre: {2}\nLanguage: {3}\nRuntime: {4}\nAge rating: {5}\nImdb score: {6}\n\nSynopsis: {7}\nPrice: {8}\n\n",ID, Title, Genre, Language, Runtime, AgeRating, IMDB, Synopsis, Price);
+            return string.Format("[{0}]\n-------------------\nTitle: {1}\nGenre: {2}\nLanguage: {3}\nRuntime: {4}\nAge rating: {5}\nImdb score: {6}\n\nSynopsis: {7}\nPrice: {8}\n\n", ID, Title, Genre, Language, Runtime, AgeRating, IMDB, Synopsis, Price);
         }
     }
 }

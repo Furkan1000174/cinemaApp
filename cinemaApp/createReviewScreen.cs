@@ -75,7 +75,7 @@ namespace cinemaApp
                                         Console.ForegroundColor = ConsoleColor.DarkRed;
                                         Console.WriteLine("You will be send back to the mainscreen\n");
                                         Console.ResetColor();
-                                        System.Threading.Thread.Sleep(5000);
+                                        System.Threading.Thread.Sleep(3000);
                                         Console.Clear();
                                         mainScreen.Show(CurrentAccount);
                                         choosing = false;
