@@ -53,14 +53,14 @@ namespace cinemaApp
                 drinkItem = Console.ReadLine();
             }
 
-            Console.WriteLine("Please enter the menu size (Small/Medium/Large:\nKeep in mind that the menu sizes are Case sensitive, so don't forget the captial letter.");
+            Console.WriteLine("Please enter the menu size (Small/Medium/Large):\nKeep in mind that the menu sizes are Case sensitive, so don't forget the captial letter.");
             string menuSize = Console.ReadLine();
             string[] sizes = { "Small", "Medium", "Large" };
             bool correctSize = sizes.Contains(menuSize);
             while (!correctSize)
             {
                 Console.WriteLine("That was an incorrect menu size, please try again.");
-                Console.WriteLine("Please enter the menu size (Small/Medium/Large:\nKeep in mind that the menu sizes are Case sensitive, so don't forget the captial letter.");
+                Console.WriteLine("Please enter the menu size (Small/Medium/Large):\nKeep in mind that the menu sizes are Case sensitive, so don't forget the captial letter.");
                 menuSize = Console.ReadLine();
                 correctSize = sizes.Contains(menuSize);
             }
