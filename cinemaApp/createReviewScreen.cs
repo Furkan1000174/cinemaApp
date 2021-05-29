@@ -58,6 +58,7 @@ namespace cinemaApp
                                 Console.WriteLine("\nPlease enter the movie number\n");
                                 string choice = Console.ReadLine();
                                 int result = Int32.Parse(choice);
+                                
 
 
                                 var movieList = new List<Movie> { };
@@ -106,8 +107,9 @@ namespace cinemaApp
             }
         }
 
-        private static void reviewSelecter(int option)
+        public static void reviewSelecter(int option)
         {
+            int currentmovieid = option;
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
             string a = "/// START WRITING YOUR REVIEW ///\n";
@@ -157,7 +159,7 @@ namespace cinemaApp
                 Console.WriteLine("Please enter your review:");
                 reviewReview = Console.ReadLine();
             }
-            ReviewJSN newReview = new ReviewJSN(id, reviewName, reviewReview);
+            ReviewJSN newReview = new ReviewJSN(id,currentmovieid, reviewName, reviewReview);
 
             string strNewReviewJson = JsonConvert.SerializeObject(newReview);
             using (StreamWriter sw = File.AppendText(@"reviews.json"))

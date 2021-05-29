@@ -166,6 +166,7 @@ namespace cinemaApp
                 }
                 foreach (var review in reviewList)
                 {
+                    if(review.MovieID == option)
                     Console.WriteLine(review);
                 }
             }
