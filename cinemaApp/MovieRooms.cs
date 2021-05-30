@@ -93,7 +93,19 @@ namespace cinemaApp
                 switch (number)
                 {
                     case 1:
+
                             var seatList = new List<Seat> { };
+                            foreach(var room in roomList)
+                            {
+                               for(int i = 0; i< room.room.Length;i++)
+                                {
+                                    for(int j = 0; j < room.room[i].Length;j++)
+                                    {
+                                        seatList.Add(room.room[i][j]);
+                                    }
+                                }
+                            }
+                            //:)
                             Console.WriteLine("Please enter which seats you would like to reserve");
                             Console.WriteLine("Please enter the row in which you would like to sit, enter a number.");
                             string xCorInput = Console.ReadLine();
@@ -122,8 +134,7 @@ namespace cinemaApp
                             {
                                 if (seat.Xcor == seatXCor && seat.Ycor == seatYCor)
                                 {
-                                    Console.WriteLine("Dit werkt kloteding!");
-                                    if (seat.Icon != " " || seat.Icon != "X")
+                                    if (seat.Icon != " " && seat.Icon != "X")
                                     {
                                         Cart newCartJSON = new Cart(CurrentAccount.ID, movieName, seat.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
@@ -132,12 +143,15 @@ namespace cinemaApp
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
-                                        seat.Icon = "X";
-                                        Console.WriteLine(seat.Icon);
+                                        seat.Icon = "Your reservation has been made! Returning to Seat Selection";
+                                    Console.WriteLine(seat);
+                                    System.Threading.Thread.Sleep(2000);
+                                    roomScreen(CurrentAccount, movieName);
                                     }
                                     else
                                     {
                                         Console.WriteLine("Something went wrong. Please try again.");
+                                        System.Threading.Thread.Sleep(2000);
                                         roomScreen(CurrentAccount, movieName);
                                     }
                                 }
@@ -158,9 +172,9 @@ namespace cinemaApp
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Console.WriteLine("Please enter a number");
+                Console.WriteLine(ex);
             }
         }   
     }
