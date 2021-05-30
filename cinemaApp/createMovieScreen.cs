@@ -114,7 +114,7 @@ namespace cinemaApp
                 Console.WriteLine("Please enter the synopsis(Short Summary of the movie)");
                 movieSynopsis = Console.ReadLine();
             }
-
+            Console.WriteLine("Please enter the price");
             Movie newMovie = new Movie(id,movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieIMDB, movieSynopsis);
 
             string strNewMovieJson = JsonConvert.SerializeObject(newMovie);

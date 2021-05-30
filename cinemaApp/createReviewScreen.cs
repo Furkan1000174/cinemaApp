@@ -1,17 +1,19 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 
 namespace cinemaApp
 {
-    class MovieInfoScreen
+    class createReviewScreen
     {
-        public static void showMovies(Account CurrentAccount)
+        public static void createReview(Account CurrentAccount) //Create a review for json
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
-            string a = "/// FILM SELECTION ///\n";
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            string a = "/// WRITE YOUR VERY OWN REVIEW!///\n";
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
@@ -19,7 +21,7 @@ namespace cinemaApp
             List<String> jsonContents = new List<String> { };
             try
             {
-                foreach (string line in File.ReadLines(@"movies.json")) //Creates a list with every object from json file
+                foreach (string line in File.ReadLines(@"movies.json")) 
                 {
                     jsonContents.Add(line);
                 }
@@ -41,7 +43,7 @@ namespace cinemaApp
                 mainScreen.Show(CurrentAccount);
             }
 
-            Console.WriteLine("Would you like to make a reservation and see the reviews of a selected film?\n1. Yes\n2. No\n");
+            Console.WriteLine("Would you like to write a review of a selected film?\n1. Yes\n2. No\n");
             string options = Console.ReadLine();
             try
             {
@@ -56,6 +58,7 @@ namespace cinemaApp
                                 Console.WriteLine("\nPlease enter the movie number\n");
                                 string choice = Console.ReadLine();
                                 int result = Int32.Parse(choice);
+                                
 
 
                                 var movieList = new List<Movie> { };
@@ -67,36 +70,15 @@ namespace cinemaApp
                                 {
                                     if (movie.ID == result)
                                     {
-                                        movieSelecter(result);
+                                        reviewSelecter(result);
+                                        Console.WriteLine("Review added!\n");
+                                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                                        Console.WriteLine("You will be send back to the mainscreen\n");
+                                        Console.ResetColor();
+                                        System.Threading.Thread.Sleep(5000);
+                                        Console.Clear();
+                                        mainScreen.Show(CurrentAccount);
                                         choosing = false;
-                                        Console.WriteLine("\nWould you like to make a reservation?\n1. Yes\n2. No\n");
-                                        string opti = Console.ReadLine();
-                                        try
-                                        {
-                                            int numb = Int32.Parse(opti);
-                                            switch (numb)
-                                            {
-                                                case 1:
-
-                                                    movieRooms.roomScreen(CurrentAccount,movie.Title);
-                                                    break;
-                                                case 2:
-                                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                                    Console.WriteLine("\nYou will be send back to the mainscreen\n");
-                                                    Console.ResetColor();
-                                                    System.Threading.Thread.Sleep(2000);
-                                                    Console.Clear();
-                                                    mainScreen.Show(CurrentAccount);
-                                                    break;
-                                                default:
-                                                    Console.WriteLine("The input you gave is incorrect.");
-                                                    break;
-                                            }
-                                        }
-                                        catch (Exception)
-                                        {
-                                            Console.WriteLine("Please enter a number");
-                                        }
                                     }
                                 }
                             }
@@ -124,56 +106,68 @@ namespace cinemaApp
                 Console.WriteLine("Please enter a number");
             }
         }
-        public static void movieSelecter(int option)
+
+        public static void reviewSelecter(int option)
         {
+            int currentmovieid = option;
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
-            string a = "/// YOUR RESERVATION ///\n";
+            string a = "/// START WRITING YOUR REVIEW ///\n";
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
+            //REVIEWS SCHRIJVEN
+            int id = 1;
             List<String> jsonContents = new List<String> { };
             try
             {
-                foreach (string line in File.ReadLines(@"movies.json")) //Creates a list with every object from json file
+                foreach (string line in File.ReadLines(@"reviews.json"))
                 {
                     jsonContents.Add(line);
                 }
-                var movieList = new List<Movie> { };
-                foreach (String movie in jsonContents)
-                {
-                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
-                }
-                Console.WriteLine(movieList[option - 1]);
-
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Please enter a number");
-            }
-            List<String> jsonCuntents = new List<String> { };
-            try
-            {
-
-                foreach (string line in File.ReadLines(@"reviews.json"))
-                {
-                    jsonCuntents.Add(line);
-                }
                 var reviewList = new List<ReviewJSN> { };
-                foreach (String review in jsonCuntents)
+                foreach (String rev in jsonContents)
                 {
-                    reviewList.Add(JsonConvert.DeserializeObject<ReviewJSN>(review));
+                    reviewList.Add(JsonConvert.DeserializeObject<ReviewJSN>(rev));
                 }
                 foreach (var review in reviewList)
                 {
-                    if(review.MovieID == option)
-                    Console.WriteLine(review);
+                    if (review.ID >= id)
+                    {
+                        id = review.ID + 1;
+                    }
                 }
+                
             }
-            catch (Exception)
+            catch (FileNotFoundException)
             {
-                Console.WriteLine("Please enter a number");
+
             }
+            Console.WriteLine("Please enter your name:");
+            string reviewName = Console.ReadLine();
+            while (string.IsNullOrEmpty(reviewName))
+            {
+                Console.WriteLine("The name section can't be empty, please try again.");
+                Console.WriteLine("Please enter your name:");
+                reviewName = Console.ReadLine();
+            }
+            Console.WriteLine("Please enter your review:");
+            string reviewReview = Console.ReadLine();
+            while (string.IsNullOrEmpty(reviewReview))
+            {
+                Console.WriteLine("The review can't be empty, please try again.");
+                Console.WriteLine("Please enter your review:");
+                reviewReview = Console.ReadLine();
+            }
+            ReviewJSN newReview = new ReviewJSN(id,currentmovieid, reviewName, reviewReview);
+
+            string strNewReviewJson = JsonConvert.SerializeObject(newReview);
+            using (StreamWriter sw = File.AppendText(@"reviews.json"))
+            {
+                sw.WriteLine(strNewReviewJson);
+                sw.Close();
+            }
+
         }
     }
 }

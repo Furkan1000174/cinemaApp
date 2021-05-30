@@ -63,8 +63,6 @@ namespace cinemaApp
                     {
                         case 1:
 
-                        try
-                        {
                             while (choosing)
                             {
                                 Console.WriteLine("\nPlease enter the combo deal number\n");
@@ -99,20 +97,9 @@ namespace cinemaApp
                                         mainScreen.Show(CurrentAccount);
                                         break;
                                     }
-                                    else
-                                    {
-                                        Console.WriteLine("There is no catering item with that Index, please try again.");
-                                        break;
-                                    }
                                 }
-
-
                             }
-                        }
-                        catch
-                        {
-                            Console.WriteLine("There is no catering item with that index, please try again.");
-                        }
+                        
                             break;
                         case 2:
                             Console.ForegroundColor = ConsoleColor.DarkRed;

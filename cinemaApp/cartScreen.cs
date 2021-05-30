@@ -49,7 +49,7 @@ namespace cinemaApp
                     }
                    
                 }
-                Console.WriteLine("The total price of the items you ordered is: " + totalPrice + "\n");
+                Console.WriteLine("The total price of the items you ordered is: €" + totalPrice + "\n");
             }
             //Als er niks is gevonden
             catch (FileNotFoundException)
