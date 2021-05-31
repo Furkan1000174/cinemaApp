@@ -34,6 +34,16 @@ namespace cinemaApp
                 }
             }
             Account CurrentAccount = new Account(0, "Guest", "","");
+            try
+            {
+                if (new FileInfo(@"room.json").Length == 0)
+                {
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                movieRooms.createRoom();
+            }
             //Welcome screen
             while (true)
             {
