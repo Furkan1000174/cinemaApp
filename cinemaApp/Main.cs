@@ -38,6 +38,7 @@ namespace cinemaApp
             {
                 if (new FileInfo(@"room.json").Length == 0)
                 {
+                    movieRooms.createRoom();
                 }
             }
             catch (FileNotFoundException)
