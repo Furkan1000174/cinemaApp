@@ -25,7 +25,7 @@ namespace cinemaApp
         
         public override string ToString()
         {
-            return string.Format("\n[{0}]\nFood: {1}\nDrink: {2}\nSize: {3}\nPrice(euro): {4}\n\n", ID, Food, Drink, Size, Price);
+            return string.Format("\n[{0}]\nFood: {1}\nDrink: {2}\nSize: {3}\nPrice: €{4}\n\n", ID, Food, Drink, Size, Price);
         }
     }
 }

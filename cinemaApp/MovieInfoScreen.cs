@@ -30,7 +30,7 @@ namespace cinemaApp
                 }
                 foreach (var movie in movieList)
                 {
-                    Console.WriteLine(movie);
+                    Console.WriteLine("[" + movie.ID + "]" + "\nTitle: " + movie.Title + "\n");
                 }
             }
             catch (FileNotFoundException)
