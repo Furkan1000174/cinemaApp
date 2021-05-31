@@ -36,9 +36,19 @@ namespace cinemaApp
         public Seat[][] room { get; set; }
         public override string ToString()
         {
-            string roomString = "";
+            int row = 1;
+            string roomString = "   1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30\n\n";
             foreach(Seat[] roomArray in room)
             {
+                if (row.ToString().Length == 1)
+                {
+                    roomString += row.ToString() + "  ";
+                }
+                else if (row.ToString().Length == 2)
+                {
+                    roomString += row.ToString() + " ";
+                }
+                row += 1;
                 foreach(Seat seat in roomArray)
                 {
                     roomString += seat;
