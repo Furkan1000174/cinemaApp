@@ -9,21 +9,20 @@ namespace cinemaApp
 {
     class movieRooms
     {
-        public static void createRoom()
+        public static void createRoom(int seats, int rows,int[] exlude)
         {
-            Seat[][] room = new Seat[20][];
+            Seat[][] room = new Seat[rows][];
             for(int i=0; i < room.Length; i++)
             {
-                room[i] = new Seat[30];
+                room[i] = new Seat[seats];
             }
-            int[] exlude = new int[] { 4, 3, 3, 3, 3, 2, 1, 0, 0, 0, 0, 0, 1, 2, 2, 3, 3, 5, 7, 8 };
             for(int i=0; i < exlude.Length; i++)
             {
-                for(int j=0; j < 30; j++)
+                for(int j=0; j < seats; j++)
                 {
-                    if (j > 15)
+                    if (j > (seats/2))
                     {
-                        if (j < 30 - exlude[i])
+                        if (j < seats - exlude[i])
                         {
                             room[i][j] = new Seat("O",i,j,15.00);
                         }
@@ -45,10 +44,25 @@ namespace cinemaApp
                     }
                 }
             }
-            Room newRoom = new Room()
+            int id = 1;
+            List<String> jsonContents = new List<String> { };
+            foreach (string line in File.ReadLines(@"room.json"))
             {
-                room = room,
-            };
+                jsonContents.Add(line);
+            }
+            var roomList = new List<Room> { };
+            foreach (String roomObject in jsonContents)
+            {
+                roomList.Add(JsonConvert.DeserializeObject<Room>(roomObject));
+            }
+            foreach (var roomItem in roomList)
+            {
+                if (roomItem.RoomID >= id)
+                {
+                    id = roomItem.RoomID + 1;
+                }
+            }
+            Room newRoom = new Room(id, room);
             string roomArray = JsonConvert.SerializeObject(newRoom);
             using (StreamWriter sw = File.AppendText(@"room.json"))
             {
@@ -97,11 +111,11 @@ namespace cinemaApp
                             var seatList = new List<Seat> { };
                             foreach(var room in roomList)
                             {
-                               for(int i = 0; i< room.room.Length;i++)
+                               for(int i = 0; i< room.seatRoom.Length;i++)
                                 {
-                                    for(int j = 0; j < room.room[i].Length;j++)
+                                    for(int j = 0; j < room.seatRoom[i].Length;j++)
                                     {
-                                        seatList.Add(room.room[i][j]);
+                                        seatList.Add(room.seatRoom[i][j]);
                                     }
                                 }
                             }
