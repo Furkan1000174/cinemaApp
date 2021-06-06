@@ -37,6 +37,7 @@ namespace cinemaApp
                 }
                 foreach (var cate in cateList)
                 {
+                    Console.OutputEncoding = Encoding.UTF8;
                     Console.WriteLine(cate);
                 }
             }

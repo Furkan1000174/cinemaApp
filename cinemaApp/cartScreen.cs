@@ -44,11 +44,13 @@ namespace cinemaApp
                 {
                     if(CurrentAccount.ID == cart.ID)
                     {
+                        Console.OutputEncoding = Encoding.UTF8;
                         Console.WriteLine(cart);
                         totalPrice = totalPrice + cart.Price;
                     }
                    
                 }
+                Console.OutputEncoding = Encoding.UTF8;
                 Console.WriteLine("The total price of the items you ordered is: €" + totalPrice + "\n");
             }
             //Als er niks is gevonden

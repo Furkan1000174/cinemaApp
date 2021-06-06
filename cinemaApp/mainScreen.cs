@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -36,7 +36,7 @@ namespace cinemaApp
            
             if (CurrentAccount.Role == "Admin")
             {
-                Console.WriteLine("[7] Manage movies\n[8] Manage reservations\n[9] Manage catering\n[10] Manage Schedule");
+                Console.WriteLine("[7] Add movies\n[8] Manage reservations\n[9] Manage catering\n[10] Manage Schedule\n[11] Manage Rooms");
             }
             Console.WriteLine("Please enter a number on screen to perform the desired action.");
             bool choosing = true;
@@ -83,21 +83,48 @@ namespace cinemaApp
                             Program.Main();
                             break;
                         case 7:
-                            createMovieScreen.createMovie(CurrentAccount);
-                            choosing = false;
+                            if(CurrentAccount.Role != "Admin")
+                            {
+                                Console.WriteLine("Nice try, but you're not getting in that easily ;)");
+                            }
+                            else
+                            {
+                                createMovieScreen.createMovie(CurrentAccount);
+                                choosing = false;
+                            }
                             break;
                         case 8:
-                            //TODO: Maak Manage Reservation Scherm
-                            //adminReservationScreen();
-                            //break;
-                            Console.WriteLine("admin manage Reservations are coming soon!");
+                            if (CurrentAccount.Role != "Admin")
+                            {
+                                Console.WriteLine("Nice try, but you're not getting in that easily ;)");
+                            }
+                            else
+                            {
+                                createCateringScreen.CateringCreate(CurrentAccount);
+                                choosing = false;
+                            }
                             break;
                         case 9:
-                            createCateringScreen.CateringCreate(CurrentAccount);
-                            choosing = false;
+                            if (CurrentAccount.Role != "Admin")
+                            {
+                                Console.WriteLine("Nice try, but you're not getting in that easily ;)");
+                            }
+                            else
+                            {
+                                createScheduleScreen.createSchedule(CurrentAccount);
+                                choosing = false;
+                            }
                             break;
                         case 10:
-                            createScheduleScreen.createSchedule(CurrentAccount);
+                            if (CurrentAccount.Role != "Admin")
+                            {
+                                Console.WriteLine("Nice try, but you're not getting in that easily ;)");
+                            }
+                            else
+                            {
+                               createRoomScreen.RoomCreate(CurrentAccount);
+                                choosing = false;
+                            }
                             break;
                         default:
                             choosing = false;
