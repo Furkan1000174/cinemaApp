@@ -38,11 +38,14 @@ namespace cinemaApp
             {
                 if (new FileInfo(@"room.json").Length == 0)
                 {
+                    int[] exlude = new int[] { 4, 3, 3, 3, 3, 2, 1, 0, 0, 0, 0, 0, 1, 2, 2, 3, 3, 5, 7, 8 };
+                    movieRooms.createRoom(30, 20, exlude);
                 }
             }
             catch (FileNotFoundException)
             {
-                movieRooms.createRoom();
+                int[] exlude = new int[] { 4, 3, 3, 3, 3, 2, 1, 0, 0, 0, 0, 0, 1, 2, 2, 3, 3, 5, 7, 8 };
+                movieRooms.createRoom(30,20,exlude);
             }
             //Welcome screen
             while (true)

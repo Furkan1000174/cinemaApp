@@ -72,7 +72,7 @@ namespace cinemaApp
 
         }
 
-        public static void roomScreen(Account CurrentAccount, string movieName)
+        public static void roomScreen(Account CurrentAccount, string movieName,int roomNumber)
         {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -80,6 +80,13 @@ namespace cinemaApp
                 Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
                 Console.WriteLine(h);
                 Console.ResetColor();
+
+
+
+
+
+
+
                 List<string> jsonContent = new List<string> { };
                 foreach (string line in File.ReadLines(@"room.json"))
                 {
@@ -92,7 +99,11 @@ namespace cinemaApp
                 }
                 foreach (var seat in roomList)
                 {
-                    Console.WriteLine(seat);
+                    if(seat.RoomID == roomNumber)
+                    {
+                        Console.WriteLine(seat);
+                    }
+                   
                 }
                
 
@@ -150,23 +161,22 @@ namespace cinemaApp
                                 {
                                     if (seat.Icon != " " && seat.Icon != "X")
                                     {
-                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName, seat.Price);
+                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}", seat.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
                                         using (StreamWriter sw = File.AppendText(@"cart.json"))
                                         {
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
-                                        seat.Icon = "Your reservation has been made! Returning to Seat Selection";
-                                    Console.WriteLine(seat);
-                                    System.Threading.Thread.Sleep(2000);
-                                    roomScreen(CurrentAccount, movieName);
+                                    Console.WriteLine("Your reservation has been made! Returning to Seat Selection");
+                                    System.Threading.Thread.Sleep(20000);
+                                    roomScreen(CurrentAccount, movieName,roomNumber);
                                     }
                                     else
                                     {
                                         Console.WriteLine("Something went wrong. Please try again.");
                                         System.Threading.Thread.Sleep(2000);
-                                        roomScreen(CurrentAccount, movieName);
+                                        roomScreen(CurrentAccount, movieName,roomNumber);
                                     }
                                 }
                             }
