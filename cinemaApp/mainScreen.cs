@@ -36,7 +36,7 @@ namespace cinemaApp
            
             if (CurrentAccount.Role == "Admin")
             {
-                Console.WriteLine("[7] Add movies\n[8] Manage reservations\n[9] Manage catering\n[10] Manage Schedule\n[11] Manage Rooms");
+                Console.WriteLine("[7] Add movies\n[8] Manage catering\n[9] Manage Schedule\n[10] Manage Rooms");
             }
             Console.WriteLine("Please enter a number on screen to perform the desired action.");
             bool choosing = true;

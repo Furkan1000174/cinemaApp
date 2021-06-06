@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System.IO;
 using System.Collections.Generic;
+using System.Text;
 
 namespace cinemaApp
 {
@@ -181,6 +182,7 @@ namespace cinemaApp
                 {
                     movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
                 }
+
                 Console.WriteLine(movieList[option - 1]);
 
             }
@@ -213,7 +215,6 @@ namespace cinemaApp
             }
             Console.ForegroundColor = ConsoleColor.Green;
             string b = "/// ROOM SELECTION ///\n";
-            string availableseat = "O";
             Console.SetCursorPosition((Console.WindowWidth - b.Length) / 2, Console.CursorTop);
             Console.WriteLine(b);
             Console.ResetColor();
@@ -227,10 +228,32 @@ namespace cinemaApp
             {
                 roomList.Add(JsonConvert.DeserializeObject<Room>(seat));
             }
+            int roomID = 1;
             foreach (var seat in roomList)
             {
+                var seatList = new List<Seat> { };
                 Console.WriteLine($"[{seat.RoomID}]");
                 Console.WriteLine($"Room number: #{seat.RoomID}");
+                for (int i = 0; i < seat.seatRoom.Length; i++)
+                {
+                    for (int j = 0; j < seat.seatRoom[i].Length; j++)
+                    {
+                        if(seat.RoomID == roomID)
+                        {
+                          seatList.Add(seat.seatRoom[i][j]);
+                        }
+                    }
+                }
+                foreach(var roomSeat in seatList)
+                {
+                    if(roomSeat.Icon == " O ")
+                    {
+                        Console.OutputEncoding = Encoding.UTF8;
+                        Console.WriteLine($"Seat Price: €{roomSeat.Price}");
+                        roomID++;
+                        break;
+                    }
+                }
             }
 
         }

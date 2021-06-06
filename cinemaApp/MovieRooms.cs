@@ -9,7 +9,7 @@ namespace cinemaApp
 {
     class movieRooms
     {
-        public static void createRoom(int seats, int rows,int[] exlude)
+        public static void createRoom(int seats, int rows,int[] exlude, double seatPrice)
         {
             Seat[][] room = new Seat[rows][];
             for(int i=0; i < room.Length; i++)
@@ -24,7 +24,7 @@ namespace cinemaApp
                     {
                         if (j < seats - exlude[i])
                         {
-                            room[i][j] = new Seat(" O ",i,j,15.00);
+                            room[i][j] = new Seat(" O ",i,j,seatPrice);
                         }
                         else
                         {
@@ -35,7 +35,7 @@ namespace cinemaApp
                     {
                         if(j >= exlude[i])
                         {
-                            room[i][j] = new Seat(" O ", i, j, 15.00);
+                            room[i][j] = new Seat(" O ", i, j, seatPrice);
                         }
                         else
                         {
@@ -126,6 +126,7 @@ namespace cinemaApp
                                 {
                                     for(int j = 0; j < room.seatRoom[i].Length;j++)
                                     {
+                                        if(room.RoomID == roomNumber)
                                         seatList.Add(room.seatRoom[i][j]);
                                     }
                                 }
