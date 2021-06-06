@@ -17,6 +17,34 @@ namespace cinemaApp
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
+            Console.WriteLine("Please enter what you would like to do\n[1]Add movie\n[2]Remove movie\n[3]Edit movie");
+            bool choosing = true;
+            while (choosing)
+            {
+                string options = Console.ReadLine();
+                try
+                {
+                    int number = Int32.Parse(options);
+                    switch (number)
+                    {
+                        case 1:
+                            choosing = false;
+                            break;
+                        case 2:
+                            RemoveMovie(CurrentAccount);
+                            choosing = false;
+                            break;
+                        default:
+                            choosing = false;
+                            Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                }
+            }
 
 
             int id = 1;
@@ -43,7 +71,7 @@ namespace cinemaApp
             }
             catch (FileNotFoundException)
             {
-                
+
             }
             Console.WriteLine("Please enter the movie title:");
             string movieTitle = Console.ReadLine();
@@ -115,7 +143,7 @@ namespace cinemaApp
                 movieSynopsis = Console.ReadLine();
             }
             Console.WriteLine("Please enter the price");
-            Movie newMovie = new Movie(id,movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieIMDB, movieSynopsis);
+            Movie newMovie = new Movie(id, movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieIMDB, movieSynopsis);
 
             string strNewMovieJson = JsonConvert.SerializeObject(newMovie);
             using (StreamWriter sw = File.AppendText(@"movies.json"))
@@ -124,8 +152,68 @@ namespace cinemaApp
                 sw.Close();
             }
             Console.WriteLine("Movie added!");
-            
+
             mainScreen.Show(CurrentAccount);
         }
+        public static void RemoveMovie(Account CurrentAccount)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            string a = "/// Remove movie ///\n";
+            Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
+            Console.WriteLine(a);
+            Console.ResetColor();
+            List<String> jsonContents = new List<String> { };
+            try
+            {
+                foreach (string line in File.ReadLines(@"movies.json")) //Creates a list with every object from json file
+                {
+                    jsonContents.Add(line);
+                }
+                var movieList = new List<Movie> { };
+                foreach (String movie in jsonContents)
+                {
+                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                }
+                foreach (var movie in movieList)
+                {
+                    Console.WriteLine(movie);
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("\nNo movies found!\nPlease create a listing first!\n");
+                System.Threading.Thread.Sleep(3500);
+                Console.Clear();
+                mainScreen.Show(CurrentAccount);
+            }
+            Console.WriteLine("\nPlease enter the title of the movie you would like to remove\n");
+            var options = Console.ReadLine();
+            List<String> jsonContents2 = new List<String> { };
+            //Loop through all movies in the current movie list.
+            try
+            {
+                foreach (string line in File.ReadLines(@"movies.json")) //Creates a list with every object from json file
+                {
+                    //If given title of the movie is in a movie object DO NOT add to jsonContent2 list 
+                    if (line.Contains(options))
+                    {
+
+                    }
+                    else
+                    {
+                        //If it is not continue to add
+                        jsonContents2.Add(line);
+                    }
+                }
+                //Figure out how to convert jsonContents2 to a movie format to add to json
+                mainScreen.Show(CurrentAccount);
+            }
+            catch
+            {
+
+            }
+        }
     }
+
 }
