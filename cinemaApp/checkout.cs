@@ -24,13 +24,9 @@ namespace cinemaApp
                 var creditcard = Console.ReadLine();
                 try
                 {
-                    var creditcard1 = Int32.Parse(creditcard.Substring(0,4));
-                    var creditcard2 = Int32.Parse(creditcard.Substring(4, 4));
-                    var creditcard3 = Int32.Parse(creditcard.Substring(8, 4));
-                    var creditcard4 = Int32.Parse(creditcard.Substring(12, 4));
-                    if (creditcard1.ToString().Length == 4 && creditcard2.ToString().Length == 4 && creditcard3.ToString().Length == 4 && creditcard4.ToString().Length == 4)
-                    {
-                        Console.WriteLine("Thank you " + CurrentAccount.UserName + "\nPlease confirm reservation\n1. Yes\n2. No");
+                    //checks if all the entered char's are numerial AND if its 16 digits long
+                    if (creditcard.All(char.IsDigit) && creditcard.Length == 16){ 
+                        Console.WriteLine("\nThank you " + CurrentAccount.UserName + "\nPlease confirm reservation\n1. Yes\n2. No\n");
                         var choice = Console.ReadLine();
                         if (choice == "1")
                         {
@@ -39,6 +35,16 @@ namespace cinemaApp
                             var number = random.Next(1000, 9999);
                             System.Threading.Thread.Sleep(2000);
                             Console.WriteLine("Your reservation code: " + number.ToString());
+                            
+                        }
+                        else if (choice == "2")
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("\nYou will be send back to the mainscreen\n");
+                            Console.ResetColor();
+                            System.Threading.Thread.Sleep(2000);
+                            Console.Clear();
+                            mainScreen.Show(CurrentAccount);
                         }
                     }
                     else
