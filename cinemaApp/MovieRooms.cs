@@ -24,22 +24,22 @@ namespace cinemaApp
                     {
                         if (j < seats - exlude[i])
                         {
-                            room[i][j] = new Seat("O",i,j,15.00);
+                            room[i][j] = new Seat(" O ",i,j,15.00);
                         }
                         else
                         {
-                            room[i][j] = new Seat(" ",i,j,00.00);
+                            room[i][j] = new Seat("   ",i,j,00.00);
                         }
                     }
                     else
                     {
                         if(j >= exlude[i])
                         {
-                            room[i][j] = new Seat("O", i, j, 15.00);
+                            room[i][j] = new Seat(" O ", i, j, 15.00);
                         }
                         else
                         {
-                            room[i][j] = new Seat(" ", i, j, 00.00);
+                            room[i][j] = new Seat("   ", i, j, 00.00);
                         }
                     }
                 }

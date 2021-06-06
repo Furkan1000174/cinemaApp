@@ -79,9 +79,7 @@ namespace cinemaApp
                         break;
 
                         case 2:
-                        Console.WriteLine("This is still a work in progress");
-                            System.Threading.Thread.Sleep(2500);
-                            mainScreen.Show(CurrentAccount);
+                            checkout.checkoutScreen(CurrentAccount);
 
                             break;
 
