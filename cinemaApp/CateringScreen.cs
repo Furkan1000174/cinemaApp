@@ -30,15 +30,25 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
-                var cateList = new List<CateringJSN> { };
-                foreach (String cate in jsonContents)
+                if (jsonContents.Count == 0)
                 {
-                    cateList.Add(JsonConvert.DeserializeObject<CateringJSN>(cate));
+                    Console.WriteLine("\nNo catering found!\nPlease create a listing first!\n");
+                    System.Threading.Thread.Sleep(3500);
+                    Console.Clear();
+                    mainScreen.Show(CurrentAccount);
                 }
-                foreach (var cate in cateList)
+                else
                 {
-                    Console.OutputEncoding = Encoding.UTF8;
-                    Console.WriteLine(cate);
+                    var cateList = new List<CateringJSN> { };
+                    foreach (String cate in jsonContents)
+                    {
+                        cateList.Add(JsonConvert.DeserializeObject<CateringJSN>(cate));
+                    }
+                    foreach (var cate in cateList)
+                    {
+                        Console.OutputEncoding = Encoding.UTF8;
+                        Console.WriteLine(cate);
+                    }
                 }
             }
             catch (FileNotFoundException)
