@@ -94,7 +94,7 @@ namespace cinemaApp
                     Console.WriteLine("Please enter the movie language:");
                     movieLanguage = Console.ReadLine();
                 }
-                Console.WriteLine("Please enter the runtime\n(Please use a comma for decimals)");
+                Console.WriteLine("Please enter the runtime\n(Please enter just an integer)");
                 string runtimeInput = Console.ReadLine();
                 int movieRuntime;
                 bool correctRuntime = int.TryParse(runtimeInput, out movieRuntime);

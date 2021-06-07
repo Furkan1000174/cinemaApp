@@ -25,14 +25,24 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
-                var movieList = new List<Movie> { };
-                foreach (String movie in jsonContents)
+                if (jsonContents.Count == 0)
                 {
-                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                    Console.WriteLine("\nNo movies found!\nPlease create a listing first!\n");
+                    System.Threading.Thread.Sleep(3500);
+                    Console.Clear();
+                    mainScreen.Show(CurrentAccount);
                 }
-                foreach (var movie in movieList)
+                else
                 {
-                    Console.WriteLine(movie);
+                    var movieList = new List<Movie> { };
+                    foreach (String movie in jsonContents)
+                    {
+                        movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                    }
+                    foreach (var movie in movieList)
+                    {
+                        Console.WriteLine(movie);
+                    }
                 }
             }
             catch (FileNotFoundException)
@@ -168,6 +178,100 @@ namespace cinemaApp
                 sw.Close();
             }
 
+        }
+        public static void reviewRemover(Account CurrentAccount)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            string a = "/// Remove review ///\n";
+            Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
+            Console.WriteLine(a);
+            Console.ResetColor();
+            List<String> jsonContents = new List<String> { };
+            try
+            {
+                foreach (string line in File.ReadLines(@"reviews.json"))
+                {
+                    jsonContents.Add(line);
+                }
+                if (jsonContents.Count == 0)
+                {
+                    Console.WriteLine("\nNo movies found!\nPlease create a listing first!\n");
+                    System.Threading.Thread.Sleep(3500);
+                    Console.Clear();
+                    mainScreen.Show(CurrentAccount);
+                }
+                else
+                {
+                    var reviewList = new List<ReviewJSN> { };
+                    foreach (String rev in jsonContents)
+                    {
+                        reviewList.Add(JsonConvert.DeserializeObject<ReviewJSN>(rev));
+                    }
+                    foreach (var review in reviewList)
+                    {
+                        Console.WriteLine(review);
+                    }
+                }
+
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("\nNo movies found!\nPlease create a listing first!\n");
+                System.Threading.Thread.Sleep(3500);
+                Console.Clear();
+                mainScreen.Show(CurrentAccount);
+            }
+            Console.WriteLine("\nPlease enter the author of the review you would like to remove\n");
+            var options = Console.ReadLine();
+            List<String> jsonContents2 = new List<String> { };
+            //Loop through all movies in the current movie list.
+            try
+            {
+                foreach (string line in File.ReadLines(@"reviews.json")) //Creates a list with every object from json file
+                {
+                    //If given title of the movie is in a movie object DO NOT add to jsonContent2 list 
+                    if (line.Contains(options))
+                    {
+
+                    }
+                    else
+                    {
+                        jsonContents2.Add(line);
+                    }
+                }
+                var reviewList = new List<ReviewJSN> { };
+                foreach (string review in jsonContents2)
+                {
+                    reviewList.Add(JsonConvert.DeserializeObject<ReviewJSN>(review));
+                }
+                if (jsonContents2.Count == 0)
+                {
+                    using (StreamWriter sw = File.CreateText(@"reviews.json"))
+                    {
+
+                        sw.Close();
+                    }
+                }
+                else
+                {
+                    foreach (var review in reviewList)
+                    {
+                        string strNewMovieJson = JsonConvert.SerializeObject(review);
+                        using (StreamWriter sw = File.CreateText(@"reviews.json"))
+                        {
+                            sw.WriteLine(strNewMovieJson);
+                            sw.Close();
+                        }
+                    }
+                }
+                System.Threading.Thread.Sleep(3000);
+                mainScreen.Show(CurrentAccount);
+            }
+            catch
+            {
+
+            }
         }
     }
 }
