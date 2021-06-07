@@ -27,7 +27,6 @@ namespace cinemaApp
             List<String> jsonContents = new List<String> { };
             double totalPrice = 0;
             //Haalt alle cart items op
-            
             try
             {
                 foreach (string line in File.ReadLines(@"cart.json"))

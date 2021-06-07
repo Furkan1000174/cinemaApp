@@ -23,14 +23,24 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
-                var movieList = new List<Movie> { };
-                foreach (string movie in jsonContents)
+                if (jsonContents.Count == 0)
                 {
-                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                    Console.WriteLine("\nNo movies found!\nPlease create a listing first!\n");
+                    System.Threading.Thread.Sleep(3500);
+                    Console.Clear();
+                    mainScreen.Show(CurrentAccount);
                 }
-                foreach (var movie in movieList)
+                else
                 {
-                    Console.WriteLine(movie);
+                    var movieList = new List<Movie> { };
+                    foreach (string movie in jsonContents)
+                    {
+                        movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                    }
+                    foreach (var movie in movieList)
+                    {
+                        Console.WriteLine(movie);
+                    }
                 }
             }
             catch (FileNotFoundException)
