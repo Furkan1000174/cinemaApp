@@ -33,10 +33,10 @@ namespace cinemaApp
                             Console.WriteLine("Generating reservation code:(Please write it down!!)");
                             var random = new Random();
                             var number = random.Next(1000, 9999);
-                            System.Threading.Thread.Sleep(5000);
+                            System.Threading.Thread.Sleep(2000);
                             Console.WriteLine("Your reservation code: " + number.ToString());
                             Console.WriteLine("You will be sent back to the main screen.");
-                            System.Threading.Thread.Sleep(2000);
+                            System.Threading.Thread.Sleep(7000);
                             mainScreen.Show(CurrentAccount);
 
                         }

@@ -160,7 +160,7 @@ namespace cinemaApp
                             {
                                 if (seat.Xcor == seatXCor && seat.Ycor == seatYCor)
                                 {
-                                    if (seat.Icon != " " && seat.Icon != "X")
+                                    if (seat.Icon == " O ")
                                     {
                                         Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}", seat.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
@@ -170,7 +170,7 @@ namespace cinemaApp
                                             sw.Close();
                                         }
                                     Console.WriteLine("Your reservation has been made! Returning to Seat Selection");
-                                    System.Threading.Thread.Sleep(20000);
+                                    System.Threading.Thread.Sleep(2000);
                                     roomScreen(CurrentAccount, movieName,roomNumber);
                                     }
                                     else

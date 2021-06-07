@@ -229,7 +229,6 @@ namespace cinemaApp
                 roomList.Add(JsonConvert.DeserializeObject<Room>(seat));
             }
             int roomID = 1;
-            int availableSeats = 0;
             foreach (var seat in roomList)
             {
                 var seatList = new List<Seat> { };
@@ -249,22 +248,8 @@ namespace cinemaApp
                 {
                     if(roomSeat.Icon == " O ")
                     {
-                        availableSeats = 0;
                         Console.OutputEncoding = Encoding.UTF8;
                         Console.WriteLine($"Seat Price: €{roomSeat.Price}");
-                        foreach(var amountofSeats in seatList)
-                        {
-                            if(roomSeat.Icon == " O ")
-                            {
-                                availableSeats++;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                           
-                        }
-                        Console.WriteLine($"Amount of seats: {availableSeats}");
                         roomID++;
                         break;
                     }
