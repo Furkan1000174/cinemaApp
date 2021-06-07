@@ -258,6 +258,10 @@ namespace cinemaApp
                             {
                                 availableSeats++;
                             }
+                            else
+                            {
+                                break;
+                            }
                            
                         }
                         Console.WriteLine($"Amount of seats: {availableSeats}");
