@@ -17,7 +17,7 @@ namespace cinemaApp
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
-            Console.WriteLine("Please enter what you would like to do\n\n[1] Add movie\n[2] Remove movie\n");
+            Console.WriteLine("Please enter what you would like to do\n\n[1] Add movie\n[2] Remove movie\n[3] Back to menu");
             bool choosing = true;
             while (choosing)
             {
@@ -32,6 +32,10 @@ namespace cinemaApp
                             break;
                         case 2:
                             RemoveMovie(CurrentAccount);
+                            choosing = false;
+                            break;
+                        case 3:
+                            mainScreen.Show(CurrentAccount);
                             choosing = false;
                             break;
                         default:

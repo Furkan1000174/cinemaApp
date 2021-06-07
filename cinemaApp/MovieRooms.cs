@@ -45,22 +45,28 @@ namespace cinemaApp
                 }
             }
             int id = 1;
-            List<String> jsonContents = new List<String> { };
-            foreach (string line in File.ReadLines(@"room.json"))
+            try
             {
-                jsonContents.Add(line);
-            }
-            var roomList = new List<Room> { };
-            foreach (String roomObject in jsonContents)
-            {
-                roomList.Add(JsonConvert.DeserializeObject<Room>(roomObject));
-            }
-            foreach (var roomItem in roomList)
-            {
-                if (roomItem.RoomID >= id)
+                List<String> jsonContents = new List<String> { };
+                foreach (string line in File.ReadLines(@"room.json"))
                 {
-                    id = roomItem.RoomID + 1;
+                    jsonContents.Add(line);
                 }
+                var roomList = new List<Room> { };
+                foreach (String roomObject in jsonContents)
+                {
+                    roomList.Add(JsonConvert.DeserializeObject<Room>(roomObject));
+                }
+                foreach (var roomItem in roomList)
+                {
+                    if (roomItem.RoomID >= id)
+                    {
+                        id = roomItem.RoomID + 1;
+                    }
+                }
+            }
+            catch
+            {
             }
             Room newRoom = new Room(id, room);
             string roomArray = JsonConvert.SerializeObject(newRoom);
