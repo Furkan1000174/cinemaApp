@@ -97,18 +97,16 @@ namespace cinemaApp
                 Console.WriteLine("Please enter the movie language:");
                 movieLanguage = Console.ReadLine();
             }
-            Console.WriteLine("Please enter the runtime\n(Please use a comma for decimals)");
+            Console.WriteLine("Please enter the runtime\n(Enter the runtime in total minutes)");
             string runtimeInput = Console.ReadLine();
-            double movieRuntime;
-            bool correctRuntime = double.TryParse(runtimeInput, out movieRuntime);
-            movieRuntime = Math.Truncate(movieRuntime * 100) / 100;
+            int movieRuntime;
+            bool correctRuntime = int.TryParse(runtimeInput, out movieRuntime);
             while (!correctRuntime)
             {
                 Console.WriteLine("That was not a correct input for runtime, please try again");
-                Console.WriteLine("Please enter the runtime\n(Please use a comma for decimals)");
+                Console.WriteLine("Please enter the runtime\n(Enter the runtime in total minutes)");
                 runtimeInput = Console.ReadLine();
-                correctRuntime = double.TryParse(runtimeInput, out movieRuntime);
-                movieRuntime = Math.Truncate(movieRuntime * 100) / 100;
+                correctRuntime = int.TryParse(runtimeInput, out movieRuntime);
             }
             Console.WriteLine("Please enter the age rating\n(Please enter just an integer)");
             string ageRatingInput = Console.ReadLine();
