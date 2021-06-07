@@ -44,12 +44,14 @@ namespace cinemaApp
                 {
                     if(CurrentAccount.ID == cart.ID)
                     {
+                        Console.OutputEncoding = Encoding.UTF8;
                         Console.WriteLine(cart);
                         totalPrice = totalPrice + cart.Price;
                     }
                    
                 }
-                Console.WriteLine("The total price of the items you ordered is: " + totalPrice + "\n");
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.WriteLine("The total price of the items you ordered is: €" + totalPrice + "\n");
             }
             //Als er niks is gevonden
             catch (FileNotFoundException)
@@ -77,9 +79,7 @@ namespace cinemaApp
                         break;
 
                         case 2:
-                        Console.WriteLine("This is still a work in progress");
-                            System.Threading.Thread.Sleep(2500);
-                            mainScreen.Show(CurrentAccount);
+                            checkout.checkoutScreen(CurrentAccount);
 
                             break;
 
