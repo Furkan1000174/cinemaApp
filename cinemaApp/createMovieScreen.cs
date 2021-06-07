@@ -213,7 +213,7 @@ namespace cinemaApp
                 foreach (var movie in movieList)
                 {
                     string strNewMovieJson = JsonConvert.SerializeObject(movie);
-                    using (StreamWriter sw = File.AppendText(@"movies.json"))
+                    using (StreamWriter sw = File.CreateText(@"movies.json"))
                     {
                         sw.WriteLine(strNewMovieJson);
                         sw.Close();
