@@ -17,34 +17,6 @@ namespace cinemaApp
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
-            Console.WriteLine("Please enter what you would like to do\n[1]Add movie\n[2]Remove movie\n[3]Edit movie");
-            bool choosing = true;
-            while (choosing)
-            {
-                string options = Console.ReadLine();
-                try
-                {
-                    int number = Int32.Parse(options);
-                    switch (number)
-                    {
-                        case 1:
-                            choosing = false;
-                            break;
-                        case 2:
-                            RemoveMovie(CurrentAccount);
-                            choosing = false;
-                            break;
-                        default:
-                            choosing = false;
-                            Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
-                            break;
-                    }
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
-                }
-            }
 
 
             int id = 1;
@@ -99,16 +71,14 @@ namespace cinemaApp
             }
             Console.WriteLine("Please enter the runtime\n(Please use a comma for decimals)");
             string runtimeInput = Console.ReadLine();
-            double movieRuntime;
-            bool correctRuntime = double.TryParse(runtimeInput, out movieRuntime);
-            movieRuntime = Math.Truncate(movieRuntime * 100) / 100;
+            int movieRuntime;
+            bool correctRuntime = int.TryParse(runtimeInput, out movieRuntime);
             while (!correctRuntime)
             {
                 Console.WriteLine("That was not a correct input for runtime, please try again");
                 Console.WriteLine("Please enter the runtime\n(Please use a comma for decimals)");
                 runtimeInput = Console.ReadLine();
-                correctRuntime = double.TryParse(runtimeInput, out movieRuntime);
-                movieRuntime = Math.Truncate(movieRuntime * 100) / 100;
+                correctRuntime = int.TryParse(runtimeInput, out movieRuntime);
             }
             Console.WriteLine("Please enter the age rating\n(Please enter just an integer)");
             string ageRatingInput = Console.ReadLine();
@@ -241,5 +211,4 @@ namespace cinemaApp
             }
         }
     }
-
 }

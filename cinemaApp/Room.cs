@@ -33,12 +33,33 @@ namespace cinemaApp
 
     class Room
     {
-        public Seat[][] room { get; set; }
+        public int RoomID;
+        public Seat[][] seatRoom { get; set; }
+        
+        public Room(int roomid, Seat[][] seatroom)
+        {
+            RoomID = roomid;
+            seatRoom = seatroom;
+        }
+
         public override string ToString()
         {
-            int row = 1;
-            string roomString = "   1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30\n\n";
-            foreach(Seat[] roomArray in room)
+            int row = 0;
+            string roomString = "    ";
+            Seat[] seatRow = seatRoom[0];
+            for(int i = 0;i<seatRow.Length; i++)
+            {
+                if(i < 10)
+                {
+                  roomString += $"{i}  ";
+                }
+                else
+                {
+                  roomString += $"{i} ";
+                }
+            }
+            roomString += "\n\n";
+            foreach(Seat[] roomArray in seatRoom)
             {
                 if (row.ToString().Length == 1)
                 {

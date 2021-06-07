@@ -9,23 +9,22 @@ namespace cinemaApp
 {
     class movieRooms
     {
-        public static void createRoom()
+        public static void createRoom(int seats, int rows,int[] exlude, double seatPrice)
         {
-            Seat[][] room = new Seat[20][];
+            Seat[][] room = new Seat[rows][];
             for(int i=0; i < room.Length; i++)
             {
-                room[i] = new Seat[30];
+                room[i] = new Seat[seats];
             }
-            int[] exlude = new int[] { 4, 3, 3, 3, 3, 2, 1, 0, 0, 0, 0, 0, 1, 2, 2, 3, 3, 5, 7, 8 };
             for(int i=0; i < exlude.Length; i++)
             {
-                for(int j=0; j < 30; j++)
+                for(int j=0; j < seats; j++)
                 {
-                    if (j > 15)
+                    if (j > (seats/2))
                     {
-                        if (j < 30 - exlude[i])
+                        if (j < seats - exlude[i])
                         {
-                            room[i][j] = new Seat(" O ",i,j,15.00);
+                            room[i][j] = new Seat(" O ",i,j,seatPrice);
                         }
                         else
                         {
@@ -36,7 +35,7 @@ namespace cinemaApp
                     {
                         if(j >= exlude[i])
                         {
-                            room[i][j] = new Seat(" O ", i, j, 15.00);
+                            room[i][j] = new Seat(" O ", i, j, seatPrice);
                         }
                         else
                         {
@@ -45,10 +44,25 @@ namespace cinemaApp
                     }
                 }
             }
-            Room newRoom = new Room()
+            int id = 1;
+            List<String> jsonContents = new List<String> { };
+            foreach (string line in File.ReadLines(@"room.json"))
             {
-                room = room,
-            };
+                jsonContents.Add(line);
+            }
+            var roomList = new List<Room> { };
+            foreach (String roomObject in jsonContents)
+            {
+                roomList.Add(JsonConvert.DeserializeObject<Room>(roomObject));
+            }
+            foreach (var roomItem in roomList)
+            {
+                if (roomItem.RoomID >= id)
+                {
+                    id = roomItem.RoomID + 1;
+                }
+            }
+            Room newRoom = new Room(id, room);
             string roomArray = JsonConvert.SerializeObject(newRoom);
             using (StreamWriter sw = File.AppendText(@"room.json"))
             {
@@ -58,7 +72,7 @@ namespace cinemaApp
 
         }
 
-        public static void roomScreen(Account CurrentAccount, string movieName)
+        public static void roomScreen(Account CurrentAccount, string movieName,int roomNumber)
         {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -66,6 +80,13 @@ namespace cinemaApp
                 Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
                 Console.WriteLine(h);
                 Console.ResetColor();
+
+
+
+
+
+
+
                 List<string> jsonContent = new List<string> { };
                 foreach (string line in File.ReadLines(@"room.json"))
                 {
@@ -78,7 +99,11 @@ namespace cinemaApp
                 }
                 foreach (var seat in roomList)
                 {
-                    Console.WriteLine(seat);
+                    if(seat.RoomID == roomNumber)
+                    {
+                        Console.WriteLine(seat);
+                    }
+                   
                 }
                
 
@@ -97,11 +122,12 @@ namespace cinemaApp
                             var seatList = new List<Seat> { };
                             foreach(var room in roomList)
                             {
-                               for(int i = 0; i< room.room.Length;i++)
+                               for(int i = 0; i< room.seatRoom.Length;i++)
                                 {
-                                    for(int j = 0; j < room.room[i].Length;j++)
+                                    for(int j = 0; j < room.seatRoom[i].Length;j++)
                                     {
-                                        seatList.Add(room.room[i][j]);
+                                        if(room.RoomID == roomNumber)
+                                        seatList.Add(room.seatRoom[i][j]);
                                     }
                                 }
                             }
@@ -134,25 +160,24 @@ namespace cinemaApp
                             {
                                 if (seat.Xcor == seatXCor && seat.Ycor == seatYCor)
                                 {
-                                    if (seat.Icon != " " && seat.Icon != "X")
+                                    if (seat.Icon == " O ")
                                     {
-                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName, seat.Price);
+                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}", seat.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
                                         using (StreamWriter sw = File.AppendText(@"cart.json"))
                                         {
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
-                                        seat.Icon = "Your reservation has been made! Returning to Seat Selection";
-                                    Console.WriteLine(seat);
+                                    Console.WriteLine("Your reservation has been made! Returning to Seat Selection");
                                     System.Threading.Thread.Sleep(2000);
-                                    roomScreen(CurrentAccount, movieName);
+                                    roomScreen(CurrentAccount, movieName,roomNumber);
                                     }
                                     else
                                     {
                                         Console.WriteLine("Something went wrong. Please try again.");
                                         System.Threading.Thread.Sleep(2000);
-                                        roomScreen(CurrentAccount, movieName);
+                                        roomScreen(CurrentAccount, movieName,roomNumber);
                                     }
                                 }
                             }

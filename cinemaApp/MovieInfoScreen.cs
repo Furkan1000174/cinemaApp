@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System.IO;
 using System.Collections.Generic;
+using System.Text;
 
 namespace cinemaApp
 {
@@ -50,7 +51,6 @@ namespace cinemaApp
                 Console.Clear();
                 mainScreen.Show(CurrentAccount);
             }
-
             Console.WriteLine("Would you like to make a reservation and see the reviews of a selected film?\n1. Yes\n2. No\n");
             string options = Console.ReadLine();
             try
@@ -84,12 +84,49 @@ namespace cinemaApp
                                         try
                                         {
                                             int numb = Int32.Parse(opti);
+                                            bool choosingRoom = true;
                                             switch (numb)
                                             {
                                                 case 1:
+                                                    try
+                                                    {
+                                                        while(choosingRoom)
+                                                        {
+                                                            Console.WriteLine("Please enter the room number.");
+                                                            string chosenRoom = Console.ReadLine();
+                                                            int roomResult = Int32.Parse(chosenRoom);
 
-                                                    movieRooms.roomScreen(CurrentAccount,movie.Title);
+                                                          
+                                                            List<String> roomJsonContents = new List<String> { };
+                                                            foreach (string line in File.ReadLines(@"room.json"))
+                                                            {
+                                                                roomJsonContents.Add(line);
+                                                            }
+                                                            var roomList = new List<Room> { };
+                                                            foreach (string seat in roomJsonContents)
+                                                            {
+                                                                roomList.Add(JsonConvert.DeserializeObject<Room>(seat));
+                                                            }
+                                                            foreach(var room in roomList)
+                                                            {
+                                                                if(room.RoomID == roomResult)
+                                                                {
+                                                                   movieRooms.roomScreen(CurrentAccount, movie.Title, roomResult);
+                                                                    choosingRoom = false;
+                                                                }
+                                                            }
+                                                        }
+                                                        
+                                                    }
+                                                    catch (Exception)
+                                                    {
+                                                        Console.WriteLine("Please enter a number");
+                                                    }
                                                     break;
+
+
+
+
                                                 case 2:
                                                     Console.ForegroundColor = ConsoleColor.DarkRed;
                                                     Console.WriteLine("\nYou will be send back to the mainscreen\n");
@@ -154,6 +191,7 @@ namespace cinemaApp
                 {
                     movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
                 }
+
                 Console.WriteLine(movieList[option - 1]);
 
             }
@@ -161,16 +199,16 @@ namespace cinemaApp
             {
                 Console.WriteLine("Please enter a number");
             }
-            List<String> jsonCuntents = new List<String> { };
+            List<String> jsonContentss = new List<String> { };
             try
             {
 
                 foreach (string line in File.ReadLines(@"reviews.json"))
                 {
-                    jsonCuntents.Add(line);
+                    jsonContentss.Add(line);
                 }
                 var reviewList = new List<ReviewJSN> { };
-                foreach (String review in jsonCuntents)
+                foreach (String review in jsonContentss)
                 {
                     reviewList.Add(JsonConvert.DeserializeObject<ReviewJSN>(review));
                 }
@@ -184,6 +222,50 @@ namespace cinemaApp
             {
                 Console.WriteLine("Please enter a number");
             }
+            Console.ForegroundColor = ConsoleColor.Green;
+            string b = "/// ROOM SELECTION ///\n";
+            Console.SetCursorPosition((Console.WindowWidth - b.Length) / 2, Console.CursorTop);
+            Console.WriteLine(b);
+            Console.ResetColor();
+            List<string> jsonContent = new List<string> { };
+            foreach (string line in File.ReadLines(@"room.json"))
+            {
+                jsonContent.Add(line);
+            }
+            var roomList = new List<Room> { };
+            foreach (string seat in jsonContent)
+            {
+                roomList.Add(JsonConvert.DeserializeObject<Room>(seat));
+            }
+            int roomID = 1;
+            foreach (var seat in roomList)
+            {
+                var seatList = new List<Seat> { };
+                Console.WriteLine($"[{seat.RoomID}]");
+                Console.WriteLine($"Room number: #{seat.RoomID}");
+                for (int i = 0; i < seat.seatRoom.Length; i++)
+                {
+                    for (int j = 0; j < seat.seatRoom[i].Length; j++)
+                    {
+                        if(seat.RoomID == roomID)
+                        {
+                          seatList.Add(seat.seatRoom[i][j]);
+                        }
+                    }
+                }
+                foreach(var roomSeat in seatList)
+                {
+                    if(roomSeat.Icon == " O ")
+                    {
+                        Console.OutputEncoding = Encoding.UTF8;
+                        Console.WriteLine($"Seat Price: €{roomSeat.Price}");
+                        roomID++;
+                        break;
+                    }
+                    
+                }
+            }
+
         }
     }
 }
