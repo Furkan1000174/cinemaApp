@@ -202,10 +202,25 @@ namespace cinemaApp
                     }
                     else
                     {
-                        //If it is not continue to add
                         jsonContents2.Add(line);
                     }
                 }
+                var movieList = new List<Movie> { };
+                foreach (string movie in jsonContents2)
+                {
+                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
+                }
+                foreach (var movie in movieList)
+                {
+                    string strNewMovieJson = JsonConvert.SerializeObject(movie);
+                    using (StreamWriter sw = File.AppendText(@"movies.json"))
+                    {
+                        sw.WriteLine(strNewMovieJson);
+                        sw.Close();
+                    }
+                }
+
+                System.Threading.Thread.Sleep(3000);
                 //Figure out how to convert jsonContents2 to a movie format to add to json
                 mainScreen.Show(CurrentAccount);
             }

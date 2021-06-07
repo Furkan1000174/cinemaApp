@@ -24,7 +24,7 @@ namespace cinemaApp
                     jsonContents.Add(line);
                 }
                 var movieList = new List<Movie> { };
-                foreach (String movie in jsonContents)
+                foreach (string movie in jsonContents)
                 {
                     movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
                 }
