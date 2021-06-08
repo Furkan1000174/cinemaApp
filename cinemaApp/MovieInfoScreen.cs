@@ -111,7 +111,7 @@ namespace cinemaApp
                                                             {
                                                                 if(room.RoomID == roomResult)
                                                                 {
-                                                                   movieRooms.roomScreen(CurrentAccount, movie.Title, roomResult);
+                                                                   movieRooms.roomScreen(CurrentAccount, movie.Title, movie.ScheduledTime, roomResult);
                                                                     choosingRoom = false;
                                                                 }
                                                             }

@@ -109,7 +109,7 @@ namespace cinemaApp
                     runtimeInput = Console.ReadLine();
                     correctRuntime = int.TryParse(runtimeInput, out movieRuntime);
                 }
-                Console.WriteLine("Please enter the runtime\n(Please use a comma for decimals)");
+                Console.WriteLine("Please enter the scheduled time and date for this movie\n(Examples: 18:00, February 12)");
                 string scheduledTime = Console.ReadLine();
 
                 Console.WriteLine("Please enter the age rating\n(Please enter just an integer)");

@@ -78,7 +78,7 @@ namespace cinemaApp
 
         }
 
-        public static void roomScreen(Account CurrentAccount, string movieName,int roomNumber)
+        public static void roomScreen(Account CurrentAccount, string movieName, string movieTime, int roomNumber)
         {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -166,30 +166,12 @@ namespace cinemaApp
                             {
                                 if (seat.Xcor == seatXCor && seat.Ycor == seatYCor)
                                 {
-                                //silvijn
-                                if (seat.Icon == " X ")
-                                {
-                                    Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}", seat.Price);
-                                    string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
-                                    using (StreamWriter sw = File.AppendText(@"cart.json"))
-                                    {
-                                        sw.WriteLine(strNewCartJSON);
-                                        sw.Close();
-                                    }
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("Your reservation has been made! Returning to Seat Selection,\nso you can select more seats if needed.\nYou can check for all of your tickets in the cart!");
-                                    System.Threading.Thread.Sleep(5500);
-                                    roomScreen(CurrentAccount, movieName, roomNumber);
-                                }
-
-                                // /silvijn
-
 
 
                                 if (seat.Icon == " O ")
                                     {
                                         seat.Icon = " X ";
-                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number: {seat.Xcor}, {seat.Ycor}" , seat.Price);
+                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number: {seat.Xcor}, {seat.Ycor}\nMovie Time: {movieTime}" , seat.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
                                         using (StreamWriter sw = File.AppendText(@"cart.json"))
                                         {
@@ -199,13 +181,13 @@ namespace cinemaApp
                                     Console.ForegroundColor = ConsoleColor.DarkRed;
                                     Console.WriteLine("Your reservation has been made!\nReturning to Seat Selection, so you can select more seats if needed.\nYou can check for all of your tickets in the cart!");
                                     System.Threading.Thread.Sleep(5500);
-                                    roomScreen(CurrentAccount, movieName,roomNumber);
+                                    roomScreen(CurrentAccount, movieName, movieTime, roomNumber);
                                     }
                                     else
                                     {
                                         Console.WriteLine("Something went wrong. Please try again.");
                                         System.Threading.Thread.Sleep(2000);
-                                        roomScreen(CurrentAccount, movieName,roomNumber);
+                                        roomScreen(CurrentAccount, movieName, movieTime, roomNumber);
                                     }
                                 }
                             }
