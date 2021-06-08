@@ -19,7 +19,7 @@
 
         public override string ToString()
         {
-            return string.Format("Review #: {0}\nReview written by: {1}\nReview: {2}\n", ID, Name, Review);
+            return string.Format("Review written by:  {1}\nReview:  {2}\n", ID, Name, Review);
         }
     }
 }

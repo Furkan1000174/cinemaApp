@@ -31,10 +31,10 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
-                var movieList = new List<CateringJSN> { };
+                var movieList = new List<Movie> { };
                 foreach (String movie in jsonContents)
                 {
-                    movieList.Add(JsonConvert.DeserializeObject<CateringJSN>(movie));
+                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
                 }
                 foreach (var movie in movieList)
                 {

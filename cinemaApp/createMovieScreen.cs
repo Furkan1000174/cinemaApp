@@ -236,7 +236,7 @@ namespace cinemaApp
                     }
                 }
                 else
-                    using (StreamWriter sw = File.CreateText(@"movies.json"))
+                using (StreamWriter sw = File.CreateText(@"movies.json"))
                     {
                         sw.Close();
                     }
