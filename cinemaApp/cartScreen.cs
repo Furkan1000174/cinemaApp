@@ -27,7 +27,6 @@ namespace cinemaApp
             List<String> jsonContents = new List<String> { };
             double totalPrice = 0;
             //Haalt alle cart items op
-            
             try
             {
                 foreach (string line in File.ReadLines(@"cart.json"))
@@ -56,7 +55,7 @@ namespace cinemaApp
             //Als er niks is gevonden
             catch (FileNotFoundException)
             {
-                Console.WriteLine("\nNo cart information found!\nThis page is under construction\n");
+                Console.WriteLine("\nNo cart information found!\nPlease add a item to your cart first!\n");
                 System.Threading.Thread.Sleep(3500);
                 Console.Clear();
                 mainScreen.Show(CurrentAccount);
@@ -90,7 +89,11 @@ namespace cinemaApp
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Please enter a number");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                    Console.ResetColor();
+                    System.Threading.Thread.Sleep(2500);
+                    cartScreen.showCart(CurrentAccount);
                 }
 
             }

@@ -36,6 +36,19 @@ namespace cinemaApp
                 seatInput = Console.ReadLine();
                 correctSeats = int.TryParse(seatInput, out roomSeats);
             }
+            Console.WriteLine("Please enter the seat price\n(Please use a comma for decimals)");
+            string seatPriceInput = Console.ReadLine();
+            double seatPrice;
+            bool correctSeaPrice = double.TryParse(seatPriceInput, out seatPrice);
+            seatPrice = Math.Truncate(seatPrice * 100) / 100;
+            while (!correctSeaPrice)
+            {
+                Console.WriteLine("That was not a correct input for runtime, please try again");
+                Console.WriteLine("Please enter the runtime\n(Please use a comma for decimals)");
+                seatPriceInput = Console.ReadLine();
+                correctSeaPrice = double.TryParse(seatPriceInput, out seatPrice);
+                seatPrice = Math.Truncate(seatPrice * 100) / 100;
+            }
             int[] exclude = new int[roomRows];
             for (int i = 0; i<roomRows;i++)
             {
@@ -52,7 +65,7 @@ namespace cinemaApp
             }
             try
             {
-                movieRooms.createRoom(roomSeats, roomRows, exclude);
+                //movieRooms.createRoom(roomSeats, roomRows, exclude,seatPrice);
             }
             catch (Exception ex)
             {

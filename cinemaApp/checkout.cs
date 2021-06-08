@@ -18,7 +18,7 @@ namespace cinemaApp
             Console.WriteLine(a);
             Console.ResetColor();
             var choosing = true;
-            Console.WriteLine("Please enter your creditcard number: ");
+            Console.WriteLine("Please enter your creditcard number\n(A credit card consists of 16 digits)");
             while (choosing)
             {
                 var creditcard = Console.ReadLine();
@@ -30,12 +30,27 @@ namespace cinemaApp
                         var choice = Console.ReadLine();
                         if (choice == "1")
                         {
-                            Console.WriteLine("Generating reservation code:");
+                            Console.WriteLine("Generating reservation code:(Please write it down!!)");
                             var random = new Random();
                             var number = random.Next(1000, 9999);
                             System.Threading.Thread.Sleep(2000);
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Your reservation code: " + number.ToString());
-                            
+                            Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("Type anything if you want to return to the mainscreen.");
+                            Console.ResetColor();
+                            string confirmation = Console.ReadLine();
+                            if (confirmation.ToLower() == "1")
+                            {
+
+                                mainScreen.Show(CurrentAccount);
+                            }
+                            else
+                            {
+                                mainScreen.Show(CurrentAccount);
+                            }
+
                         }
                         else if (choice == "2")
                         {

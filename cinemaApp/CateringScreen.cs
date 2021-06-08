@@ -30,20 +30,30 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
-                var cateList = new List<CateringJSN> { };
-                foreach (String cate in jsonContents)
+                if (jsonContents.Count == 0)
                 {
-                    cateList.Add(JsonConvert.DeserializeObject<CateringJSN>(cate));
+                    Console.WriteLine("\nNo catering found!\nPlease create a listing first!\n");
+                    System.Threading.Thread.Sleep(3500);
+                    Console.Clear();
+                    mainScreen.Show(CurrentAccount);
                 }
-                foreach (var cate in cateList)
+                else
                 {
-                    Console.OutputEncoding = Encoding.UTF8;
-                    Console.WriteLine(cate);
+                    var cateList = new List<CateringJSN> { };
+                    foreach (String cate in jsonContents)
+                    {
+                        cateList.Add(JsonConvert.DeserializeObject<CateringJSN>(cate));
+                    }
+                    foreach (var cate in cateList)
+                    {
+                        Console.OutputEncoding = Encoding.UTF8;
+                        Console.WriteLine(cate);
+                    }
                 }
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("\nNo catering information found!\nThis page is under construction\n");
+                Console.WriteLine("\nNo catering information found!\nPlease create a listing first!\n");
                 System.Threading.Thread.Sleep(3500);
                 Console.Clear();
                 mainScreen.Show(CurrentAccount);
@@ -111,13 +121,21 @@ namespace cinemaApp
                             mainScreen.Show(CurrentAccount);
                             break;
                         default:
-                            Console.WriteLine("The input you gave is incorrect.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                            Console.ResetColor();
+                            System.Threading.Thread.Sleep(2500);
+                            CateringScreen.showCatering(CurrentAccount);
                             break;
                     }
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Please enter a number");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                    Console.ResetColor();
+                    System.Threading.Thread.Sleep(2500);
+                    CateringScreen.showCatering(CurrentAccount);
                 }
         }
         public static void cateSelecter(int option)

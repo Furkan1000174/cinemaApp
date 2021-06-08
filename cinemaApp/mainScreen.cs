@@ -36,7 +36,7 @@ namespace cinemaApp
            
             if (CurrentAccount.Role == "Admin")
             {
-                Console.WriteLine("[7] Add movies\n[8] Manage reservations\n[9] Manage catering\n[10] Manage Schedule\n[11] Manage Rooms");
+                Console.WriteLine("[7] Manage movies\n[8] Manage catering\n[9] Manage Schedule\n[10] Remove reviews\n[11] Reset rooms");
             }
             Console.WriteLine("Please enter a number on screen to perform the desired action.");
             bool choosing = true;
@@ -122,19 +122,38 @@ namespace cinemaApp
                             }
                             else
                             {
-                               createRoomScreen.RoomCreate(CurrentAccount);
+                                createReviewScreen.reviewRemover(CurrentAccount);
+                                choosing = false;
+                            }
+                            break;
+                        case 11:
+                            if (CurrentAccount.Role != "Admin")
+                            {
+                                Console.WriteLine("Nice try, but you're not getting in that easily ;)");
+                            }
+                            else
+                            {
+                                movieRooms.clearRooms();
                                 choosing = false;
                             }
                             break;
                         default:
                             choosing = false;
-                            Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                            Console.ResetColor();
+                            System.Threading.Thread.Sleep(2500);
+                            mainScreen.Show(CurrentAccount);
                             break;
                     }
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                    Console.ResetColor();
+                    System.Threading.Thread.Sleep(2500);
+                    mainScreen.Show(CurrentAccount);
                 }
             }
     }

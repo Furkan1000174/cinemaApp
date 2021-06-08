@@ -21,10 +21,8 @@ namespace cinemaApp
 
         }
 
-            public override string ToString()
-            {
-                return string.Format("Account information:\n\tID: {0}, Username: {1}, Password: {2} Role:{3}", ID, UserName, PassWord,Role);
-            }
+            public override string ToString() => string.Format("Account information:\n\tID: {0}, Username: {1}, Password: {2} Role:{3}", ID, UserName, PassWord,Role);
+            
         }
 
 }
