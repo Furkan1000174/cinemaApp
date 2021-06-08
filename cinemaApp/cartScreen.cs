@@ -89,7 +89,11 @@ namespace cinemaApp
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Please enter a number");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                    Console.ResetColor();
+                    System.Threading.Thread.Sleep(2500);
+                    cartScreen.showCart(CurrentAccount);
                 }
 
             }

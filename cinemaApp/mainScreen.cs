@@ -128,13 +128,21 @@ namespace cinemaApp
                             break;
                         default:
                             choosing = false;
-                            Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                            Console.ResetColor();
+                            System.Threading.Thread.Sleep(2500);
+                            mainScreen.Show(CurrentAccount);
                             break;
                     }
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("The input you gave is incorrect.\n Please try a number that is shown on screen.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                    Console.ResetColor();
+                    System.Threading.Thread.Sleep(2500);
+                    mainScreen.Show(CurrentAccount);
                 }
             }
     }
