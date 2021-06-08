@@ -169,7 +169,7 @@ namespace cinemaApp
                                             sw.Close();
                                         }
                                     Console.WriteLine("Your reservation has been made! Returning to Seat Selection");
-                                    System.Threading.Thread.Sleep(20000);
+                                    System.Threading.Thread.Sleep(3000);
                                     roomScreen(CurrentAccount, movieName,roomNumber);
                                     }
                                     else
