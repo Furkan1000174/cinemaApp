@@ -186,8 +186,6 @@ namespace cinemaApp
                             {
                                 if (seat.Xcor == seatXCor && seat.Ycor == seatYCor)
                                 {
-
-
                                 if (seat.Icon == " O " || seat.Icon == " T " || seat.Icon == " * ")
                                     {
                                         seat.Icon = " X ";
@@ -198,13 +196,21 @@ namespace cinemaApp
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
-                                        Reservation newResJSON = new Reservation(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number(row,seat): {seat.Xcor}, {seat.Ycor}\nMovie Time: {movieTime}" , seat.Price);
-                                        string strNewResJSON = JsonConvert.SerializeObject(newResJSON);
-                                        using (StreamWriter sw = File.AppendText(@"reservations.json"))
+                                    using (StreamWriter sw = File.CreateText(@"room.json"))
+                                    {
+                                        sw.Close();
+                                    }
+                                    foreach ( var room in roomList)
+                                    {
+                                        string strnNewSeat = JsonConvert.SerializeObject(room);
+                                        using (StreamWriter sw = File.AppendText(@"room.json"))
                                         {
-                                            sw.WriteLine(strNewResJSON);
+                                            sw.WriteLine(strnNewSeat);
                                             sw.Close();
                                         }
+                                    }
+
+
                                     Console.ForegroundColor = ConsoleColor.Blue;
                                     Console.WriteLine("Your reservation has been made!\nYou can check for all of your tickets in the cart!\n");
                                     
@@ -252,6 +258,16 @@ namespace cinemaApp
             {
                 Console.WriteLine(ex);
             }
-        }   
+        }  
+        public static void clearRooms()
+        {
+            using (StreamWriter sw = File.CreateText(@"room.json"))
+            {
+                sw.Close();
+            }
+            Console.WriteLine("Rooms have been reset");
+            System.Threading.Thread.Sleep(2000);
+            Program.Main();
+        }
     }
 }
