@@ -22,7 +22,7 @@ namespace cinemaApp
         
         public override string ToString()
         {
-            return string.Format("\nItem:{1}\nPrice: €{2}\n",ID,Item,Price);
+            return string.Format("\n{1}\nPrice: €{2}\n",ID,Item,Price);
         }
     }
    
