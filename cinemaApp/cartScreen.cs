@@ -33,6 +33,15 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
+                if (jsonContents.Count() == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("\nYou will be send back to the mainscreen\n");
+                    Console.ResetColor();
+                    System.Threading.Thread.Sleep(2000);
+                    Console.Clear();
+                    mainScreen.Show(CurrentAccount);
+                }
                 var cartList = new List<Cart> { };
                 foreach (String cartItem in jsonContents)
                 {

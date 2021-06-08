@@ -198,6 +198,13 @@ namespace cinemaApp
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
+                                        Reservation newResJSON = new Reservation(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number(row,seat): {seat.Xcor}, {seat.Ycor}\nMovie Time: {movieTime}" , seat.Price);
+                                        string strNewResJSON = JsonConvert.SerializeObject(newResJSON);
+                                        using (StreamWriter sw = File.AppendText(@"reservations.json"))
+                                        {
+                                            sw.WriteLine(strNewResJSON);
+                                            sw.Close();
+                                        }
                                     Console.ForegroundColor = ConsoleColor.Blue;
                                     Console.WriteLine("Your reservation has been made!\nYou can check for all of your tickets in the cart!\n");
                                     
