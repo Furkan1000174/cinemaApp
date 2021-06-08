@@ -12,7 +12,7 @@ namespace cinemaApp
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
-            string a = "/// FILM SELECTION ///\n";
+            string a = "/// MOVIE SELECTION ///\n";
             Console.SetCursorPosition((Console.WindowWidth - a.Length) / 2, Console.CursorTop);
             Console.WriteLine(a);
             Console.ResetColor();
@@ -111,7 +111,11 @@ namespace cinemaApp
                                                     }
                                                     catch (Exception)
                                                     {
-                                                        Console.WriteLine("Please enter a number");
+                                                        Console.ForegroundColor = ConsoleColor.Red;
+                                                        Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.\nYou'll be send back.");
+                                                        Console.ResetColor();
+                                                        System.Threading.Thread.Sleep(3000);
+                                                        MovieInfoScreen.showMovies(CurrentAccount);
                                                     }
                                                     break;
 
@@ -127,13 +131,21 @@ namespace cinemaApp
                                                     showMovies(CurrentAccount);
                                                     break;
                                                 default:
-                                                    Console.WriteLine("The input you gave is incorrect.");
+                                                    Console.ForegroundColor = ConsoleColor.Red;
+                                                    Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                                                    Console.ResetColor();
+                                                    System.Threading.Thread.Sleep(2500);
+                                                    MovieInfoScreen.showMovies(CurrentAccount);
                                                     break;
                                             }
                                         }
                                         catch (Exception)
                                         {
-                                            Console.WriteLine("Please enter a number");
+                                            Console.ForegroundColor = ConsoleColor.Red;
+                                            Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.\nYou'll be send back.");
+                                            Console.ResetColor();
+                                            System.Threading.Thread.Sleep(3000);
+                                            MovieInfoScreen.showMovies(CurrentAccount);
                                         }
                                     }
                                 }
@@ -141,7 +153,11 @@ namespace cinemaApp
                         }
                         catch
                         {
-                            Console.WriteLine("There is no movie with that Index, please try again.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                            Console.ResetColor();
+                            System.Threading.Thread.Sleep(2500);
+                            MovieInfoScreen.showMovies(CurrentAccount);
                         }
                         break;
                     case 2:
@@ -153,13 +169,21 @@ namespace cinemaApp
                         mainScreen.Show(CurrentAccount);
                         break;
                     default:
-                        Console.WriteLine("The input you gave is incorrect.");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                        Console.ResetColor();
+                        System.Threading.Thread.Sleep(2500);
+                        MovieInfoScreen.showMovies(CurrentAccount);
                         break;
                 }
             }
             catch (Exception)
             {
-                Console.WriteLine("Please enter a number");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                Console.ResetColor();
+                System.Threading.Thread.Sleep(2500);
+                MovieInfoScreen.showMovies(CurrentAccount);
             }
         }
         public static void movieSelecter(int option)
@@ -233,7 +257,18 @@ namespace cinemaApp
             {
                 var seatList = new List<Seat> { };
                 Console.WriteLine($"[{seat.RoomID}]");
-                Console.WriteLine($"Room number: #{seat.RoomID}");
+                if (seat.RoomID == 1)
+                {
+                    Console.WriteLine($"Room number: #{seat.RoomID}, large");
+                }
+                else if (seat.RoomID == 2)
+                {
+                    Console.WriteLine($"Room number: #{seat.RoomID}, medium");
+                }
+                else if (seat.RoomID == 3)
+                {
+                    Console.WriteLine($"Room number: #{seat.RoomID}, small");
+                }
                 for (int i = 0; i < seat.seatRoom.Length; i++)
                 {
                     for (int j = 0; j < seat.seatRoom[i].Length; j++)
@@ -243,17 +278,6 @@ namespace cinemaApp
                           seatList.Add(seat.seatRoom[i][j]);
                         }
                     }
-                }
-                foreach(var roomSeat in seatList)
-                {
-                    if(roomSeat.Icon == " O ")
-                    {
-                        Console.OutputEncoding = Encoding.UTF8;
-                        Console.WriteLine($"Seat Price: €{roomSeat.Price}");
-                        roomID++;
-                        break;
-                    }
-                    
                 }
             }
 

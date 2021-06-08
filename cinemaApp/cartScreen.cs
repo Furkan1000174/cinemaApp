@@ -33,6 +33,15 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
+                if (jsonContents.Count() == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("\nYou will be send back to the mainscreen\n");
+                    Console.ResetColor();
+                    System.Threading.Thread.Sleep(2000);
+                    Console.Clear();
+                    mainScreen.Show(CurrentAccount);
+                }
                 var cartList = new List<Cart> { };
                 foreach (String cartItem in jsonContents)
                 {
@@ -89,7 +98,11 @@ namespace cinemaApp
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Please enter a number");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                    Console.ResetColor();
+                    System.Threading.Thread.Sleep(2500);
+                    cartScreen.showCart(CurrentAccount);
                 }
 
             }

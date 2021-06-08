@@ -34,7 +34,7 @@ namespace cinemaApp
                                 }
                                 else
                                 {
-                                    room[i][j] = new Seat(" # ", i, j, 11.50);
+                                    room[i][j] = new Seat(" T ", i, j, 11.50);
                                 }
                             }
                             else
@@ -59,7 +59,7 @@ namespace cinemaApp
                                 }
                                 else
                                 {
-                                    room[i][j] = new Seat(" # ", i, j, 11.50);
+                                    room[i][j] = new Seat(" T ", i, j, 11.50);
                                 }
                             }
                             else
@@ -117,12 +117,6 @@ namespace cinemaApp
                 Console.WriteLine(h);
                 Console.ResetColor();
 
-
-
-
-
-
-
                 List<string> jsonContent = new List<string> { };
                 foreach (string line in File.ReadLines(@"room.json"))
                 {
@@ -141,9 +135,6 @@ namespace cinemaApp
                     }
                    
                 }
-               
-
-            
 
             Console.WriteLine("What would you like to do?\n1. Reserve a seat.\n2. Go back.\n");
             string options = Console.ReadLine();
@@ -167,7 +158,6 @@ namespace cinemaApp
                                     }
                                 }
                             }
-                            
                             Console.WriteLine("Please enter which seats you would like to reserve");
                             Console.WriteLine("Please enter the row in which you would like to sit, enter a number.");
                             string xCorInput = Console.ReadLine();
@@ -196,9 +186,7 @@ namespace cinemaApp
                             {
                                 if (seat.Xcor == seatXCor && seat.Ycor == seatYCor) // als die bij de seat is die is gekozen
                                 {
-
-
-                                if (seat.Icon == " O ") //als de seat vrij is
+                                if (seat.Icon == " O " || seat.Icon == " T " || seat.Icon == " * ")
                                     {
                                         seat.Icon = " - "; //maak de seat bezet
                                         Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number: {seat.Xcor}, {seat.Ycor}\nMovie Time: {movieTime}" , seat.Price);
@@ -208,6 +196,21 @@ namespace cinemaApp
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
+                                    using (StreamWriter sw = File.CreateText(@"room.json"))
+                                    {
+                                        sw.Close();
+                                    }
+                                    foreach ( var room in roomList)
+                                    {
+                                        string strnNewSeat = JsonConvert.SerializeObject(room);
+                                        using (StreamWriter sw = File.AppendText(@"room.json"))
+                                        {
+                                            sw.WriteLine(strnNewSeat);
+                                            sw.Close();
+                                        }
+                                    }
+
+
                                     Console.ForegroundColor = ConsoleColor.Blue;
                                     Console.WriteLine("Your reservation has been made!\nYou can check for all of your tickets in the cart!\n");
                                     
@@ -279,6 +282,16 @@ namespace cinemaApp
             {
                 Console.WriteLine(ex);
             }
-        }   
+        }  
+        public static void clearRooms()
+        {
+            using (StreamWriter sw = File.CreateText(@"room.json"))
+            {
+                sw.Close();
+            }
+            Console.WriteLine("Rooms have been reset");
+            System.Threading.Thread.Sleep(2000);
+            Program.Main();
+        }
     }
 }

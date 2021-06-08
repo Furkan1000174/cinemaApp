@@ -40,16 +40,16 @@ namespace cinemaApp
                 {
                     int[] exludeLarge = new int[] { 4, 3, 3, 3, 3, 2, 1, 0, 0, 0, 0, 0, 1, 2, 2, 3, 3, 5, 7, 8 };
                     int[] vipExcludeLarge = { 30, 9, 8, 8, 7, 7, 6, 6, 5, 5, 6, 7, 8, 8, 9, 10, 12, 30, 30, 30 };
-                    int[] ExExcludeLarge = { 30, 30, 30, 30, 13, 12, 11, 11, 11, 11, 11, 11, 13, 30, 30, 30, 30, 30, 30, 30 };
-                    movieRooms.createRoom(30, 20, exludeLarge, vipExcludeLarge, exludeLarge,12.50);
-                    int[] exludeMedium = { 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3};
-                    int[] vipExcludeMedium = { 18 ,6, 5, 5, 4, 4, 3, 3, 2, 2, 2, 3, 4, 5, 6, 6, 18, 18, 18 };
-                    int[] ExExcludeMedium = { 18, 18, 18, 18, 18, 8, 7, 6, 6, 6, 6, 7, 8, 18, 18, 18, 18, 18, 18};
-                    movieRooms.createRoom(18, 19, exludeMedium, vipExcludeMedium, exludeMedium, 12.50);
+                    int[] excludeLarge = { 30, 30, 30, 30, 13, 12, 11, 11, 11, 11, 11, 11, 13, 30, 30, 30, 30, 30, 30, 30 };
+                    movieRooms.createRoom(30, 20, exludeLarge, vipExcludeLarge, excludeLarge, 12.50);
+                    int[] exludeMedium = { 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3 };
+                    int[] vipExcludeMedium = { 18, 6, 5, 5, 4, 4, 3, 3, 2, 2, 2, 3, 4, 5, 6, 6, 18, 18, 18 };
+                    int[] excludeMedium = { 18, 18, 18, 18, 18, 8, 7, 6, 6, 6, 6, 7, 8, 18, 18, 18, 18, 18, 18 };
+                    movieRooms.createRoom(18, 19, exludeMedium, vipExcludeMedium, excludeMedium, 12.50);
                     int[] exludeSmall = { 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2 };
                     int[] vipExcludeSmall = { 12, 12, 12, 5, 4, 3, 3, 3, 3, 4, 5, 12, 12, 12 };
                     int[] excludeSmall = { 12, 12, 12, 12, 12, 5, 5, 5, 5, 12, 12, 12, 12, 12 };
-                    movieRooms.createRoom(12, 14, excludeSmall, vipExcludeSmall, exludeSmall, 12.50);
+                    movieRooms.createRoom(12, 14, exludeSmall, vipExcludeSmall, excludeSmall, 12.50);
                 }
             }
             catch (FileNotFoundException)
@@ -94,13 +94,19 @@ namespace cinemaApp
                             mainScreen.Show(CurrentAccount);
                             break;
                         default:
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                            Console.ResetColor();
+                            System.Threading.Thread.Sleep(2500);
+                            Console.Clear();
                             break;
                     }
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("\n\nThe input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                    Console.ResetColor();
                     System.Threading.Thread.Sleep(2500);
                     Console.Clear();
                 }

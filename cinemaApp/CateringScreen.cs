@@ -97,6 +97,13 @@ namespace cinemaApp
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
+                                        Reservation newResJSON = new Reservation(CurrentAccount.ID, cate.Food + " " + cate.Drink, cate.Price);
+                                        string strNewResJSON = JsonConvert.SerializeObject(newResJSON);
+                                        using (StreamWriter sw = File.AppendText(@"reservations.json"))
+                                        {
+                                            sw.WriteLine(strNewResJSON);
+                                            sw.Close();
+                                        }
                                         cateSelecter(result);
                                         choosing = false;
                                         Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -121,13 +128,21 @@ namespace cinemaApp
                             mainScreen.Show(CurrentAccount);
                             break;
                         default:
-                            Console.WriteLine("The input you gave is incorrect.");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                            Console.ResetColor();
+                            System.Threading.Thread.Sleep(2500);
+                            CateringScreen.showCatering(CurrentAccount);
                             break;
                     }
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Please enter a number");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
+                    Console.ResetColor();
+                    System.Threading.Thread.Sleep(2500);
+                    CateringScreen.showCatering(CurrentAccount);
                 }
         }
         public static void cateSelecter(int option)
