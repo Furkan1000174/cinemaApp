@@ -249,22 +249,29 @@ namespace cinemaApp
                 {
                     using (StreamWriter sw = File.CreateText(@"reviews.json"))
                     {
-
                         sw.Close();
+                        Console.WriteLine($"\n{options} has been removed");
+                        System.Threading.Thread.Sleep(3000);
+                        mainScreen.Show(CurrentAccount);
                     }
                 }
                 else
+                    using (StreamWriter sw = File.CreateText(@"reviews.json"))
+                    {
+                        sw.Close();
+                    }
                 {
                     foreach (var review in reviewList)
                     {
                         string strNewMovieJson = JsonConvert.SerializeObject(review);
-                        using (StreamWriter sw = File.CreateText(@"reviews.json"))
+                        using (StreamWriter sw = File.AppendText(@"reviews.json"))
                         {
                             sw.WriteLine(strNewMovieJson);
                             sw.Close();
                         }
                     }
                 }
+                Console.WriteLine($"\n{options} has been removed");
                 System.Threading.Thread.Sleep(3000);
                 mainScreen.Show(CurrentAccount);
             }

@@ -141,7 +141,7 @@ namespace cinemaApp
                     Console.WriteLine("Please enter the synopsis(Short Summary of the movie)");
                     movieSynopsis = Console.ReadLine();
                 }
-                Console.WriteLine("Please enter the price");
+
                 Movie newMovie = new Movie(id, movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieIMDB, movieSynopsis);
 
                 string strNewMovieJson = JsonConvert.SerializeObject(newMovie);
@@ -151,6 +151,7 @@ namespace cinemaApp
                     sw.Close();
                 }
                 Console.WriteLine("Movie added!");
+                System.Threading.Thread.Sleep(3000);
 
                 mainScreen.Show(CurrentAccount);
             }
@@ -226,21 +227,28 @@ namespace cinemaApp
                     {
 
                         sw.Close();
+                        Console.WriteLine($"\n{options} has been removed");
+                        System.Threading.Thread.Sleep(3000);
+                        mainScreen.Show(CurrentAccount);
                     }
                 }
                 else
+                using (StreamWriter sw = File.CreateText(@"movies.json"))
+                    {
+                        sw.Close();
+                    }
                 {
                     foreach (var movie in movieList)
                     {
                         string strNewMovieJson = JsonConvert.SerializeObject(movie);
-                        using (StreamWriter sw = File.CreateText(@"movies.json"))
+                        using (StreamWriter sw = File.AppendText(@"movies.json"))
                         {
                             sw.WriteLine(strNewMovieJson);
                             sw.Close();
                         }
                     }
                 }
-
+                Console.WriteLine($"\n{options} has been removed");
                 System.Threading.Thread.Sleep(3000);
                 //Figure out how to convert jsonContents2 to a movie format to add to json
                 mainScreen.Show(CurrentAccount);

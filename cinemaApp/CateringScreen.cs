@@ -53,7 +53,7 @@ namespace cinemaApp
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("\nNo catering information found!\nThis page is under construction\n");
+                Console.WriteLine("\nNo catering information found!\nPlease create a listing first!\n");
                 System.Threading.Thread.Sleep(3500);
                 Console.Clear();
                 mainScreen.Show(CurrentAccount);

@@ -202,21 +202,28 @@ namespace cinemaApp
                     {
 
                         sw.Close();
+                        Console.WriteLine($"\n{options} has been removed");
+                        System.Threading.Thread.Sleep(3000);
+                        mainScreen.Show(CurrentAccount);
                     }
                 }
                 else
+                    using (StreamWriter sw = File.CreateText(@"catering.json"))
+                    {
+                        sw.Close();
+                    }
                 {
                     foreach (var catering in cateringList)
                     {
                         string strNewMovieJson = JsonConvert.SerializeObject(catering);
-                        using (StreamWriter sw = File.CreateText(@"catering.json"))
+                        using (StreamWriter sw = File.AppendText(@"catering.json"))
                         {
                             sw.WriteLine(strNewMovieJson);
                             sw.Close();
                         }
                     }
                 }
-
+                Console.WriteLine($"\n{options} has been removed");
                 System.Threading.Thread.Sleep(3000);
                 //Figure out how to convert jsonContents2 to a movie format to add to json
                 mainScreen.Show(CurrentAccount);
