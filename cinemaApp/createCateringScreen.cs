@@ -225,7 +225,6 @@ namespace cinemaApp
                 }
                 Console.WriteLine($"\n{options} has been removed");
                 System.Threading.Thread.Sleep(3000);
-                //Figure out how to convert jsonContents2 to a movie format to add to json
                 mainScreen.Show(CurrentAccount);
             }
             catch
