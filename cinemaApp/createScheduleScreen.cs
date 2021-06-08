@@ -31,10 +31,10 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
-                var movieList = new List<CateringJSN> { };
+                var movieList = new List<Movie> { };
                 foreach (String movie in jsonContents)
                 {
-                    movieList.Add(JsonConvert.DeserializeObject<CateringJSN>(movie));
+                    movieList.Add(JsonConvert.DeserializeObject<Movie>(movie));
                 }
                 foreach (var movie in movieList)
                 {
@@ -75,7 +75,7 @@ namespace cinemaApp
                                 {
                                     if (movie.ID == result)
                                     {
-                                        Console.WriteLine("\nPlease enter some schedule times(Type any time like so: 00:00. Press Enter to add it.");
+                                        Console.WriteLine("\nPlease enter FIVE schedule times(Type any time like so: 00:00. Press Enter to add it.");
                                         string[] times = new string[5];
                                         for (int i = 0; i < times.Length; i++)
                                         {
