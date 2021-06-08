@@ -36,7 +36,7 @@ namespace cinemaApp
            
             if (CurrentAccount.Role == "Admin")
             {
-                Console.WriteLine("[7] Manage movies\n[8] Manage catering\n[9] Manage Schedule\n[10] Remove reviews");
+                Console.WriteLine("[7] Manage movies\n[8] Manage catering\n[9] Manage Schedule\n[10] Remove reviews\n[11] Reset rooms");
             }
             Console.WriteLine("Please enter a number on screen to perform the desired action.");
             bool choosing = true;
@@ -123,6 +123,17 @@ namespace cinemaApp
                             else
                             {
                                 createReviewScreen.reviewRemover(CurrentAccount);
+                                choosing = false;
+                            }
+                            break;
+                        case 11:
+                            if (CurrentAccount.Role != "Admin")
+                            {
+                                Console.WriteLine("Nice try, but you're not getting in that easily ;)");
+                            }
+                            else
+                            {
+                                movieRooms.clearRooms();
                                 choosing = false;
                             }
                             break;
