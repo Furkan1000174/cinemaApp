@@ -214,6 +214,7 @@ namespace cinemaApp
             Console.ForegroundColor = ConsoleColor.Green;
             string b = "/// ROOM SELECTION ///\n";
             string availableseat = "O";
+            string availableVIPseat = "V";
             Console.SetCursorPosition((Console.WindowWidth - b.Length) / 2, Console.CursorTop);
             Console.WriteLine(b);
             Console.ResetColor();

@@ -107,7 +107,7 @@ namespace cinemaApp
                 }
                
 
-            //Jullie zijn lieve kereltjes ♥
+            
 
             Console.WriteLine("What would you like to do?\n1. Reserve a seat.\n2. Go back to the main menu.\n");
             string options = Console.ReadLine();
@@ -130,7 +130,7 @@ namespace cinemaApp
                                     }
                                 }
                             }
-                            //:)
+                            
                             Console.WriteLine("Please enter which seats you would like to reserve");
                             Console.WriteLine("Please enter the row in which you would like to sit, enter a number.");
                             string xCorInput = Console.ReadLine();
