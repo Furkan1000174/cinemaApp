@@ -239,13 +239,19 @@ namespace cinemaApp
                         {
                             
                         }
-                        //update json met nieuwe room
-                        foreach (Seat seat in seatList) {
+
+
+                            using (StreamWriter sw = File.CreateText(@"room.json"))
+                        {
+                            sw.WriteLine("");
+
+                        }
+                            foreach (Seat seat in seatList) {
                                 string strNewRoomJSON = JsonConvert.SerializeObject(seat);
-                                using (StreamWriter sw = File.AppendText(@"room.json"))
+                                using (StreamWriter sw2 = File.AppendText(@"room.json"))
                                 {
-                                    sw.WriteLine(strNewRoomJSON);
-                                    sw.Close();
+                                    sw2.WriteLine(strNewRoomJSON);
+                                    sw2.Close();
                                 }
 
 

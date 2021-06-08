@@ -73,6 +73,10 @@ namespace cinemaApp
                     sw.Close();
 
                 }
+
+               
+
+
                 Console.WriteLine("Account created!");
 
                 loginScreen.Login(CurrentAccount);
