@@ -115,7 +115,7 @@ namespace cinemaApp
 
             
 
-            Console.WriteLine("What would you like to do?\n1. Reserve a seat.\n2. Go back to the main menu.\n");
+            Console.WriteLine("What would you like to do?\n1. Reserve a seat.\n2. Go back.\n");
             string options = Console.ReadLine();
 
             int number = Int32.Parse(options);
@@ -168,7 +168,8 @@ namespace cinemaApp
                                 {
                                     if (seat.Icon == " O ")
                                     {
-                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}", seat.Price);
+                                        seat.Icon = " X ";
+                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number: {seat.Xcor}, {seat.Ycor}" , seat.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
                                         using (StreamWriter sw = File.AppendText(@"cart.json"))
                                         {
@@ -192,11 +193,11 @@ namespace cinemaApp
 
                     case 2:
                         Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.WriteLine("\nYou will be send back to the mainscreen\n");
+                        Console.WriteLine("\nYou will be send back\n");
                         Console.ResetColor();
                         System.Threading.Thread.Sleep(2000);
                         Console.Clear();
-                        mainScreen.Show(CurrentAccount);
+                        MovieInfoScreen.showMovies(CurrentAccount);
                         break;
                     default:
                         Console.WriteLine("The input you gave is incorrect.");

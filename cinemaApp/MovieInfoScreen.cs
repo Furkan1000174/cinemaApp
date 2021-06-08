@@ -129,11 +129,11 @@ namespace cinemaApp
 
                                                 case 2:
                                                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                                                    Console.WriteLine("\nYou will be send back to the mainscreen\n");
+                                                    Console.WriteLine("\nYou will be send back.\n");
                                                     Console.ResetColor();
                                                     System.Threading.Thread.Sleep(2000);
                                                     Console.Clear();
-                                                    mainScreen.Show(CurrentAccount);
+                                                    showMovies(CurrentAccount);
                                                     break;
                                                 default:
                                                     Console.WriteLine("The input you gave is incorrect.");
