@@ -117,12 +117,6 @@ namespace cinemaApp
                 Console.WriteLine(h);
                 Console.ResetColor();
 
-
-
-
-
-
-
                 List<string> jsonContent = new List<string> { };
                 foreach (string line in File.ReadLines(@"room.json"))
                 {
@@ -141,9 +135,6 @@ namespace cinemaApp
                     }
                    
                 }
-               
-
-            
 
             Console.WriteLine("What would you like to do?\n1. Reserve a seat.\n2. Go back.\n");
             string options = Console.ReadLine();
@@ -167,7 +158,6 @@ namespace cinemaApp
                                     }
                                 }
                             }
-                            
                             Console.WriteLine("Please enter which seats you would like to reserve");
                             Console.WriteLine("Please enter the row in which you would like to sit, enter a number.");
                             string xCorInput = Console.ReadLine();
@@ -198,7 +188,7 @@ namespace cinemaApp
                                 {
 
 
-                                if (seat.Icon == " O ")
+                                if (seat.Icon == " O " || seat.Icon == " T " || seat.Icon == " * ")
                                     {
                                         seat.Icon = " X ";
                                         Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number(row,seat): {seat.Xcor}, {seat.Ycor}\nMovie Time: {movieTime}" , seat.Price);
