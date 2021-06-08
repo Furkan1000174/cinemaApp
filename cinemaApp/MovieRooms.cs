@@ -170,7 +170,7 @@ namespace cinemaApp
 
                                 if (seat.Icon == " O ") //als de seat vrij is
                                     {
-                                        seat.Icon = " X "; //maak de seat bezet
+                                        seat.Icon = " - "; //maak de seat bezet
                                         Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number: {seat.Xcor}, {seat.Ycor}\nMovie Time: {movieTime}" , seat.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
                                         using (StreamWriter sw = File.AppendText(@"cart.json"))
@@ -205,10 +205,14 @@ namespace cinemaApp
                                     }
                                 }
                             }
-                            //update json met nieuwe room
-                            foreach (Seat seat in seatList) {
+                        using (StreamWriter sw = File.CreateText(@"room.json"))
+                        {
+                            
+                        }
+                        //update json met nieuwe room
+                        foreach (Seat seat in seatList) {
                                 string strNewRoomJSON = JsonConvert.SerializeObject(seat);
-                                using (StreamWriter sw = File.CreateText(@"room.json"))
+                                using (StreamWriter sw = File.AppendText(@"room.json"))
                                 {
                                     sw.WriteLine(strNewRoomJSON);
                                     sw.Close();
