@@ -9,8 +9,10 @@ namespace cinemaApp
 {
     class movieRooms
     {
-        public static void createRoom(int seats, int rows,int[] exlude, double seatPrice)
+        public static void createRoom(int seats, int rows,int[] exlude,int[] vip, int[] ex,double seatPrice)
         {
+            int[] vipExclude = vip;
+            int[] ExExclude = ex;
             Seat[][] room = new Seat[rows][];
             for(int i=0; i < room.Length; i++)
             {
@@ -24,7 +26,21 @@ namespace cinemaApp
                     {
                         if (j < seats - exlude[i])
                         {
-                            room[i][j] = new Seat(" O ",i,j,seatPrice);
+                            if (j < seats - vipExclude[i])
+                            {
+                                if (j < seats - ExExclude[i])
+                                {
+                                    room[i][j] = new Seat(" * ", i, j, 12.50);
+                                }
+                                else
+                                {
+                                    room[i][j] = new Seat(" # ", i, j, 11.50);
+                                }
+                            }
+                            else
+                            {
+                                room[i][j] = new Seat(" O ", i, j, 10.50);
+                            }
                         }
                         else
                         {
@@ -35,7 +51,21 @@ namespace cinemaApp
                     {
                         if(j >= exlude[i])
                         {
-                            room[i][j] = new Seat(" O ", i, j, seatPrice);
+                            if (j >= vipExclude[i])
+                            {
+                                if (j >= ExExclude[i])
+                                {
+                                    room[i][j] = new Seat(" * ", i, j, 12.50);
+                                }
+                                else
+                                {
+                                    room[i][j] = new Seat(" # ", i, j, 11.50);
+                                }
+                            }
+                            else
+                            {
+                                room[i][j] = new Seat(" O ", i, j, 10.50);
+                            }
                         }
                         else
                         {

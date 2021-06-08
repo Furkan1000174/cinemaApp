@@ -51,11 +51,11 @@ namespace cinemaApp
             {
                 if(i < 10)
                 {
-                  roomString += $"{i}  ";
+                      roomString += $"{i}  ";
                 }
                 else
                 {
-                  roomString += $"{i} ";
+                    roomString += $"{i} ";
                 }
             }
             roomString += "\n\n";
