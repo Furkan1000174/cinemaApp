@@ -65,7 +65,7 @@ namespace cinemaApp
             }
             try
             {
-                movieRooms.createRoom(roomSeats, roomRows, exclude,seatPrice);
+                //movieRooms.createRoom(roomSeats, roomRows, exclude,seatPrice);
             }
             catch (Exception ex)
             {
