@@ -179,8 +179,22 @@ namespace cinemaApp
                                             sw.Close();
                                         }
                                     Console.ForegroundColor = ConsoleColor.Blue;
-                                    Console.WriteLine("Your reservation has been made!\nReturning to Seat Selection, so you can select more seats if needed.\nYou can check for all of your tickets in the cart!");
-                                    System.Threading.Thread.Sleep(5500);
+                                    Console.WriteLine("Your reservation has been made!\nYou can check for all of your tickets in the cart!\n");
+                                    
+                                    Console.ResetColor();
+                                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                                    Console.WriteLine("Type anything if you want to return to the mainscreen.");
+                                    Console.ResetColor();
+                                    string confirmation = Console.ReadLine();
+                                    if (confirmation.ToLower() == "1")
+                                    {
+
+                                        mainScreen.Show(CurrentAccount);
+                                    }
+                                    else
+                                    {
+                                        mainScreen.Show(CurrentAccount);
+                                    }
                                     roomScreen(CurrentAccount, movieName, movieTime, roomNumber);
                                     }
                                     else
