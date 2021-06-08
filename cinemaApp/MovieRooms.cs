@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace cinemaApp
 {
@@ -87,12 +88,6 @@ namespace cinemaApp
                 Console.WriteLine(h);
                 Console.ResetColor();
 
-
-
-
-
-
-
                 List<string> jsonContent = new List<string> { };
                 foreach (string line in File.ReadLines(@"room.json"))
                 {
@@ -111,20 +106,15 @@ namespace cinemaApp
                     }
                    
                 }
-               
-
-            
-
             Console.WriteLine("What would you like to do?\n1. Reserve a seat.\n2. Go back.\n");
             string options = Console.ReadLine();
-
             int number = Int32.Parse(options);
+            
             try
             {
                 switch (number)
                 {
                     case 1:
-
                             var seatList = new List<Seat> { };
                             foreach(var room in roomList)
                             {
@@ -132,7 +122,7 @@ namespace cinemaApp
                                 {
                                     for(int j = 0; j < room.seatRoom[i].Length;j++)
                                     {
-                                        if(room.RoomID == roomNumber)
+                                        if (room.RoomID == roomNumber)
                                         seatList.Add(room.seatRoom[i][j]);
                                     }
                                 }
@@ -169,14 +159,18 @@ namespace cinemaApp
                                     if (seat.Icon == " O ")
                                     {
                                         seat.Icon = " X ";
-                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number: {seat.Xcor}, {seat.Ycor}" , seat.Price);
+                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number: {seat.Xcor}\n Row Number: {seat.Ycor}" , seat.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
                                         using (StreamWriter sw = File.AppendText(@"cart.json"))
                                         {
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                                    
+                                   
+
+
+                                        Console.ForegroundColor = ConsoleColor.DarkRed;
                                     Console.WriteLine("Your reservation has been made!\nReturning to Seat Selection, so you can select more seats if needed.\nYou can check for all of your tickets in the cart!");
                                     System.Threading.Thread.Sleep(5500);
                                     roomScreen(CurrentAccount, movieName,roomNumber);
