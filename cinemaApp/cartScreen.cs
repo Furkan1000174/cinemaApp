@@ -27,7 +27,6 @@ namespace cinemaApp
             List<String> jsonContents = new List<String> { };
             double totalPrice = 0;
             //Haalt alle cart items op
-            
             try
             {
                 foreach (string line in File.ReadLines(@"cart.json"))
@@ -44,17 +43,19 @@ namespace cinemaApp
                 {
                     if(CurrentAccount.ID == cart.ID)
                     {
+                        Console.OutputEncoding = Encoding.UTF8;
                         Console.WriteLine(cart);
                         totalPrice = totalPrice + cart.Price;
                     }
                    
                 }
+                Console.OutputEncoding = Encoding.UTF8;
                 Console.WriteLine("The total price of the items you ordered is: €" + totalPrice + "\n");
             }
             //Als er niks is gevonden
             catch (FileNotFoundException)
             {
-                Console.WriteLine("\nNo cart information found!\nThis page is under construction\n");
+                Console.WriteLine("\nNo cart information found!\nPlease add a item to your cart first!\n");
                 System.Threading.Thread.Sleep(3500);
                 Console.Clear();
                 mainScreen.Show(CurrentAccount);
@@ -77,9 +78,7 @@ namespace cinemaApp
                         break;
 
                         case 2:
-                        Console.WriteLine("This is still a work in progress");
-                            System.Threading.Thread.Sleep(2500);
-                            mainScreen.Show(CurrentAccount);
+                            checkout.checkoutScreen(CurrentAccount);
 
                             break;
 

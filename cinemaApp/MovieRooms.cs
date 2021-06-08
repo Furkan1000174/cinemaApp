@@ -9,46 +9,66 @@ namespace cinemaApp
 {
     class movieRooms
     {
-        public static void createRoom()
+        public static void createRoom(int seats, int rows,int[] exlude, double seatPrice)
         {
-            Seat[][] room = new Seat[20][];
+            Seat[][] room = new Seat[rows][];
             for(int i=0; i < room.Length; i++)
             {
-                room[i] = new Seat[30];
+                room[i] = new Seat[seats];
             }
-            int[] exlude = new int[] { 4, 3, 3, 3, 3, 2, 1, 0, 0, 0, 0, 0, 1, 2, 2, 3, 3, 5, 7, 8 };
             for(int i=0; i < exlude.Length; i++)
             {
-                for(int j=0; j < 30; j++)
+                for(int j=0; j < seats; j++)
                 {
-                    if (j > 15)
+                    if (j > (seats/2))
                     {
-                        if (j < 30 - exlude[i])
+                        if (j < seats - exlude[i])
                         {
-                            room[i][j] = new Seat("O",i,j,15.00);
+                            room[i][j] = new Seat(" O ",i,j,seatPrice);
                         }
                         else
                         {
-                            room[i][j] = new Seat(" ",i,j,00.00);
+                            room[i][j] = new Seat("   ",i,j,00.00);
                         }
                     }
                     else
                     {
                         if(j >= exlude[i])
                         {
-                            room[i][j] = new Seat("O", i, j, 15.00);
+                            room[i][j] = new Seat(" O ", i, j, seatPrice);
                         }
                         else
                         {
-                            room[i][j] = new Seat(" ", i, j, 00.00);
+                            room[i][j] = new Seat("   ", i, j, 00.00);
                         }
                     }
                 }
             }
-            Room newRoom = new Room()
+            int id = 1;
+            try
             {
-                room = room,
-            };
+                List<String> jsonContents = new List<String> { };
+                foreach (string line in File.ReadLines(@"room.json"))
+                {
+                    jsonContents.Add(line);
+                }
+                var roomList = new List<Room> { };
+                foreach (String roomObject in jsonContents)
+                {
+                    roomList.Add(JsonConvert.DeserializeObject<Room>(roomObject));
+                }
+                foreach (var roomItem in roomList)
+                {
+                    if (roomItem.RoomID >= id)
+                    {
+                        id = roomItem.RoomID + 1;
+                    }
+                }
+            }
+            catch
+            {
+            }
+            Room newRoom = new Room(id, room);
             string roomArray = JsonConvert.SerializeObject(newRoom);
             using (StreamWriter sw = File.AppendText(@"room.json"))
             {
@@ -58,7 +78,7 @@ namespace cinemaApp
 
         }
 
-        public static void roomScreen(Account CurrentAccount, string movieName)
+        public static void roomScreen(Account CurrentAccount, string movieName, string movieTime, int roomNumber)
         {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -66,6 +86,13 @@ namespace cinemaApp
                 Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
                 Console.WriteLine(h);
                 Console.ResetColor();
+
+
+
+
+
+
+
                 List<string> jsonContent = new List<string> { };
                 foreach (string line in File.ReadLines(@"room.json"))
                 {
@@ -78,13 +105,17 @@ namespace cinemaApp
                 }
                 foreach (var seat in roomList)
                 {
-                    Console.WriteLine(seat);
+                    if(seat.RoomID == roomNumber)
+                    {
+                        Console.WriteLine(seat);
+                    }
+                   
                 }
                
 
-            //Jullie zijn lieve kereltjes ♥
+            
 
-            Console.WriteLine("What would you like to do?\n1. Reserve a seat.\n2. Go back to the main menu.\n");
+            Console.WriteLine("What would you like to do?\n1. Reserve a seat.\n2. Go back.\n");
             string options = Console.ReadLine();
 
             int number = Int32.Parse(options);
@@ -97,15 +128,16 @@ namespace cinemaApp
                             var seatList = new List<Seat> { };
                             foreach(var room in roomList)
                             {
-                               for(int i = 0; i< room.room.Length;i++)
+                               for(int i = 0; i< room.seatRoom.Length;i++)
                                 {
-                                    for(int j = 0; j < room.room[i].Length;j++)
+                                    for(int j = 0; j < room.seatRoom[i].Length;j++)
                                     {
-                                        seatList.Add(room.room[i][j]);
+                                        if(room.RoomID == roomNumber)
+                                        seatList.Add(room.seatRoom[i][j]);
                                     }
                                 }
                             }
-                            //:)
+                            
                             Console.WriteLine("Please enter which seats you would like to reserve");
                             Console.WriteLine("Please enter the row in which you would like to sit, enter a number.");
                             string xCorInput = Console.ReadLine();
@@ -134,25 +166,42 @@ namespace cinemaApp
                             {
                                 if (seat.Xcor == seatXCor && seat.Ycor == seatYCor)
                                 {
-                                    if (seat.Icon != " " && seat.Icon != "X")
+
+
+                                if (seat.Icon == " O ")
                                     {
-                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName, seat.Price);
+                                        seat.Icon = " X ";
+                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number(row,seat): {seat.Xcor}, {seat.Ycor}\nMovie Time: {movieTime}" , seat.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
                                         using (StreamWriter sw = File.AppendText(@"cart.json"))
                                         {
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
-                                        seat.Icon = "Your reservation has been made! Returning to Seat Selection";
-                                    Console.WriteLine(seat);
-                                    System.Threading.Thread.Sleep(2000);
-                                    roomScreen(CurrentAccount, movieName);
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                    Console.WriteLine("Your reservation has been made!\nYou can check for all of your tickets in the cart!\n");
+                                    
+                                    Console.ResetColor();
+                                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                                    Console.WriteLine("Type anything if you want to return to the mainscreen.");
+                                    Console.ResetColor();
+                                    string confirmation = Console.ReadLine();
+                                    if (confirmation.ToLower() == "1")
+                                    {
+
+                                        mainScreen.Show(CurrentAccount);
+                                    }
+                                    else
+                                    {
+                                        mainScreen.Show(CurrentAccount);
+                                    }
+                                    roomScreen(CurrentAccount, movieName, movieTime, roomNumber);
                                     }
                                     else
                                     {
                                         Console.WriteLine("Something went wrong. Please try again.");
                                         System.Threading.Thread.Sleep(2000);
-                                        roomScreen(CurrentAccount, movieName);
+                                        roomScreen(CurrentAccount, movieName, movieTime, roomNumber);
                                     }
                                 }
                             }
@@ -160,11 +209,11 @@ namespace cinemaApp
 
                     case 2:
                         Console.ForegroundColor = ConsoleColor.DarkRed;
-                        Console.WriteLine("\nYou will be send back to the mainscreen\n");
+                        Console.WriteLine("\nYou will be send back\n");
                         Console.ResetColor();
                         System.Threading.Thread.Sleep(2000);
                         Console.Clear();
-                        mainScreen.Show(CurrentAccount);
+                        MovieInfoScreen.showMovies(CurrentAccount);
                         break;
                     default:
                         Console.WriteLine("The input you gave is incorrect.");
