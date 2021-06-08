@@ -171,7 +171,7 @@ namespace cinemaApp
                                 if (seat.Icon == " O ")
                                     {
                                         seat.Icon = " X ";
-                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number: {seat.Xcor}, {seat.Ycor}\nMovie Time: {movieTime}" , seat.Price);
+                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number(row,seat): {seat.Xcor}, {seat.Ycor}\nMovie Time: {movieTime}" , seat.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
                                         using (StreamWriter sw = File.AppendText(@"cart.json"))
                                         {
