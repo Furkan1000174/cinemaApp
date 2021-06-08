@@ -9,7 +9,7 @@ namespace cinemaApp
 {
     class movieRooms
     {
-        public static void createRoom(int seats, int rows,int[] exlude)
+        public static void createRoom(int seats, int rows,int[] exlude, double seatPrice)
         {
             Seat[][] room = new Seat[rows][];
             for(int i=0; i < room.Length; i++)
@@ -24,7 +24,7 @@ namespace cinemaApp
                     {
                         if (j < seats - exlude[i])
                         {
-                            room[i][j] = new Seat(" O ",i,j,15.00);
+                            room[i][j] = new Seat(" O ",i,j,seatPrice);
                         }
                         else
                         {
@@ -35,7 +35,7 @@ namespace cinemaApp
                     {
                         if(j >= exlude[i])
                         {
-                            room[i][j] = new Seat(" O ", i, j, 15.00);
+                            room[i][j] = new Seat(" O ", i, j, seatPrice);
                         }
                         else
                         {
@@ -45,22 +45,28 @@ namespace cinemaApp
                 }
             }
             int id = 1;
-            List<String> jsonContents = new List<String> { };
-            foreach (string line in File.ReadLines(@"room.json"))
+            try
             {
-                jsonContents.Add(line);
-            }
-            var roomList = new List<Room> { };
-            foreach (String roomObject in jsonContents)
-            {
-                roomList.Add(JsonConvert.DeserializeObject<Room>(roomObject));
-            }
-            foreach (var roomItem in roomList)
-            {
-                if (roomItem.RoomID >= id)
+                List<String> jsonContents = new List<String> { };
+                foreach (string line in File.ReadLines(@"room.json"))
                 {
-                    id = roomItem.RoomID + 1;
+                    jsonContents.Add(line);
                 }
+                var roomList = new List<Room> { };
+                foreach (String roomObject in jsonContents)
+                {
+                    roomList.Add(JsonConvert.DeserializeObject<Room>(roomObject));
+                }
+                foreach (var roomItem in roomList)
+                {
+                    if (roomItem.RoomID >= id)
+                    {
+                        id = roomItem.RoomID + 1;
+                    }
+                }
+            }
+            catch
+            {
             }
             Room newRoom = new Room(id, room);
             string roomArray = JsonConvert.SerializeObject(newRoom);
@@ -126,6 +132,7 @@ namespace cinemaApp
                                 {
                                     for(int j = 0; j < room.seatRoom[i].Length;j++)
                                     {
+                                        if(room.RoomID == roomNumber)
                                         seatList.Add(room.seatRoom[i][j]);
                                     }
                                 }
@@ -159,7 +166,7 @@ namespace cinemaApp
                             {
                                 if (seat.Xcor == seatXCor && seat.Ycor == seatYCor)
                                 {
-                                    if (seat.Icon != " " && seat.Icon != "X")
+                                    if (seat.Icon == " O ")
                                     {
                                         Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}", seat.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
@@ -169,7 +176,7 @@ namespace cinemaApp
                                             sw.Close();
                                         }
                                     Console.WriteLine("Your reservation has been made! Returning to Seat Selection");
-                                    System.Threading.Thread.Sleep(20000);
+                                    System.Threading.Thread.Sleep(2000);
                                     roomScreen(CurrentAccount, movieName,roomNumber);
                                     }
                                     else

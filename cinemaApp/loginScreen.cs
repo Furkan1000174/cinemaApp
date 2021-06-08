@@ -89,6 +89,8 @@ namespace cinemaApp
                     {
                         Console.WriteLine("Password or Username is incorrect...");
                         System.Threading.Thread.Sleep(2000);
+                        Console.Clear();
+                        Program.Main();
                     }
                 }
                 catch (FileNotFoundException)
