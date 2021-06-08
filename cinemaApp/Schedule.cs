@@ -12,7 +12,7 @@ namespace cinemaApp
 
 
     public static void showSchedule(Account CurrentAccount)
-    {
+    {       
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
             string a = "/// FILM SELECTION ///\n";
@@ -45,7 +45,7 @@ namespace cinemaApp
             }
 
 
-            Console.WriteLine("Do you want to go to the film selection screeen? y/n: ");
+            Console.WriteLine("Do you want to go to the film selection screen? y/n: ");
 
         string confirmation = Console.ReadLine();
         if (confirmation.ToLower() == "y")

@@ -34,10 +34,22 @@ namespace cinemaApp
                             var random = new Random();
                             var number = random.Next(1000, 9999);
                             System.Threading.Thread.Sleep(2000);
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Your reservation code: " + number.ToString());
-                            Console.WriteLine("You will be sent back to the main screen.");
-                            System.Threading.Thread.Sleep(7000);
-                            mainScreen.Show(CurrentAccount);
+                            Console.ResetColor();
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("Type anything if you want to return to the mainscreen.");
+                            Console.ResetColor();
+                            string confirmation = Console.ReadLine();
+                            if (confirmation.ToLower() == "1")
+                            {
+
+                                mainScreen.Show(CurrentAccount);
+                            }
+                            else
+                            {
+                                mainScreen.Show(CurrentAccount);
+                            }
 
                         }
                         else if (choice == "2")

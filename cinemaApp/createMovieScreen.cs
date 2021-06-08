@@ -98,7 +98,7 @@ namespace cinemaApp
                     Console.WriteLine("Please enter the movie language:");
                     movieLanguage = Console.ReadLine();
                 }
-                Console.WriteLine("Please enter the runtime\n(Please enter just an integer)");
+                Console.WriteLine("Please enter the runtime:\n(In minutes, for example: '120'):");
                 string runtimeInput = Console.ReadLine();
                 int movieRuntime;
                 bool correctRuntime = int.TryParse(runtimeInput, out movieRuntime);
@@ -109,6 +109,9 @@ namespace cinemaApp
                     runtimeInput = Console.ReadLine();
                     correctRuntime = int.TryParse(runtimeInput, out movieRuntime);
                 }
+                Console.WriteLine("Please enter the scheduled time and date for this movie\n(Examples: 18:00, February 12)");
+                string scheduledTime = Console.ReadLine();
+
                 Console.WriteLine("Please enter the age rating\n(Please enter just an integer)");
                 string ageRatingInput = Console.ReadLine();
                 int movieAgeRating;
@@ -142,7 +145,7 @@ namespace cinemaApp
                     movieSynopsis = Console.ReadLine();
                 }
 
-                Movie newMovie = new Movie(id, movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, movieIMDB, movieSynopsis);
+                Movie newMovie = new Movie(id, movieTitle, movieGenre, movieLanguage, movieRuntime, movieAgeRating, scheduledTime, movieIMDB, movieSynopsis);
 
                 string strNewMovieJson = JsonConvert.SerializeObject(newMovie);
                 using (StreamWriter sw = File.AppendText(@"movies.json"))
@@ -178,7 +181,7 @@ namespace cinemaApp
                     Console.Clear();
                     mainScreen.Show(CurrentAccount);
                 }
-                else 
+                else
                 {
                     var movieList = new List<Movie> { };
                     foreach (String movie in jsonContents)
