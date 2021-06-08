@@ -233,7 +233,18 @@ namespace cinemaApp
             {
                 var seatList = new List<Seat> { };
                 Console.WriteLine($"[{seat.RoomID}]");
-                Console.WriteLine($"Room number: #{seat.RoomID}");
+                if (seat.RoomID == 1)
+                {
+                    Console.WriteLine($"Room number: #{seat.RoomID}, large");
+                }
+                else if (seat.RoomID == 2)
+                {
+                    Console.WriteLine($"Room number: #{seat.RoomID}, medium");
+                }
+                else if (seat.RoomID == 3)
+                {
+                    Console.WriteLine($"Room number: #{seat.RoomID}, small");
+                }
                 for (int i = 0; i < seat.seatRoom.Length; i++)
                 {
                     for (int j = 0; j < seat.seatRoom[i].Length; j++)
@@ -243,17 +254,6 @@ namespace cinemaApp
                           seatList.Add(seat.seatRoom[i][j]);
                         }
                     }
-                }
-                foreach(var roomSeat in seatList)
-                {
-                    if(roomSeat.Icon == " O ")
-                    {
-                        Console.OutputEncoding = Encoding.UTF8;
-                        Console.WriteLine($"Seat Price: €{roomSeat.Price}");
-                        roomID++;
-                        break;
-                    }
-                    
                 }
             }
 
