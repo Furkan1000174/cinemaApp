@@ -34,7 +34,7 @@ namespace cinemaApp
                                 }
                                 else
                                 {
-                                    room[i][j] = new Seat(" # ", i, j, 11.50);
+                                    room[i][j] = new Seat(" T ", i, j, 11.50);
                                 }
                             }
                             else
@@ -59,7 +59,7 @@ namespace cinemaApp
                                 }
                                 else
                                 {
-                                    room[i][j] = new Seat(" # ", i, j, 11.50);
+                                    room[i][j] = new Seat(" T ", i, j, 11.50);
                                 }
                             }
                             else
