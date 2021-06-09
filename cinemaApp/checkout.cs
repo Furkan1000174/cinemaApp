@@ -37,6 +37,11 @@ namespace cinemaApp
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Your reservation code: " + number.ToString());
                             Console.ResetColor();
+                            using (StreamWriter sw = File.CreateText(@"cart.json"))
+                            {
+                              //empty cart
+
+                            }
                             Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine("Type anything if you want to return to the mainscreen.");
                             Console.ResetColor();

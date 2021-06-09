@@ -97,6 +97,13 @@ namespace cinemaApp
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
+                                        Reservation newResJSON = new Reservation(CurrentAccount.ID, cate.Food + " " + cate.Drink, cate.Price);
+                                        string strNewResJSON = JsonConvert.SerializeObject(newResJSON);
+                                        using (StreamWriter sw = File.AppendText(@"reservations.json"))
+                                        {
+                                            sw.WriteLine(strNewResJSON);
+                                            sw.Close();
+                                        }
                                         cateSelecter(result);
                                         choosing = false;
                                         Console.ForegroundColor = ConsoleColor.DarkMagenta;

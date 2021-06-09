@@ -27,11 +27,11 @@ namespace cinemaApp
         Console.ResetColor();
             if (CurrentAccount.UserName == "")
             {
-                Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] Write a review\n[3] View catering\n[4] View Schedule\n[5] View Cart\n[6] Go Back");
+                Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] Write a review\n[3] View catering\n[4] View Reservations\n[5] View Cart\n[6] Go Back");
             }
             else
             {
-                Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] Write a review\n[3] View catering\n[4] View Schedule\n[5] View Cart\n[6] Log Out");
+                Console.WriteLine("Please enter the number of what you would like to do:\n\n[1] View movies\n[2] Write a review\n[3] View catering\n[4] View Reservations\n[5] View Cart\n[6] Log Out");
             }
            
             if (CurrentAccount.Role == "Admin")
@@ -61,7 +61,7 @@ namespace cinemaApp
                             choosing = false;
                             break;
                         case 4:
-                            Schedule.showSchedule(CurrentAccount);
+                            ReservationsScreen.showRes(CurrentAccount);
                             choosing = false;
                             break;
                         case 5:

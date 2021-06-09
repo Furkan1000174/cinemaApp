@@ -127,11 +127,11 @@ namespace cinemaApp
                 {
                     roomList.Add(JsonConvert.DeserializeObject<Room>(seat));
                 }
-                foreach (var seat in roomList)
+                foreach (Room seat in roomList)
                 {
                     if(seat.RoomID == roomNumber)
                     {
-                        Console.WriteLine(seat);
+                        Console.WriteLine(seat); // <<<<<-------------------------- print the room
                     }
                    
                 }
@@ -184,18 +184,26 @@ namespace cinemaApp
                             }
                             foreach (var seat in seatList)
                             {
-                                if (seat.Xcor == seatXCor && seat.Ycor == seatYCor)
+                                if (seat.Xcor == seatXCor && seat.Ycor == seatYCor) // als die bij de seat is die is gekozen
                                 {
+                                Reservation newResJSON = new Reservation(CurrentAccount.ID, movieName, seat.Price);
+                                string strNewResJSON = JsonConvert.SerializeObject(newResJSON);
+                                using (StreamWriter sw = File.AppendText(@"reservations.json"))
+                                {
+                                    sw.WriteLine(strNewResJSON);
+                                    sw.Close();
+                                }
                                 if (seat.Icon == " O " || seat.Icon == " T " || seat.Icon == " * ")
                                     {
-                                        seat.Icon = " X ";
-                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number(row,seat): {seat.Xcor}, {seat.Ycor}\nMovie Time: {movieTime}" , seat.Price);
+                                        seat.Icon = " - "; //maak de seat bezet
+                                        Cart newCartJSON = new Cart(CurrentAccount.ID, movieName + $"\nRoom number: {roomNumber}\nSeat Number: {seat.Xcor}, {seat.Ycor}\nMovie Time: {movieTime}" , seat.Price);
                                         string strNewCartJSON = JsonConvert.SerializeObject(newCartJSON);
                                         using (StreamWriter sw = File.AppendText(@"cart.json"))
                                         {
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
+                                    
                                     using (StreamWriter sw = File.CreateText(@"room.json"))
                                     {
                                         sw.Close();
@@ -238,6 +246,30 @@ namespace cinemaApp
                                     }
                                 }
                             }
+                        using (StreamWriter sw = File.CreateText(@"room.json"))
+                        {
+                            
+                        }
+
+
+                            using (StreamWriter sw = File.CreateText(@"room.json"))
+                        {
+                            sw.WriteLine("");
+
+                        }
+                            foreach (Seat seat in seatList) {
+                                string strNewRoomJSON = JsonConvert.SerializeObject(seat);
+                                using (StreamWriter sw2 = File.AppendText(@"room.json"))
+                                {
+                                    sw2.WriteLine(strNewRoomJSON);
+                                    sw2.Close();
+                                }
+
+
+                            }
+
+
+
                         break;
 
                     case 2:
