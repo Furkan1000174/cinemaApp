@@ -186,6 +186,13 @@ namespace cinemaApp
                             {
                                 if (seat.Xcor == seatXCor && seat.Ycor == seatYCor) // als die bij de seat is die is gekozen
                                 {
+                                Reservation newResJSON = new Reservation(CurrentAccount.ID, movieName, seat.Price);
+                                string strNewResJSON = JsonConvert.SerializeObject(newResJSON);
+                                using (StreamWriter sw = File.AppendText(@"reservations.json"))
+                                {
+                                    sw.WriteLine(strNewResJSON);
+                                    sw.Close();
+                                }
                                 if (seat.Icon == " O " || seat.Icon == " T " || seat.Icon == " * ")
                                     {
                                         seat.Icon = " - "; //maak de seat bezet
@@ -196,6 +203,7 @@ namespace cinemaApp
                                             sw.WriteLine(strNewCartJSON);
                                             sw.Close();
                                         }
+                                    
                                     using (StreamWriter sw = File.CreateText(@"room.json"))
                                     {
                                         sw.Close();

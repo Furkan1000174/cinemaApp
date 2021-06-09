@@ -68,6 +68,7 @@ namespace cinemaApp
                                 {
                                     if (movie.ID == result)
                                     {
+                                        
                                         movieSelecter(result);
                                         choosing = false;
                                         Console.WriteLine("\nWould you like to make a reservation?\n1. Yes\n2. No\n");

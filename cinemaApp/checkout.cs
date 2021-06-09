@@ -39,7 +39,7 @@ namespace cinemaApp
                             Console.ResetColor();
                             using (StreamWriter sw = File.CreateText(@"cart.json"))
                             {
-                                sw.WriteLine("");
+                              //empty cart
 
                             }
                             Console.ForegroundColor = ConsoleColor.DarkRed;

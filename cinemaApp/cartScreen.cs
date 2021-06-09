@@ -33,12 +33,12 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
-                if (jsonContents.Count() == 0)
+                if (jsonContents.Count == 0)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("\nYou will be send back to the mainscreen\n");
+                    Console.WriteLine("\nThere are no items in your basket, you will be send back to the mainscreen\n");
                     Console.ResetColor();
-                    System.Threading.Thread.Sleep(2000);
+                    System.Threading.Thread.Sleep(5000);
                     Console.Clear();
                     mainScreen.Show(CurrentAccount);
                 }
@@ -48,6 +48,8 @@ namespace cinemaApp
                     cartList.Add(JsonConvert.DeserializeObject<Cart>(cartItem));
                 }
                 //Laat alleen de Cart items zien van de ingelogde gebruiker
+               
+
                 foreach (var cart in cartList)
                 {
                     if(CurrentAccount.ID == cart.ID)
