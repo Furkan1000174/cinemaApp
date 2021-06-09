@@ -26,6 +26,13 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
+                if (jsonContents.Count == 0)
+                {
+                    Console.WriteLine("\nNo Schedule found!\nPlease create a listing first!\n");
+                    System.Threading.Thread.Sleep(3500);
+                    Console.Clear();
+                    mainScreen.Show(CurrentAccount);
+                }
                 var scheduleList = new List<ScheduleClass> { };
                 foreach (String schedule in jsonContents)
                 {

@@ -30,23 +30,35 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
-                var cartList = new List<Reservation> { };
-                foreach (String cartItem in jsonContents)
+                if (jsonContents.Count == 0)
                 {
-                    cartList.Add(JsonConvert.DeserializeObject<Reservation>(cartItem));
+                    Console.WriteLine("\nNo items found!\nPlease create a listing first!\n");
+                    System.Threading.Thread.Sleep(3500);
+                    Console.Clear();
+                    mainScreen.Show(CurrentAccount);
                 }
-                foreach (var cart in cartList)
+                else
                 {
-                    if (CurrentAccount.ID == cart.ID)
+                    var cartList = new List<Reservation> { };
+                    foreach (String cartItem in jsonContents)
                     {
-                        Console.OutputEncoding = Encoding.UTF8;
-                        Console.WriteLine(cart);
-                        totalPrice = totalPrice + cart.Price;
+                        cartList.Add(JsonConvert.DeserializeObject<Reservation>(cartItem));
                     }
+                    foreach (var cart in cartList)
+                    {
+                        if (CurrentAccount.ID == cart.ID)
+                        {
+                            Console.OutputEncoding = Encoding.UTF8;
+                            Console.WriteLine(cart);
+                            totalPrice = totalPrice + cart.Price;
+                        }
 
+                    }
                 }
                 Console.OutputEncoding = Encoding.UTF8;
                 Console.WriteLine("The total price of the items you ordered is: €" + totalPrice + "\n");
+                System.Threading.Thread.Sleep(5000);
+                mainScreen.Show(CurrentAccount);
             }
             //Als er niks is gevonden
             catch (FileNotFoundException)
@@ -56,16 +68,6 @@ namespace cinemaApp
                 Console.Clear();
                 mainScreen.Show(CurrentAccount);
             }
-            catch (Exception)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("The input you gave is incorrect.\nPlease try a number that is shown on screen.");
-                Console.ResetColor();
-                System.Threading.Thread.Sleep(2500);
-                cartScreen.showCart(CurrentAccount);
-            }
-
-
         }
     }
 }

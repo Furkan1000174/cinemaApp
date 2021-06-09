@@ -72,7 +72,7 @@ namespace cinemaApp
             {
      
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                string h = "Welcome to our Movie Theatre!\n\n";
+                string h = "Welcome to CinemaPunk!\n\n";
                 Console.SetCursorPosition((Console.WindowWidth - h.Length) / 2, Console.CursorTop);
                 Console.WriteLine(h);
                 Console.ResetColor();

@@ -31,6 +31,13 @@ namespace cinemaApp
                 {
                     jsonContents.Add(line);
                 }
+                if (jsonContents.Count == 0)
+                {
+                    Console.WriteLine("\nNo movies found!\nPlease create a listing first!\n");
+                    System.Threading.Thread.Sleep(3500);
+                    Console.Clear();
+                    mainScreen.Show(CurrentAccount);
+                }
                 var movieList = new List<Movie> { };
                 foreach (String movie in jsonContents)
                 {
